@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paolo Meres | Le Chaton</title>
+<style>
+:root{
+    --bg:#0f0d0a;
+    --bg-elevated:#15130f;
+    --panel:#1a1712;
+    --panel-hover:#242018;
+    --gold:#c4a06c;
+    --gold-dim:#8a7350;
+    --gold-glow:rgba(196,160,108,0.12);
+    --amber:#c4883a;
+    --amber-soft:#a07030;
+    --text:#e8e0d5;
+    --text-dim:#b0a898;
+    --text-muted:#6b6358;
+    --danger:#8b3a3a;
+    --secret-glow:rgba(139,58,58,0.08);
+    --border-thin:rgba(196,160,108,0.12);
+    --border-hover:rgba(196,160,108,0.35);
+    --shadow:0 4px 24px rgba(0,0,0,0.5);
+    --shadow-gold:0 0 40px rgba(196,160,108,0.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Georgia','Times New Roman',serif;
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+::selection{
+    background:var(--gold);
+    color:var(--bg);
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{
+    width:6px;
+}
+::-webkit-scrollbar-track{
+    background:var(--bg);
+}
+::-webkit-scrollbar-thumb{
+    background:var(--gold-dim);
+    border-radius:3px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background:var(--gold);
+}
+
+/* ─── HERO ─── */
+.hero{
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(180deg,
+            rgba(15,13,10,0.35) 0%,
+            rgba(15,13,10,0.6) 50%,
+            rgba(15,13,10,0.95) 100%
+        ),
+        url("WhatsApp Image 2026-06-21 at 14.26.28.jpeg");
+    background-size:cover;
+    background-position:center 15%;
+    filter:brightness(0.8) contrast(1.05);
+    animation:heroBreath 20s ease-in-out infinite;
+}
+
+@keyframes heroBreath{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.03); }
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(15,13,10,0.85) 100%),
+        linear-gradient(to bottom, rgba(15,13,10,0.1), rgba(15,13,10,0.9));
+    z-index:1;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:0 20px;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,6.5rem);
+    color:var(--gold);
+    letter-spacing:12px;
+    text-transform:uppercase;
+    font-weight:400;
+    text-shadow:0 0 60px rgba(196,160,108,0.3), 0 2px 10px rgba(0,0,0,0.5);
+    opacity:0;
+    animation:fadeUp 1.2s ease 0.3s forwards;
+}
+
+.hero .subtitle{
+    font-size:clamp(1rem,2.5vw,1.5rem);
+    color:var(--text-dim);
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-top:15px;
+    opacity:0;
+    animation:fadeUp 1.2s ease 0.6s forwards;
+}
+
+.hero .tagline{
+    font-size:1.1rem;
+    color:var(--text-muted);
+    margin-top:25px;
+    max-width:500px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.8;
+    opacity:0;
+    animation:fadeUp 1.2s ease 0.9s forwards;
+}
+
+.hero .tagline span{
+    display:inline-block;
+    padding:0 12px;
+    border-right:1px solid var(--gold-dim);
+}
+
+.hero .tagline span:last-child{
+    border-right:none;
+}
+
+.hero-btn{
+    margin-top:45px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold-dim);
+    padding:14px 36px;
+    border-radius:50px;
+    font-family:inherit;
+    font-size:0.95rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all 0.4s ease;
+    opacity:0;
+    animation:fadeUp 1.2s ease 1.2s forwards;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-btn::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:var(--gold);
+    transform:translateX(-101%);
+    transition:transform 0.4s ease;
+    z-index:-1;
+}
+
+.hero-btn:hover{
+    color:var(--bg);
+    border-color:var(--gold);
+    box-shadow:0 0 30px var(--gold-glow);
+}
+
+.hero-btn:hover::before{
+    transform:translateX(0);
+}
+
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(30px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* ─── MOON ─── */
+.moon{
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(220,200,160,0.7), rgba(196,160,108,0.3), transparent 70%);
+    top:8%;
+    right:10%;
+    filter:blur(8px);
+    animation:pulse 10s ease-in-out infinite;
+    z-index:0;
+    opacity:0.4;
+}
+
+@keyframes pulse{
+    0%,100%{ transform:scale(1); opacity:0.4; }
+    50%{ transform:scale(1.1); opacity:0.6; }
+}
+
+/* ─── CAT PAW PRINTS ─── */
+#paws-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:999;
+}
+
+.paw{
+    position:absolute;
+    width:14px;
+    height:14px;
+    opacity:0.15;
+    animation:fadePaw linear infinite;
+}
+
+.paw::before{
+    content:'';
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:var(--gold-dim);
+    border-radius:50%;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.paw::after{
+    content:'';
+    position:absolute;
+    width:3px;
+    height:5px;
+    background:var(--gold-dim);
+    border-radius:50%;
+    top:0;
+    left:3px;
+    box-shadow:4px 0 0 var(--gold-dim), 8px 1px 0 var(--gold-dim);
+}
+
+@keyframes fadePaw{
+    0%{ opacity:0; transform:scale(0.5); }
+    20%{ opacity:0.15; transform:scale(1); }
+    80%{ opacity:0.15; transform:scale(1); }
+    100%{ opacity:0; transform:scale(0.5); }
+}
+
+/* ─── NAV ─── */
+.nav-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(15,13,10,0.92);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border-thin);
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+}
+
+.nav-logo{
+    font-size:1.3rem;
+    color:var(--gold);
+    letter-spacing:3px;
+    font-weight:400;
+}
+
+.nav-logo span{
+    color:var(--text-muted);
+    font-size:0.75rem;
+    display:block;
+    letter-spacing:5px;
+    margin-top:-2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:0.85rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    transition:color 0.3s;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:width 0.3s;
+}
+
+.nav-links a:hover{
+    color:var(--gold);
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ─── MAIN LAYOUT ─── */
+.container{
+    width:92%;
+    max-width:1300px;
+    margin:40px auto;
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:35px;
+}
+
+/* ─── INFOBOX ─── */
+.infobox{
+    background:var(--panel);
+    border:1px solid var(--border-thin);
+    border-radius:16px;
+    overflow:hidden;
+    position:sticky;
+    top:80px;
+    height:fit-content;
+    transition:all 0.4s ease;
+    box-shadow:var(--shadow);
+}
+
+.infobox:hover{
+    border-color:var(--border-hover);
+    box-shadow:var(--shadow-gold);
+}
+
+.infobox-img-wrap{
+    position:relative;
+    overflow:hidden;
+}
+
+.infobox img{
+    width:100%;
+    display:block;
+    transition:transform 0.6s ease;
+}
+
+.infobox:hover .infobox-img-wrap img{
+    transform:scale(1.03);
+}
+
+.infobox-img-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:60%;
+    background:linear-gradient(to top, var(--panel), transparent);
+    pointer-events:none;
+}
+
+.infobox h2{
+    text-align:center;
+    padding:18px 15px 12px;
+    color:var(--gold);
+    font-size:1.4rem;
+    font-weight:400;
+    letter-spacing:2px;
+}
+
+.infobox .title-line{
+    width:40px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 15px;
+    opacity:0.5;
+}
+
+.info-table{
+    padding:0 20px 20px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    padding:10px 0;
+    font-size:0.9rem;
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row .label{
+    color:var(--gold-dim);
+    font-weight:600;
+    letter-spacing:0.5px;
+    font-size:0.8rem;
+    text-transform:uppercase;
+}
+
+.info-row .value{
+    color:var(--text);
+    text-align:right;
+    max-width:60%;
+}
+
+.info-row .value.secret{
+    color:var(--text-muted);
+    font-style:italic;
+    cursor:help;
+    position:relative;
+}
+
+.info-row .value.secret::after{
+    content:'?̷';
+    margin-left:4px;
+    color:var(--danger);
+    opacity:0.6;
+}
+
+/* ─── SECTIONS ─── */
+.content{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.section{
+    background:var(--panel);
+    border:1px solid var(--border-thin);
+    border-radius:16px;
+    padding:30px 35px;
+    transition:all 0.4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:3px;
+    height:0;
+    background:linear-gradient(to bottom, var(--gold), var(--amber));
+    transition:height 0.5s ease;
+}
+
+.section:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-gold);
+}
+
+.section:hover::before{
+    height:100%;
+}
+
+.section h2{
+    color:var(--gold);
+    font-size:1.3rem;
+    font-weight:400;
+    letter-spacing:2px;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(196,160,108,0.15);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.section h2::before{
+    content:'';
+    display:inline-block;
+    width:6px;
+    height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    box-shadow:0 0 8px var(--gold-glow);
+}
+
+.section p{
+    color:var(--text-dim);
+    margin-bottom:14px;
+    text-align:justify;
+}
+
+.section p:last-child{
+    margin-bottom:0;
+}
+
+.section ul{
+    padding-left:0;
+    list-style:none;
+}
+
+.section ul li{
+    padding:8px 0 8px 24px;
+    position:relative;
+    color:var(--text-dim);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+}
+
+.section ul li:last-child{
+    border-bottom:none;
+}
+
+.section ul li::before{
+    content:'◆';
+    position:absolute;
+    left:0;
+    color:var(--gold-dim);
+    font-size:0.6rem;
+    top:10px;
+}
+
+/* ─── QUOTE ─── */
+.quote-block{
+    background:linear-gradient(135deg, rgba(196,160,108,0.05), rgba(196,136,58,0.03));
+    border-left:3px solid var(--gold);
+    padding:25px 30px;
+    margin:20px 0;
+    border-radius:0 12px 12px 0;
+    position:relative;
+}
+
+.quote-block::before{
+    content:'"';
+    position:absolute;
+    top:5px;
+    left:15px;
+    font-size:3rem;
+    color:var(--gold);
+    opacity:0.15;
+    line-height:1;
+}
+
+.quote-block p{
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.1rem;
+    line-height:1.8;
+    margin:0;
+    position:relative;
+    z-index:1;
+}
+
+.quote-block .author{
+    display:block;
+    margin-top:12px;
+    color:var(--text-muted);
+    font-size:0.85rem;
+    font-style:normal;
+}
+
+/* ─── STATS ─── */
+.stat{
+    margin-bottom:18px;
+}
+
+.stat:last-child{
+    margin-bottom:0;
+}
+
+.stat-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-size:0.9rem;
+}
+
+.stat-header .stat-name{
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:0.8rem;
+}
+
+.stat-header .stat-value{
+    color:var(--gold);
+    font-weight:600;
+}
+
+.bar-track{
+    height:8px;
+    background:rgba(0,0,0,0.3);
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+}
+
+.bar-fill{
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--amber));
+    position:relative;
+    width:0;
+    transition:width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bar-fill::after{
+    content:'';
+    position:absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    width:20px;
+    background:linear-gradient(to right, transparent, rgba(255,255,255,0.2));
+    border-radius:0 20px 20px 0;
+}
+
+/* ─── GALLERY ─── */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:18px;
+}
+
+.gallery-item{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--border-thin);
+    cursor:pointer;
+    transition:all 0.4s ease;
+    aspect-ratio:3/4;
+}
+
+.gallery-item:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.4), 0 0 20px var(--gold-glow);
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.6s ease, filter 0.4s ease;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+.gallery-item .gallery-caption{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:30px 15px 15px;
+    background:linear-gradient(to top, rgba(15,13,10,0.95), transparent);
+    transform:translateY(100%);
+    transition:transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption{
+    transform:translateY(0);
+}
+
+.gallery-caption span{
+    color:var(--gold);
+    font-size:0.85rem;
+    letter-spacing:1px;
+}
+
+.gallery-caption .gallery-sub{
+    display:block;
+    color:var(--text-muted);
+    font-size:0.75rem;
+    margin-top:3px;
+}
+
+/* ─── CHILDHOOD MEMORY ─── */
+.memory-section{
+    background:linear-gradient(135deg, rgba(196,160,108,0.03), rgba(196,136,58,0.02));
+}
+
+.memory-img-wrap{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--border-thin);
+    margin-bottom:20px;
+}
+
+.memory-img-wrap img{
+    width:100%;
+    display:block;
+    transition:transform 0.6s ease;
+}
+
+.memory-img-wrap:hover img{
+    transform:scale(1.02);
+}
+
+.memory-img-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:40px 20px 15px;
+    background:linear-gradient(to top, rgba(15,13,10,0.9), transparent);
+}
+
+.memory-img-overlay span{
+    color:var(--gold);
+    font-size:0.8rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.memory-characters{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.character-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--bg-elevated);
+    border:1px solid var(--border-thin);
+    border-radius:50px;
+    padding:8px 18px 8px 8px;
+    text-decoration:none;
+    color:var(--text-dim);
+    font-size:0.85rem;
+    transition:all 0.3s ease;
+}
+
+.character-link:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+    box-shadow:0 0 15px var(--gold-glow);
+    transform:translateX(4px);
+}
+
+.character-link .char-avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:var(--panel-hover);
+    border:1px solid var(--gold-dim);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.7rem;
+    color:var(--gold);
+}
+
+/* ─── SECRET CAT REVEAL ─── */
+#catBtn{
+    background:transparent;
+    color:var(--text-muted);
+    border:1px dashed var(--text-muted);
+    padding:10px 22px;
+    border-radius:40px;
+    font-family:inherit;
+    font-size:0.8rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all 0.4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+#catBtn:hover{
+    color:var(--danger);
+    border-color:var(--danger);
+    box-shadow:0 0 20px var(--secret-glow);
+}
+
+#catBtn.revealed{
+    color:var(--danger);
+    border-color:var(--danger);
+    background:rgba(139,58,58,0.1);
+}
+
+.secret-section{
+    display:none;
+    animation:secretReveal 0.8s ease forwards;
+}
+
+.secret-section.visible{
+    display:block;
+}
+
+@keyframes secretReveal{
+    from{ opacity:0; transform:translateY(20px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.secret-section .section{
+    border-color:rgba(139,58,58,0.2);
+    background:linear-gradient(135deg, rgba(139,58,58,0.03), var(--panel));
+}
+
+.secret-section .section:hover{
+    border-color:rgba(139,58,58,0.4);
+    box-shadow:0 0 30px rgba(139,58,58,0.06);
+}
+
+.secret-section h2{
+    color:var(--danger);
+}
+
+.secret-section h2::before{
+    background:var(--danger);
+    box-shadow:0 0 8px rgba(139,58,58,0.3);
+}
+
+.secret-badge{
+    display:inline-block;
+    background:rgba(139,58,58,0.15);
+    color:var(--danger);
+    border:1px solid rgba(139,58,58,0.3);
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-left:10px;
+    vertical-align:middle;
+}
+
+.secret-warning{
+    background:rgba(139,58,58,0.08);
+    border:1px dashed rgba(139,58,58,0.25);
+    border-radius:8px;
+    padding:12px 16px;
+    margin-bottom:20px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* ─── CAT EYE CURSOR ─── */
+#cat-eye{
+    position:fixed;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:var(--gold);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    box-shadow:0 0 12px var(--gold), 0 0 30px rgba(196,160,108,0.3);
+    z-index:9999;
+    opacity:0;
+    transition:opacity 0.3s;
+    transform:translate(-50%,-50%);
+}
+
+body.cat-active #cat-eye{
+    opacity:0.6;
+}
+
+body.cat-active{
+    cursor:none;
+}
+
+body.cat-active .hero-bg{
+    filter:brightness(0.35) contrast(1.3) saturate(0.5);
+    transition:filter 1s ease;
+}
+
+body.cat-active .hero h1{
+    color:var(--danger);
+    text-shadow:0 0 60px rgba(139,58,58,0.3);
+    transition:color 1s ease;
+}
+
+body.cat-active .hero .subtitle{
+    color:var(--danger);
+    transition:color 1s ease;
+}
+
+/* ─── QUOTE ROTATOR ─── */
+#quote-box{
+    min-height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.quote-fade{
+    animation:quoteFade 0.8s ease;
+}
+
+@keyframes quoteFade{
+    0%{ opacity:0; transform:translateY(10px); }
+    100%{ opacity:1; transform:translateY(0); }
+}
+
+/* ─── FOOTER ─── */
+footer{
+    text-align:center;
+    color:var(--text-muted);
+    padding:50px 20px 30px;
+    font-size:0.85rem;
+    letter-spacing:1px;
+    border-top:1px solid var(--border-thin);
+    margin-top:40px;
+}
+
+footer .footer-line{
+    width:40px;
+    height:1px;
+    background:var(--gold-dim);
+    margin:0 auto 15px;
+    opacity:0.3;
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+    .container{
+        grid-template-columns:1fr;
+    }
+    .infobox{
+        position:relative;
+        top:0;
+        max-width:400px;
+        margin:0 auto;
+    }
+    .nav-links{
+        display:none;
+    }
+}
+
+@media(max-width:600px){
+    .section{
+        padding:22px 20px;
+    }
+    .gallery{
+        grid-template-columns:repeat(2, 1fr);
+    }
+    .memory-characters{
+        flex-direction:column;
+    }
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ─── LIGHTBOX ─── */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(15,13,10,0.95);
+    z-index:10000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+    cursor:zoom-out;
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:8px;
+    box-shadow:0 0 60px rgba(0,0,0,0.5);
+}
+
+.lightbox-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:var(--text-dim);
+    font-size:2rem;
+    cursor:pointer;
+    transition:color 0.3s;
+}
+
+.lightbox-close:hover{
+    color:var(--gold);
+}
+</style>
+</head>
+<body>
+
+<div id="paws-container"></div>
+<div id="cat-eye"></div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <div class="moon"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>PAOLO MERES</h1>
+        <div class="subtitle">Le Chaton</div>
+        <p class="tagline">
+            <span>Négociateur</span>
+            <span>Consultant</span>
+            <span>Médiateur</span>
+        </p>
+        <button class="hero-btn" onclick="document.getElementById('wiki').scrollIntoView({behavior:'smooth'})">
+            <span>◆</span> Entrer dans le dossier
+        </button>
+    </div>
+</section>
+
+<!-- ─── NAV ─── -->
+<nav class="nav-bar">
+    <div class="nav-logo">
+        PAOLO
+        <span>MERES</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#resume">Résumé</a></li>
+        <li><a href="#enfance">Enfance</a></li>
+        <li><a href="#personnalite">Personnalité</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+    </ul>
+    <button id="catBtn">🐱 Révéler le Chaton</button>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main id="wiki" class="container">
+
+    <!-- ─── INFOBOX ─── -->
+    <aside class="infobox reveal">
+        <div class="infobox-img-wrap">
+            <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres">
+            <div class="infobox-img-overlay"></div>
+        </div>
+        <h2>Informations</h2>
+        <div class="title-line"></div>
+        <div class="info-table">
+            <div class="info-row">
+                <span class="label">Nom complet</span>
+                <span class="value">Paolo Meres</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Alias</span>
+                <span class="value">P.M. / « Le Chaton »</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Âge</span>
+                <span class="value">29 ans</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Nationalité</span>
+                <span class="value">Italienne</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Taille</span>
+                <span class="value">1,85 m</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Poids</span>
+                <span class="value">74 kg</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Langues</span>
+                <span class="value">Italien, Anglais, Français</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Occupation</span>
+                <span class="value">Consultant / Négociateur</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Affiliation</span>
+                <span class="value">Indépendant</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Statut</span>
+                <span class="value secret" title="Information classifiée">Neutre</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ─── CONTENT ─── -->
+    <div class="content">
+
+        <!-- Résumé -->
+        <section class="section reveal" id="resume">
+            <h2>Résumé</h2>
+            <p>
+                Paolo Meres est un consultant et négociateur italien dont l'apparence décontractée
+                cache une intelligence aiguë et une maîtrise redoutable du langage corporel.
+                Derrière ses lunettes rondes et son sourire désarmant se trouve un homme
+                qui sait exactement où placer chaque mot — et chaque menace.
+            </p>
+            <p>
+                Connu dans certains milieux sous le surnom de <strong style="color:var(--gold)">« Le Chaton »</strong>,
+                un héritage de sa jeunesse qu'il porte avec une ironie mordante, Paolo est un
+                intermédiaire neutre jusqu'à preuve du contraire. Un intermédiaire qui connaît
+                déjà toutes les pièces sur votre échiquier avant que vous ne les ayez posées.
+            </p>
+            <div class="quote-block">
+                <p>Je ne suis qu'un simple intermédiaire… qui connaît déjà toutes les pièces sur votre échiquier.</p>
+            </div>
+        </section>
+
+        <!-- Enfance -->
+        <section class="section reveal" id="enfance">
+            <h2>Enfance</h2>
+            <p>
+                Enfant turbulent mais profondément loyal, Paolo a grandi dans les rues de Naples
+                avec une soif insatiable de justice et une incapacité à tolérer l'injustice,
+                même quand elle lui coûtait cher.
+            </p>
+            <div class="quote-block">
+                <p>Ma famille. Et moi quand je serai grand.</p>
+                <span class="author">— Paolo Meres, 7 ans, dessin de sa famille</span>
+            </div>
+            <ul>
+                <li>Courageux jusqu'à l'impulsivité — défend les plus faibles, même contre plus forts que lui.</li>
+                <li>Très franc, parfois brutal. Ne ment jamais, déteste les mensonges et les injustices.</li>
+                <li>Curieux, observateur. Toujours en train de lire ou d'apprendre quelque chose.</li>
+                <li>S'attache vite, protège fort. Un ami pour la vie ou un ennemi qu'on ne oublie pas.</li>
+                <li>Têtu, se fait souvent blesser, refuse l'autorité injuste.</li>
+                <li>Trop protecteur — une faiblesse qu'il ne contrôle pas.</li>
+            </ul>
+        </section>
+
+        <!-- Personnalité -->
+        <section class="section reveal" id="personnalite">
+            <h2>Personnalité</h2>
+            <p>
+                Calme en apparence, théâtral sous le stress. Paolo est un homme de paradoxes :
+                il parle peu mais écoute toujours, préfère manipuler plutôt que menacer,
+                et sourit même quand il gagne — surtout quand il gagne.
+            </p>
+            <ul>
+                <li>Calme en apparence, le stress le rend théâtral et imprévisible.</li>
+                <li>Observe tout. Parle peu, écoute toujours.</li>
+                <li>Préfère manipuler plutôt que menacer — trois étapes d'avance.</li>
+                <li>Sourit même quand il gagne. Surtout quand il gagne.</li>
+                <li>Facile à sous-estimer — c'est son arme la plus redoutable.</li>
+                <li>Extrêmement préparé. Ne perd jamais patience… jusqu'à ce qu'il perde patience.</li>
+            </ul>
+        </section>
+
+        <!-- Compétences -->
+        <section class="section reveal" id="competences">
+            <h2>Compétences</h2>
+            <ul>
+                <li><strong style="color:var(--gold)">Négociation :</strong> Capable de faire signer un contrat à quelqu'un qui ne voulait même pas parler.</li>
+                <li><strong style="color:var(--gold)">Langage corporel :</strong> Maîtrise absolue — il lit vos pensées avant que vous ne les formiez.</li>
+                <li><strong style="color:var(--gold)">Médiation :</strong> Résout des conflits que des armées n'ont pas pu résoudre.</li>
+                <li><strong style="color:var(--gold)">Tir de précision :</strong> Glock 19 sous la veste, holster interne — il ne manque jamais.</li>
+                <li><strong style="color:var(--gold)">Cryptographie :</strong> Stylo plume avec lame et micro caché — chaque objet est une arme.</li>
+                <li><strong style="color:var(--gold)">Mémoire vive :</strong> N'oublie jamais un visage, une voix, une dette.</li>
+            </ul>
+        </section>
+
+        <!-- Statistiques -->
+        <section class="section reveal" id="stats">
+            <h2>Statistiques</h2>
+            <div class="stat">
+                <div class="stat-header">
+                    <span class="stat-name">Intelligence</span>
+                    <span class="stat-value">95%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-width="95"></div>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="stat-header">
+                    <span class="stat-name">Manipulation</span>
+                    <span class="stat-value">92%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-width="92"></div>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="stat-header">
+                    <span class="stat-name">Calme</span>
+                    <span class="stat-value">88%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-width="88"></div>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="stat-header">
+                    <span class="stat-name">Combat</span>
+                    <span class="stat-value">82%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-width="82"></div>
+                </div>
+            </div>
+            <div class="stat">
+                <div class="stat-header">
+                    <span class="stat-name">Loyauté</span>
+                    <span class="stat-value">96%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" data-width="96"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objets emblématiques -->
+        <section class="section reveal" id="objets">
+            <h2>Objets Emblématiques</h2>
+            <ul>
+                <li><strong style="color:var(--gold)">Lunettes rondes</strong> — Regard toujours calme, même quand il ment.</li>
+                <li><strong style="color:var(--gold)">Montre à gousset</strong> — Dans l'arrière, gravure intérieure : son vrai nom.</li>
+                <li><strong style="color:var(--gold)">Stylo plume</strong> — Lame + micro caché. Écrit, enregistre, tue si nécessaire.</li>
+                <li><strong style="color:var(--gold)">Glock 19</strong> — Sous la veste, holster interne. Toujours chargé.</li>
+                <li><strong style="color:var(--gold)">Couteau papillon</strong> — Dans la manche. Dernier recours.</li>
+                <li><strong style="color:var(--gold)">Seringue tranquillisante</strong> — 2ml. Quand les mots ne suffisent plus.</li>
+                <li><strong style="color:var(--gold)">Fumigène discret</strong> — Encre qui fume. Pour les sorties… rapides.</li>
+                <li><strong style="color:var(--gold)">Sacoche</strong> — Contrats, identités, cartes, rapports, photos, dossiers, comptes, secrets. Tout et n'importe quoi.</li>
+            </ul>
+        </section>
+
+        <!-- Galerie -->
+        <section class="section reveal" id="galerie">
+            <h2>Galerie</h2>
+            <div class="gallery">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="WhatsApp Image 2026-06-21 at 15.41.34.jpeg" alt="Paolo enfant">
+                    <div class="gallery-caption">
+                        <span>Âge : 8 ans</span>
+                        <span class="gallery-sub">« Le petit turbulent »</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Portrait Paolo">
+                    <div class="gallery-caption">
+                        <span>Portrait</span>
+                        <span class="gallery-sub">Le Chaton</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="WhatsApp Image 2026-06-21 at 14.26.28.jpeg" alt="Paolo adulte">
+                    <div class="gallery-caption">
+                        <span>Âge : 29 ans</span>
+                        <span class="gallery-sub">Le négociateur</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Childhood Memory -->
+        <section class="section memory-section reveal" id="souvenir">
+            <h2>Souvenir d'Enfance</h2>
+            <p>
+                Une photographie rare, prise dans les rues de Munich, immortalise un moment
+                de vulnérabilité que Paolo a depuis longtemps enfoui. Trois enfants, un secret,
+                un lien que le temps n'a pas effacé.
+            </p>
+            <div class="memory-img-wrap" onclick="openLightbox(this)">
+                <img src="ChatGPT Image Jun 23, 2026, 02_35_10 PM.png" alt="Souvenir d'enfance - Paolo, Nora et Yoana">
+                <div class="memory-img-overlay">
+                    <span>Munich, été 1997</span>
+                </div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">
+                De gauche à droite : les trois enfants qui ne savaient pas encore que leurs
+                destins resteraient entrelacés pour toujours.
+            </p>
+            <div class="memory-characters">
+                <a href="paolo-meres.html" class="character-link" style="border-color:var(--gold); color:var(--gold);">
+                    <div class="char-avatar" style="border-color:var(--gold); color:var(--gold);">PM</div>
+                    <span>Paolo Meres</span>
+                </a>
+                <a href="nora-dinkelmann.html" class="character-link">
+                    <div class="char-avatar">ND</div>
+                    <span>Nora Dinkelmann</span>
+                </a>
+                <a href="yoana-noxley.html" class="character-link">
+                    <div class="char-avatar">YN</div>
+                    <span>Yoana Noxley</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Citation -->
+        <section class="section reveal" id="citations">
+            <h2>Citations</h2>
+            <div class="quote-block" id="quote-box">
+                <p>Désolé si je parais nerveux… je ne suis pas habitué à ce genre de rencontres.</p>
+            </div>
+        </section>
+
+        <!-- ─── SECRET CAT SECTION ─── -->
+        <div class="secret-section" id="secretCat">
+            <section class="section reveal">
+                <h2>
+                    Véritable Nature
+                    <span class="secret-badge">Classifié</span>
+                </h2>
+                <div class="secret-warning">
+                    <span>⚠</span>
+                    <span>Ces informations sont strictement confidentielles. Divulgation interdite sous peine de représailles.</span>
+                </div>
+                <p>
+                    Derrière le masque du consultant bienveillant se cache un opérateur dont
+                    la neutralité n'est qu'une façade. Paolo Meres n'est pas un simple intermédiaire —
+                    il est le filtre à travers lequel passent toutes les informations sensibles
+                    de l'Europe du Sud. Chaque contrat qu'il négocie, chaque médiation qu'il mène
+                    à bien, sert en réalité à construire un réseau d'influence invisible.
+                </p>
+                <p>
+                    Son surnom de « Chaton » n'est pas une moquerie d'enfance. C'est un code.
+                    Dans les cercles où il opère vraiment, le Chaton est celui qui arrive
+                    silencieusement, observe sans être vu, et frappe quand personne ne regarde.
+                    Il ne tue pas — il arrange. Il arrange les accidents, les démissions,
+                    les disparitions. Tout avec un sourire et une poignée de main.
+                </p>
+                <div class="quote-block" style="border-left-color:var(--danger);">
+                    <p style="color:var(--danger);">Je ne suis pas ici pour vous battre. Je suis ici pour que vous fassiez le bon choix.</p>
+                </div>
+            </section>
+
+            <section class="section reveal">
+                <h2>
+                    Arsenal du Chaton
+                    <span class="secret-badge">Top Secret</span>
+                </h2>
+                <div class="gallery">
+                    <div class="gallery-item" onclick="openLightbox(this)" style="grid-column:span 2;">
+                        <img src="WhatsApp Image 2026-06-21 at 14.26.28.jpeg" alt="Arsenal complet de Paolo">
+                        <div class="gallery-caption">
+                            <span>Arsenal Complet</span>
+                            <span class="gallery-sub">Chaque objet a une fonction, chaque fonction a une cible</span>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong style="color:var(--danger)">Glock 19 :</strong> Sous la veste, holster interne. 15 balles, 15 problèmes résolus.</li>
+                    <li><strong style="color:var(--danger)">Stylo plume :</strong> Lame cachée + micro. Écrit, enregistre, élimine.</li>
+                    <li><strong style="color:var(--danger)">Seringue tranquillisante :</strong> 2ml. Quand la négociation échoue.</li>
+                    <li><strong style="color:var(--danger)">Couteau papillon :</strong> Dans la manche. Pour les situations… personnelles.</li>
+                    <li><strong style="color:var(--danger)">Fumigène discret :</strong> Encre qui fume. Disparaître sans laisser de trace.</li>
+                    <li><strong style="color:var(--danger)">Sacoche :</strong> Identités, rapports, secrets. Tout ce qu'il faut pour détruire un empire.</li>
+                </ul>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="footer-line"></div>
+    <p>Wiki du personnage Paolo Meres • Univers fictif</p>
+    <p style="margin-top:8px; font-size:0.75rem; opacity:0.5;">« Je ne suis pas ici pour vous battre. Je suis ici pour que vous fassiez le bon choix. »</p>
+</footer>
+
+<!-- ─── LIGHTBOX ─── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+// ─── PAW PRINTS ───
+const pawsContainer = document.getElementById("paws-container");
+for(let i = 0; i < 30; i++){
+    const p = document.createElement("span");
+    p.classList.add("paw");
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = (20 + Math.random() * 80) + "vh";
+    p.style.animationDuration = (6 + Math.random() * 10) + "s";
+    p.style.animationDelay = (-Math.random() * 15) + "s";
+    p.style.opacity = 0.1 + Math.random() * 0.15;
+    const size = 0.7 + Math.random() * 0.6;
+    p.style.transform = `scale(${size})`;
+    pawsContainer.appendChild(p);
+}
+
+// ─── CAT EYE CURSOR ───
+const eye = document.getElementById("cat-eye");
+document.addEventListener("mousemove", (e) => {
+    eye.style.left = e.clientX + "px";
+    eye.style.top = e.clientY + "px";
+});
+
+// ─── CAT REVEAL ───
+const catBtn = document.getElementById("catBtn");
+const secretCat = document.getElementById("secretCat");
+let catRevealed = false;
+
+catBtn.addEventListener("click", () => {
+    catRevealed = !catRevealed;
+
+    if(catRevealed){
+        document.body.classList.add("cat-active");
+        catBtn.classList.add("revealed");
+        catBtn.innerHTML = "🐱 Masquer le Chaton";
+        secretCat.classList.add("visible");
+        setTimeout(() => {
+            secretCat.scrollIntoView({behavior: "smooth", block: "start"});
+        }, 300);
+    } else {
+        document.body.classList.remove("cat-active");
+        catBtn.classList.remove("revealed");
+        catBtn.innerHTML = "🐱 Révéler le Chaton";
+        secretCat.classList.remove("visible");
+    }
+});
+
+// ─── QUOTE ROTATOR ───
+const quotes = [
+    "Désolé si je parais nerveux… je ne suis pas habitué à ce genre de rencontres.",
+    "Je ne suis qu'un simple intermédiaire… qui connaît déjà toutes les pièces sur votre échiquier.",
+    "Je ne suis pas ici pour vous battre. Je suis ici pour que vous fassiez le bon choix.",
+    "Le chat se fait passer pour une souris.",
+    "Je ne perds jamais patience. Jusqu'à ce que je perde patience.",
+    "Trois étapes d'avance. Toujours."
+];
+
+let currentQuote = 0;
+const quoteBox = document.getElementById("quote-box");
+
+function changeQuote(){
+    quoteBox.innerHTML = `<p class="quote-fade">${quotes[currentQuote]}</p>`;
+    currentQuote = (currentQuote + 1) % quotes.length;
+}
+
+changeQuote();
+setInterval(changeQuote, 6000);
+
+// ─── SCROLL REVEAL ───
+const revealElements = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ─── STATS ANIMATION ───
+const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            const bars = entry.target.querySelectorAll(".bar-fill");
+            bars.forEach(bar => {
+                const width = bar.dataset.width;
+                setTimeout(() => {
+                    bar.style.width = width + "%";
+                }, 200);
+            });
+            statObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll("#stats").forEach(el => statObserver.observe(el));
+
+// ─── LIGHTBOX ───
+function openLightbox(element){
+    const img = element.querySelector("img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLightbox(){
+    const lightbox = document.getElementById("lightbox");
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeLightbox();
+});
+
+// ─── NAV HIGHLIGHT ON SCROLL ───
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if(scrollY >= sectionTop - 200){
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.style.color = "";
+        if(link.getAttribute("href") === "#" + current){
+            link.style.color = "var(--gold)";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

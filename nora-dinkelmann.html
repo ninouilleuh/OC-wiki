@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nora Dinkelmann — Dossier #ND-1920 | L'Office</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+    --bg:#0a0908;
+    --bg-elevated:#110f0d;
+    --bg-card:#161412;
+    --panel:#1e1b18;
+    --panel-hover:#2a2622;
+    --gold:#b89b6a;
+    --gold-bright:#d4b896;
+    --gold-dim:#7a6540;
+    --gold-glow:rgba(184,155,106,0.15);
+    --blood:#6b2a2a;
+    --blood-soft:#8a3a3a;
+    --blood-glow:rgba(107,42,42,0.2);
+    --pink:#c495a5;
+    --pink-soft:#d4a5b5;
+    --pink-dim:#8a6a75;
+    --text:#e0d8cf;
+    --text-dim:#a09890;
+    --text-muted:#5a5248;
+    --text-faint:#3a3530;
+    --border-thin:rgba(184,155,106,0.08);
+    --border-hover:rgba(184,155,106,0.25);
+    --font-display:'Cinzel',serif;
+    --font-body:'Cormorant Garamond',serif;
+    --font-mono:'Space Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+::selection{background:var(--gold);color:var(--bg);}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+
+.film-grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.nav-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,9,8,0.95);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border-thin);
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+}
+
+.nav-logo{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    color:var(--gold);
+    letter-spacing:4px;
+    font-weight:400;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.nav-logo::before{content:'◈';font-size:0.8rem;opacity:0.6;}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s;
+    position:relative;
+    padding:4px 0;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:width 0.3s;
+}
+
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+
+.char-hero{
+    min-height:85vh;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+}
+
+.char-hero-bg{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, var(--bg) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(196,149,165,0.06), transparent 50%);
+    z-index:1;
+}
+
+.char-hero video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:sepia(0.1) contrast(1.1) brightness(0.45);
+}
+
+.char-hero-content{
+    position:relative;
+    z-index:2;
+    padding:80px 40px 60px;
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+}
+
+.char-hero .dossier-code{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:3px;
+    color:var(--blood-soft);
+    text-transform:uppercase;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.char-hero .dossier-code::before{
+    content:'';
+    width:20px;
+    height:1px;
+    background:var(--blood-soft);
+}
+
+.char-hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    color:var(--gold);
+    letter-spacing:8px;
+    text-transform:uppercase;
+    font-weight:400;
+    text-shadow:0 0 60px rgba(184,155,106,0.3);
+    margin-bottom:10px;
+}
+
+.char-hero .tagline{
+    font-family:var(--font-body);
+    font-size:1.3rem;
+    color:var(--text-dim);
+    font-style:italic;
+    margin-bottom:20px;
+}
+
+.char-hero .meta-row{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.char-hero .meta-item{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+}
+
+.char-hero .meta-item span{color:var(--gold);}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:60px 0;
+}
+
+.section{margin-bottom:80px;}
+
+.section-title{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:0.85rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.section-title::before{
+    content:'';
+    width:30px;
+    height:1px;
+    background:var(--gold-dim);
+}
+
+.section p{
+    color:var(--text-dim);
+    font-size:1.05rem;
+    line-height:1.9;
+    margin-bottom:18px;
+    text-align:justify;
+}
+
+.section .highlight{
+    color:var(--gold-bright);
+    font-style:italic;
+}
+
+.section .quote{
+    border-left:2px solid var(--pink-soft);
+    padding-left:25px;
+    margin:30px 0;
+    font-style:italic;
+    color:var(--text);
+    font-size:1.1rem;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    margin:40px 0;
+}
+
+.stat-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:6px;
+    padding:25px 20px;
+    text-align:center;
+    transition:all 0.4s ease;
+}
+
+.stat-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+}
+
+.stat-card .stat-value{
+    font-family:var(--font-display);
+    font-size:1.5rem;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.stat-card .stat-label{
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+}
+
+.bar-stat-section{margin:40px 0;}
+
+.stat{margin-bottom:22px;}
+.stat:last-child{margin-bottom:0;}
+
+.stat-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:0.9rem;
+}
+
+.stat-header .stat-name{
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:0.75rem;
+    font-family:var(--font-mono);
+}
+
+.stat-header .stat-value{
+    color:var(--gold);
+    font-weight:600;
+    font-family:var(--font-display);
+}
+
+.bar-track{
+    height:6px;
+    background:rgba(0,0,0,0.4);
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+}
+
+.bar-fill{
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg, var(--gold-dim), var(--gold), var(--pink-soft));
+    position:relative;
+    width:0;
+    transition:width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bar-fill::after{
+    content:'';
+    position:absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    width:30px;
+    background:linear-gradient(to right, transparent, rgba(255,255,255,0.2));
+    border-radius:0 20px 20px 0;
+}
+
+.traits-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.trait-tag{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    padding:6px 14px;
+    border:1px solid var(--border-thin);
+    border-radius:3px;
+    background:var(--bg-card);
+    transition:all 0.3s;
+    cursor:default;
+}
+
+.trait-tag:hover{
+    border-color:var(--pink-soft);
+    color:var(--pink-soft);
+}
+
+.relations-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    margin-top:30px;
+}
+
+.relation-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:6px;
+    padding:25px;
+    transition:all 0.4s ease;
+    text-decoration:none;
+    display:block;
+}
+
+.relation-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+}
+
+.relation-card .rel-name{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:0.85rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.relation-card .rel-status{
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.relation-card .rel-desc{
+    color:var(--text-dim);
+    font-size:0.9rem;
+    line-height:1.7;
+}
+
+.infobox-wrap{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:40px;
+    align-items:start;
+}
+
+.infobox{
+    background:var(--panel);
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    overflow:hidden;
+    position:sticky;
+    top:80px;
+    height:fit-content;
+    transition:all 0.4s ease;
+}
+
+.infobox:hover{
+    border-color:var(--border-hover);
+    box-shadow:0 0 30px var(--gold-glow);
+}
+
+.infobox-img-wrap{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:1;
+}
+
+.infobox img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.6s ease;
+}
+
+.infobox:hover .infobox-img-wrap img{transform:scale(1.03);}
+
+.infobox-img-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:60%;
+    background:linear-gradient(to top, var(--panel), transparent);
+    pointer-events:none;
+}
+
+.infobox h3{
+    text-align:center;
+    padding:18px 15px 8px;
+    color:var(--pink);
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    font-weight:400;
+    letter-spacing:3px;
+}
+
+.infobox .title-line{
+    width:40px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 15px;
+    opacity:0.5;
+}
+
+.info-table{padding:0 20px 20px;}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    padding:10px 0;
+    font-size:0.9rem;
+}
+
+.info-row:last-child{border-bottom:none;}
+
+.info-row .label{
+    color:var(--gold-dim);
+    font-weight:600;
+    letter-spacing:1px;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    font-family:var(--font-mono);
+}
+
+.info-row .value{
+    color:var(--text);
+    text-align:right;
+    max-width:60%;
+    font-size:0.85rem;
+}
+
+.info-row .value.secret{
+    color:var(--text-muted);
+    font-style:italic;
+    cursor:help;
+    position:relative;
+}
+
+.info-row .value.secret::after{
+    content:' ?̷';
+    color:var(--blood-soft);
+    opacity:0.6;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:18px;
+    margin-top:25px;
+}
+
+.gallery-item{
+    position:relative;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid var(--border-thin);
+    cursor:pointer;
+    transition:all 0.4s ease;
+    aspect-ratio:3/4;
+}
+
+.gallery-item:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.4), 0 0 20px var(--gold-glow);
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.6s ease, filter 0.4s ease;
+}
+
+.gallery-item:hover img{transform:scale(1.08);}
+
+.gallery-item .gallery-caption{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:30px 15px 15px;
+    background:linear-gradient(to top, rgba(10,9,8,0.95), transparent);
+    transform:translateY(100%);
+    transition:transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption{transform:translateY(0);}
+
+.gallery-caption span{
+    color:var(--pink);
+    font-size:0.85rem;
+    letter-spacing:1px;
+}
+
+.gallery-caption .gallery-sub{
+    display:block;
+    color:var(--text-muted);
+    font-size:0.75rem;
+    margin-top:3px;
+}
+
+.quote-block{
+    background:linear-gradient(135deg, rgba(184,155,106,0.04), rgba(196,149,165,0.04));
+    border-left:2px solid var(--gold);
+    padding:25px 30px;
+    margin:25px 0;
+    border-radius:0 8px 8px 0;
+    position:relative;
+}
+
+.quote-block::before{
+    content:'"';
+    position:absolute;
+    top:5px;
+    left:15px;
+    font-size:3rem;
+    color:var(--gold);
+    opacity:0.1;
+    line-height:1;
+    font-family:var(--font-display);
+}
+
+.quote-block p{
+    font-style:italic;
+    color:var(--pink);
+    font-size:1.1rem;
+    line-height:1.8;
+    margin:0;
+    position:relative;
+    z-index:1;
+}
+
+.quote-block .author{
+    display:block;
+    margin-top:12px;
+    color:var(--text-muted);
+    font-size:0.85rem;
+    font-style:normal;
+    font-family:var(--font-mono);
+    letter-spacing:1px;
+}
+
+.memory-section{
+    background:linear-gradient(135deg, rgba(184,155,106,0.02), rgba(196,149,165,0.02));
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    padding:35px;
+    margin:40px 0;
+}
+
+.memory-img-wrap{
+    position:relative;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid var(--border-thin);
+    margin:20px 0;
+    cursor:pointer;
+}
+
+.memory-img-wrap img{
+    width:100%;
+    display:block;
+    transition:transform 0.6s ease;
+}
+
+.memory-img-wrap:hover img{transform:scale(1.02);}
+
+.memory-img-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:40px 20px 15px;
+    background:linear-gradient(to top, rgba(10,9,8,0.9), transparent);
+}
+
+.memory-img-overlay span{
+    color:var(--gold);
+    font-size:0.75rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-family:var(--font-mono);
+}
+
+.memory-characters{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.character-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:50px;
+    padding:8px 18px 8px 8px;
+    text-decoration:none;
+    color:var(--text-dim);
+    font-size:0.85rem;
+    transition:all 0.3s ease;
+}
+
+.character-link:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+    box-shadow:0 0 15px var(--gold-glow);
+    transform:translateX(4px);
+}
+
+.character-link .char-avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:var(--panel-hover);
+    border:1px solid var(--gold-dim);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.7rem;
+    color:var(--gold);
+    font-family:var(--font-mono);
+}
+
+/* SECRET WOLF */
+.wolf-trigger{
+    text-align:center;
+    margin:60px 0 40px;
+    padding:30px;
+    border:1px dashed var(--border-thin);
+    border-radius:8px;
+    position:relative;
+}
+
+.wolf-trigger::before{
+    content:'◈';
+    position:absolute;
+    top:-12px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--bg);
+    padding:0 15px;
+    color:var(--text-faint);
+    font-size:0.8rem;
+}
+
+.wolf-trigger-hint{
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:3px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.wolf-sequence{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.wolf-rune{
+    width:36px;
+    height:36px;
+    border:1px solid var(--border-thin);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    color:var(--text-faint);
+    cursor:pointer;
+    transition:all 0.4s ease;
+    user-select:none;
+    background:transparent;
+}
+
+.wolf-rune:hover{
+    border-color:var(--gold-dim);
+    color:var(--gold-dim);
+    box-shadow:0 0 10px var(--gold-glow);
+}
+
+.wolf-rune.active{
+    border-color:var(--blood-soft);
+    color:var(--blood-soft);
+    background:rgba(107,42,42,0.1);
+    box-shadow:0 0 15px var(--blood-glow);
+}
+
+.wolf-rune.correct{
+    border-color:var(--gold);
+    color:var(--gold);
+    background:rgba(184,155,106,0.1);
+}
+
+.wolf-rune.wrong{
+    border-color:var(--text-faint);
+    color:var(--text-faint);
+    animation:shake 0.4s ease;
+}
+
+@keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    75%{transform:translateX(5px);}
+}
+
+.secret-section{
+    display:none;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.secret-section.visible{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+.secret-section .section{
+    border-color:rgba(107,42,42,0.15);
+    background:linear-gradient(135deg, rgba(107,42,42,0.03), var(--bg-card));
+}
+
+.secret-section .section:hover{
+    border-color:rgba(107,42,42,0.3);
+    box-shadow:0 0 30px rgba(107,42,42,0.06);
+}
+
+.secret-section .section-title{color:var(--blood-soft);}
+.secret-section .section-title::before{background:var(--blood-soft);}
+
+.secret-badge{
+    display:inline-block;
+    background:rgba(107,42,42,0.12);
+    color:var(--blood-soft);
+    border:1px solid rgba(107,42,42,0.25);
+    padding:3px 10px;
+    border-radius:2px;
+    font-size:0.6rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-left:10px;
+    font-family:var(--font-mono);
+    vertical-align:middle;
+}
+
+.secret-warning{
+    background:rgba(107,42,42,0.06);
+    border:1px dashed rgba(107,42,42,0.2);
+    border-radius:6px;
+    padding:14px 18px;
+    margin-bottom:25px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+}
+
+body.wolf-mode{cursor:none;}
+
+body.wolf-mode .char-hero video{
+    filter:brightness(0.3) contrast(1.4) saturate(0.5) !important;
+    transition:filter 1.5s ease;
+}
+
+body.wolf-mode .char-hero h1{
+    color:var(--blood-soft);
+    text-shadow:0 0 60px rgba(107,42,42,0.4);
+    transition:all 1.5s ease;
+}
+
+body.wolf-mode .char-hero .tagline{
+    color:var(--blood-soft);
+    transition:all 1.5s ease;
+}
+
+#wolf-eye{
+    position:fixed;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--blood-soft);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    box-shadow:0 0 12px var(--blood-soft), 0 0 30px rgba(107,42,42,0.3);
+    z-index:9998;
+    opacity:0;
+    transition:opacity 0.5s;
+    transform:translate(-50%,-50%);
+}
+
+body.wolf-mode #wolf-eye{opacity:0.7;}
+
+.quote-rotator{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    padding:35px 40px;
+    text-align:center;
+    margin:40px 0;
+    position:relative;
+    overflow:hidden;
+}
+
+.quote-rotator::before{
+    content:'"';
+    position:absolute;
+    top:10px;
+    left:20px;
+    font-size:4rem;
+    color:var(--gold);
+    opacity:0.08;
+    line-height:1;
+    font-family:var(--font-display);
+}
+
+#quote-box{
+    min-height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#quote-box p{
+    font-style:italic;
+    color:var(--pink);
+    font-size:1.15rem;
+    line-height:1.8;
+    margin:0;
+    transition:opacity 0.6s ease;
+}
+
+.quote-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+}
+
+.quote-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--border-thin);
+    cursor:pointer;
+    transition:all 0.3s;
+}
+
+.quote-dot.active{
+    background:var(--gold);
+    box-shadow:0 0 8px var(--gold-glow);
+}
+
+#petals-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:50;
+}
+
+.petal{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:var(--pink);
+    border-radius:70% 0 70% 0;
+    opacity:0;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0;}
+    5%{opacity:0.15;}
+    95%{opacity:0.15;}
+    100%{transform:translateY(110vh) translateX(30px) rotate(720deg); opacity:0;}
+}
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(10,9,8,0.96);
+    z-index:10000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+    cursor:zoom-out;
+}
+
+.lightbox.active{display:flex;}
+
+.lightbox img{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:8px;
+    box-shadow:0 0 60px rgba(0,0,0,0.5);
+}
+
+.lightbox-close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:var(--text-dim);
+    font-size:2rem;
+    cursor:pointer;
+    transition:color 0.3s;
+    font-family:var(--font-display);
+}
+
+.lightbox-close:hover{color:var(--gold);}
+
+.nav-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:40px;
+    border-top:1px solid var(--border-thin);
+    margin-top:60px;
+    max-width:1100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.nav-footer a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.nav-footer a:hover{color:var(--gold);}
+
+.objets-list{
+    list-style:none;
+    padding:0;
+}
+
+.objets-list li{
+    padding:14px 0 14px 28px;
+    position:relative;
+    color:var(--text-dim);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    font-size:1rem;
+    line-height:1.7;
+}
+
+.objets-list li:last-child{border-bottom:none;}
+
+.objets-list li::before{
+    content:'◆';
+    position:absolute;
+    left:0;
+    color:var(--gold-dim);
+    font-size:0.6rem;
+    top:18px;
+}
+
+.objets-list li strong{
+    color:var(--gold);
+    font-weight:400;
+}
+
+@media(max-width:1000px){
+    .stats-grid{grid-template-columns:repeat(2, 1fr);}
+    .relations-grid{grid-template-columns:1fr;}
+    .char-hero-content{padding:60px 20px 40px;}
+    .nav-links{display:none;}
+    .infobox-wrap{grid-template-columns:1fr;}
+    .infobox{position:relative;top:0;max-width:400px;margin:0 auto;}
+}
+
+@media(max-width:600px){
+    .stats-grid{grid-template-columns:1fr;}
+    .char-hero h1{letter-spacing:4px;}
+    .gallery{grid-template-columns:repeat(2, 1fr);}
+    .memory-characters{flex-direction:column;}
+    .wolf-sequence{gap:6px;}
+    .wolf-rune{width:32px;height:32px;font-size:0.6rem;}
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+video::-webkit-media-controls{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="film-grain"></div>
+<div id="petals-container"></div>
+<div id="wolf-eye"></div>
+
+<nav class="nav-bar">
+    <a href="index-monde.html" class="nav-logo">L'OFFICE</a>
+    <ul class="nav-links">
+        <li><a href="index-monde.html#prologue">Prologue</a></li>
+        <li><a href="index-monde.html#monde">Le Monde</a></li>
+        <li><a href="index-monde.html#office">L'Office</a></li>
+        <li><a href="index-monde.html#personnages">Personnages</a></li>
+        <li><a href="index-monde.html#chronologie">Chronologie</a></li>
+    </ul>
+</nav>
+
+<section class="char-hero" id="hero">
+    <video autoplay muted loop playsinline poster="PFP Nora.png">
+        <source src="animated pfp nora.mp4" type="video/mp4">
+    </video>
+    <div class="char-hero-bg"></div>
+    <div class="char-hero-content">
+        <div class="dossier-code">Dossier #ND-1920 — Niveau d'accès : Restreint</div>
+        <h1>Nora Dinkelmann</h1>
+        <div class="tagline">« La Louve de Munich — ne pardonne jamais »</div>
+        <div class="meta-row">
+            <div class="meta-item">Âge : <span>27 ans</span></div>
+            <div class="meta-item">Naissance : <span>1893</span></div>
+            <div class="meta-item">Rôle : <span>Agent terrain — Munich</span></div>
+            <div class="meta-item">Statut : <span>Actif</span></div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+    <div class="infobox-wrap">
+        <aside class="infobox reveal">
+            <div class="infobox-img-wrap">
+                <img src="PFP Nora.png" alt="Nora Dinkelmann">
+                <div class="infobox-img-overlay"></div>
+            </div>
+            <h3>Informations</h3>
+            <div class="title-line"></div>
+            <div class="info-table">
+                <div class="info-row">
+                    <span class="label">Nom complet</span>
+                    <span class="value">Nora Dinkelmann</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Surnom</span>
+                    <span class="value">La Louve de Munich</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Âge</span>
+                    <span class="value">27 ans</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Naissance</span>
+                    <span class="value">1893 — Munich</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Taille</span>
+                    <span class="value">1,72 m</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Nationalité</span>
+                    <span class="value">Allemande</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Occupation</span>
+                    <span class="value">Agent terrain</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Nature</span>
+                    <span class="value secret" title="Information classifiée — déverrouillage requis">Inconnue</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Affiliation</span>
+                    <span class="value">L'Office / Famille Dinkelmann</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Réputation</span>
+                    <span class="value">Élégante. Impitoyable.</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="content-col">
+
+            <div class="section reveal">
+                <h2 class="section-title">Identité</h2>
+                <p>Nora Dinkelmann est une agent terrain de l'Office basée à Munich. À <span class="highlight">27 ans</span>, elle est l'une des chasseuses d'entités les plus redoutées d'Europe centrale. Son surnom — <em>« La Louve de Munich »</em> — n'est pas qu'une métaphore.</p>
+                <p>Née dans une famille de l'ancienne noblesse bavaroise, Nora a grandi entre les salons raffinés de Munich et les forêts sauvages des Alpes. Son enfance a été marquée par un secret de famille : la lignée Dinkelmann porte en elle le sang du loup, une malédiction héréditaire qui se transmet de génération en génération.</p>
+                <p>Elle a rejoint l'Office à 19 ans, après que sa première transformation ait coïncidé avec l'attaque d'une entité démoniaque sur sa propriété familiale. L'Office l'a recrutée non pas malgré sa nature, mais à cause d'elle.</p>
+                <div class="quote-block">
+                    <p>Je ne suis pas un monstre. Je suis une femme qui porte un monstre en elle. Il y a une différence.</p>
+                    <span class="author">— Nora Dinkelmann, rapport interne #ND-1917</span>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Apparence</h2>
+                <p>Nora est une femme d'une beauté saisissante, avec des cheveux blonds bouclés qui cascadent sur ses épaules et des yeux d'un bleu glacier qui semblent percer l'âme de ceux qu'elle fixe. Elle mesure 1,72 mètre et possède une silhouette athlétique, sculptée par des années de chasse et de combat.</p>
+                <p>Son style vestimentaire contraste fortement avec l'univers sombre de l'Office. Elle affectionne particulièrement les manteaux de fourrure rose — un choix délibéré qui la rend instantanément reconnaissable et qui sert de leurre. Personne n'attend qu'une femme en rose puisse décapiter un vampire en moins de trois secondes.</p>
+                <p>Au cou, elle porte toujours un collier avec une dent de loup — un trophée de sa première chasse, ou peut-être un rappel de ce qu'elle est devenue.</p>
+            </div>
+
+            <div class="bar-stat-section reveal" id="stats">
+                <h2 class="section-title">Statistiques</h2>
+                <div class="stat">
+                    <div class="stat-header">
+                        <span class="stat-name">Instinct</span>
+                        <span class="stat-value">100%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" data-width="100"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-header">
+                        <span class="stat-name">Loyauté</span>
+                        <span class="stat-value">95%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-header">
+                        <span class="stat-name">Charisme</span>
+                        <span class="stat-value">92%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" data-width="92"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-header">
+                        <span class="stat-name">Intelligence</span>
+                        <span class="stat-value">96%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" data-width="96"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-header">
+                        <span class="stat-name">Résistance</span>
+                        <span class="stat-value">88%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" data-width="88"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Personnalité</h2>
+                <p>Nora est une force de la nature déguisée en femme de société. En public, elle est charmante, élégante, presque frivole. En privé, elle est impitoyable, disciplinée et terrifiante quand on la provoque.</p>
+                <p>Elle ne pardonne jamais une trahison. Elle n'oublie jamais une dette. Et elle ne recule devant rien quand il s'agit de protéger ceux qu'elle aime — une liste courte mais sacrée.</p>
+                <p>Son plus grand conflit intérieur est la lutte contre sa nature lupine. Chaque pleine lune est une épreuve. Chaque transformation la rapproche un peu plus du monstre qu'elle chasse.</p>
+                <ul class="objets-list" style="margin-top:20px;">
+                    <li>Calme, méthodique, chaque mouvement calculé.</li>
+                    <li>Charismatique lorsqu'elle le souhaite — une présence magnétique et volontaire.</li>
+                    <li>Protectrice envers les siens, parfois jusqu'à l'excès.</li>
+                    <li>Possessive concernant ce qu'elle considère comme sa meute.</li>
+                    <li>Derrière son sourire envoûtant se cache une femme qui n'oublie jamais.</li>
+                </ul>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Capacités</h2>
+                <p>En tant que louve-garou, Nora possède des capacités physiques bien au-delà de celles d'un humain normal : force surhumaine, vitesse accrue, sens aiguisés, et une capacité de régénération rapide. Sa forme lupine est une créature majestueuse de blanc immaculé, ornée de tatouages sacrés dorés qui brillent dans l'obscurité.</p>
+                <p>En plus de ses capacités surnaturelles, Nora est une experte en arts martiaux, en maniement des armes blanches, et en traque. Elle parle couramment l'allemand, le français, l'italien et le latin — ce dernier essentiel pour les rituels de confinement.</p>
+                <div class="traits-list">
+                    <span class="trait-tag">Transformation lupine</span>
+                    <span class="trait-tag">Force surhumaine</span>
+                    <span class="trait-tag">Régénération</span>
+                    <span class="trait-tag">Arts martiaux</span>
+                    <span class="trait-tag">Traque</span>
+                    <span class="trait-tag">Rituels de confinement</span>
+                    <span class="trait-tag">Odorat développé</span>
+                    <span class="trait-tag">Mémoire photographique</span>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Objets Emblématiques</h2>
+                <ul class="objets-list">
+                    <li><strong>Collier à canine de loup</strong> — Sertie d'or, offerte par son père. Portée en permanence.</li>
+                    <li><strong>Le Loup et les Étoiles</strong> — Son livre préféré depuis l'enfance, couverture usée par les lectures nocturnes.</li>
+                    <li><strong>Bague à tête de loup</strong> — Symbole de la famille Dinkelmann, gravée d'une rune de protection.</li>
+                    <li><strong>Rolex Datejust 31 Or Everose</strong> — Montre héritée de sa mère, le seul luxe qu'elle s'autorise.</li>
+                    <li><strong>Parfum « Louve »</strong> — Sa signature olfactive, un mélange de rose et de cuir.</li>
+                    <li><strong>Pistolet de poche calibre .25</strong> — Caché dans son sac, chargé de balles d'argent bénites.</li>
+                </ul>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Relations</h2>
+                <div class="relations-grid">
+                    <a href="yoana-noxley.html" class="relation-card">
+                        <div class="rel-name">Yoana Noxley</div>
+                        <div class="rel-status">Directrice — Supérieure</div>
+                        <div class="rel-desc">Nora respecte profondément Yoana, bien qu'elle soupçonne que la directrice cache plus de secrets qu'elle n'en révèle. Leur relation est celle d'une soldate et de sa générale.</div>
+                    </a>
+                    <a href="paolo-meres.html" class="relation-card">
+                        <div class="rel-name">Paolo Meres</div>
+                        <div class="rel-status">Consultant — Tension</div>
+                        <div class="rel-desc">Nora et Paolo partagent une alchimie complexe, mêlée de fascination et de méfiance. Elle sait qu'il cache quelque chose. Il sait qu'elle le sait.</div>
+                    </a>
+                    <a href="la-voyageuse.html" class="relation-card">
+                        <div class="rel-name">La Voyageuse</div>
+                        <div class="rel-status">Entité errante — Intérêt</div>
+                        <div class="rel-desc">Nora ressent une curieuse connexion avec cette entité errante. Peut-être parce qu'elles sont toutes deux des créatures piégées entre deux mondes.</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="memory-section reveal">
+                <h2 class="section-title">Souvenir d'Enfance</h2>
+                <p>Une photographie rare, prise dans les rues de Munich, immortalise un moment de vulnérabilité que Nora a depuis longtemps enfoui. Trois enfants, un secret, un lien que le temps n'a pas effacé.</p>
+                <div class="memory-img-wrap" onclick="openLightbox(this)">
+                    <img src="ChatGPT Image Jun 23, 2026, 02_35_10 PM.png" alt="Souvenir d'enfance - Paolo, Nora et Yoana">
+                    <div class="memory-img-overlay">
+                        <span>Munich, été 1897</span>
+                    </div>
+                </div>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">
+                    De gauche à droite : les trois enfants qui ne savaient pas encore que leurs destins resteraient entrelacés pour toujours.
+                </p>
+                <div class="memory-characters">
+                    <a href="paolo-meres.html" class="character-link">
+                        <div class="char-avatar">PM</div>
+                        <span>Paolo Meres</span>
+                    </a>
+                    <a href="nora-dinkelmann.html" class="character-link" style="border-color:var(--pink); color:var(--pink);">
+                        <div class="char-avatar" style="border-color:var(--pink); color:var(--pink);">ND</div>
+                        <span>Nora Dinkelmann</span>
+                    </a>
+                    <a href="yoana-noxley.html" class="character-link">
+                        <div class="char-avatar">YN</div>
+                        <span>Yoana Noxley</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Galerie</h2>
+                <div class="gallery">
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="Child Nora.png" alt="Nora enfant">
+                        <div class="gallery-caption">
+                            <span>Âge : 8 ans</span>
+                            <span class="gallery-sub">« La petite louve timide »</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="PFP Nora.png" alt="Portrait Nora">
+                        <div class="gallery-caption">
+                            <span>Portrait</span>
+                            <span class="gallery-sub">La Louve dévoilée</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="Adult Nora.png" alt="Nora adulte">
+                        <div class="gallery-caption">
+                            <span>Âge : 27 ans</span>
+                            <span class="gallery-sub">L'héritière</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="ChatGPT Image Jun 23, 2026, 02_20_54 PM.png" alt="Tenues de Nora">
+                        <div class="gallery-caption">
+                            <span>Collection de Tenues</span>
+                            <span class="gallery-sub">Élégance sans effort</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="ChatGPT Image Jun 23, 2026, 02_21_06 PM.png" alt="Tenues alternatives">
+                        <div class="gallery-caption">
+                            <span>Tenues Alternatives</span>
+                            <span class="gallery-sub">De la ville à la nuit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-rotator reveal">
+                <div id="quote-box">
+                    <p>Les loups savent des choses que les humains ignorent.</p>
+                </div>
+                <div class="quote-dots">
+                    <span class="quote-dot active" data-index="0"></span>
+                    <span class="quote-dot" data-index="1"></span>
+                    <span class="quote-dot" data-index="2"></span>
+                    <span class="quote-dot" data-index="3"></span>
+                    <span class="quote-dot" data-index="4"></span>
+                    <span class="quote-dot" data-index="5"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="wolf-trigger reveal">
+        <div class="wolf-trigger-hint">Sceau de déverrouillage — Séquence requise</div>
+        <div class="wolf-sequence" id="wolfSequence">
+            <div class="wolf-rune" data-rune="1">◈</div>
+            <div class="wolf-rune" data-rune="2">◉</div>
+            <div class="wolf-rune" data-rune="3">▣</div>
+            <div class="wolf-rune" data-rune="4">◆</div>
+            <div class="wolf-rune" data-rune="5">◊</div>
+            <div class="wolf-rune" data-rune="6">▤</div>
+            <div class="wolf-rune" data-rune="7">◐</div>
+        </div>
+        <p style="margin-top:15px;font-family:var(--font-mono);font-size:0.55rem;color:var(--text-faint);letter-spacing:2px;">
+            ENTITÉ LUPINE — ACCÈS RESTREINT — NIVEAU ALPHA REQUIS
+        </p>
+    </div>
+
+    <div class="secret-section" id="secretWolf">
+
+        <div class="section reveal">
+            <h2 class="section-title">
+                Véritable Nature
+                <span class="secret-badge">Classifié</span>
+            </h2>
+            <div class="secret-warning">
+                <span>⚠</span>
+                <span>Ces informations sont strictement confidentielles. Divulgation interdite sous peine de représailles immédiates.</span>
+            </div>
+            <p>Nora Dinkelmann n'est pas une simple héritière. Elle est l'une des dernières représentantes d'une lignée de loups-garous ayant traversé les siècles dans le secret. Sa transformation lupine est un héritage ancestral, transmis de génération en génération au sein de la famille Dinkelmann.</p>
+            <p>En forme lupine, elle devient une créature majestueuse, imposante et terrifiante. Son pelage beige clair est parsemé de tatouages dorés qui parcourent son corps comme des œuvres sacrées. Chaque bijou qu'elle porte a une signification, chaque chaîne un souvenir, chaque cristal un symbole de pouvoir et de protection.</p>
+            <div class="quote-block" style="border-left-color:var(--blood-soft);">
+                <p style="color:var(--blood-soft);">Elle est la beauté et la bête, la grâce et la mort.</p>
+                <span class="author">— Rapport d'évaluation #ND-1920-Alpha</span>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2 class="section-title">
+                Forme Lupine
+                <span class="secret-badge">Top Secret</span>
+            </h2>
+            <div class="gallery">
+                <div class="gallery-item" onclick="openLightbox(this)" style="grid-column:span 2;">
+                    <img src="ChatGPT Image Jun 23, 2026, 02_20_07 PM.png" alt="Forme lupine de Nora">
+                    <div class="gallery-caption">
+                        <span>Forme Lupine</span>
+                        <span class="gallery-sub">92 kg | 1,68 m au garrot | Loup-garou majestueux</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="objets-list">
+                <li><strong style="color:var(--blood-soft);">Espèce :</strong> Loup-garou (forme lupine)</li>
+                <li><strong style="color:var(--blood-soft);">Pelage :</strong> Beige clair avec tatouages dorés sacrés</li>
+                <li><strong style="color:var(--blood-soft);">Bijoux :</strong> Couronne de louve, pendentif canine, bracelet du pacte, chaîne du protecteur, clé du sanctuaire</li>
+                <li><strong style="color:var(--blood-soft);">Tatouages :</strong> Chaque symbole gravé représente un serment, une victoire ou une perte</li>
+                <li><strong style="color:var(--blood-soft);">Capacités :</strong> Force surhumaine, vitesse accrue, sens amplifiés, régénération accélérée</li>
+            </ul>
+            <p style="margin-top:20px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">
+                Note de l'archiviste : Les photographies de la forme lupine sont interdites par protocole de sécurité Alpha-7. Toute violation sera traitée comme une faute grave passible de mesures disciplinaires sévères.
+            </p>
+        </div>
+
+        <div class="section reveal">
+            <h2 class="section-title">
+                Transformation
+                <span class="secret-badge">Protocole Alpha</span>
+            </h2>
+            <p>La transformation de Nora est un spectacle à la fois terrifiant et majestueux. Sous la lumière de la pleine lune, son corps se déforme, ses os se réorganisent, sa peau se couvre de fourrure blanche immaculée. Les tatouages dorés qui ornent sa forme humaine deviennent des runes lumineuses sur sa forme lupine, pulsant d'une énergie ancienne.</p>
+            <p>Dans cette forme, Nora perd une partie de son humanité. Elle devient plus instinctive, plus sauvage, plus dangereuse. Mais elle conserve toujours assez de conscience pour reconnaître ses alliés — et pour distinguer ses ennemis.</p>
+            <div class="quote-block" style="border-left-color:var(--blood-soft);">
+                <p style="color:var(--blood-soft);">Chaque pleine lune est une épreuve. Chaque transformation me rapproche un peu plus du monstre que je chasse. Mais je ne reculerai pas. Je ne peux pas.</p>
+                <span class="author">— Journal personnel de Nora Dinkelmann, 1919</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="nav-footer">
+    <a href="paolo-meres.html">◄ Paolo Meres</a>
+    <a href="index-monde.html">◈ Retour aux Archives</a>
+    <a href="yoana-noxley.html">Yoana Noxley ►</a>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+// Petals
+const petalsContainer = document.getElementById("petals-container");
+for(let i = 0; i < 25; i++){
+    const p = document.createElement("span");
+    p.classList.add("petal");
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = (-Math.random() * 100) + "vh";
+    p.style.animationDuration = (12 + Math.random() * 18) + "s";
+    p.style.animationDelay = (-Math.random() * 20) + "s";
+    p.style.opacity = 0.1 + Math.random() * 0.2;
+    const size = 5 + Math.random() * 8;
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+    petalsContainer.appendChild(p);
+}
+
+// Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, {threshold:0.1});
+reveals.forEach(el => obs.observe(el));
+
+// Bar Stats Animation
+const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            const bars = entry.target.querySelectorAll(".bar-fill");
+            bars.forEach((bar, i) => {
+                const width = bar.dataset.width;
+                setTimeout(() => { bar.style.width = width + "%"; }, i * 200);
+            });
+            statObs.unobserve(entry.target);
+        }
+    });
+}, {threshold:0.4});
+document.querySelectorAll("#stats").forEach(el => statObs.observe(el));
+
+// Quote Rotator
+const quotes = [
+    "Les loups savent des choses que les humains ignorent.",
+    "Je n'oublie jamais une dette.",
+    "La peur possède une odeur.",
+    "Une louve protège toujours sa meute.",
+    "Le silence révèle davantage que les mots.",
+    "On croit caresser la louve… jusqu'au moment où elle referme sa mâchoire."
+];
+
+let currentQuote = 0;
+const quoteBox = document.getElementById("quote-box");
+const quoteDots = document.querySelectorAll(".quote-dot");
+
+function showQuote(index){
+    quoteBox.style.opacity = '0';
+    setTimeout(() => {
+        quoteBox.innerHTML = `<p>${quotes[index]}</p>`;
+        quoteBox.style.opacity = '1';
+    }, 300);
+    quoteDots.forEach((d, i) => d.classList.toggle('active', i === index));
+    currentQuote = index;
+}
+
+quoteDots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showQuote(i));
+});
+
+setInterval(() => {
+    showQuote((currentQuote + 1) % quotes.length);
+}, 6000);
+
+// Lightbox
+function openLightbox(element){
+    const img = element.querySelector("img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLightbox(){
+    const lightbox = document.getElementById("lightbox");
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeLightbox();
+});
+
+// Secret Wolf Sequence
+const wolfRunes = document.querySelectorAll('.wolf-rune');
+const secretWolf = document.getElementById('secretWolf');
+const wolfEye = document.getElementById('wolf-eye');
+let clickedSequence = [];
+const correctSequence = ['3', '1', '5', '2', '7'];
+
+wolfRunes.forEach(rune => {
+    rune.addEventListener('click', () => {
+        const runeVal = rune.dataset.rune;
+        clickedSequence.push(runeVal);
+        rune.classList.add('active');
+
+        // Check if sequence is getting wrong
+        const currentIndex = clickedSequence.length - 1;
+        if(clickedSequence[currentIndex] !== correctSequence[currentIndex]){
+            // Wrong sequence - reset
+            clickedSequence = [];
+            wolfRunes.forEach(r => {
+                r.classList.remove('active', 'correct');
+                r.classList.add('wrong');
+                setTimeout(() => r.classList.remove('wrong'), 400);
+            });
+            return;
+        }
+
+        rune.classList.add('correct');
+
+        // Check if complete
+        if(clickedSequence.length === correctSequence.length){
+            // Success!
+            wolfRunes.forEach(r => {
+                r.style.borderColor = 'var(--blood-soft)';
+                r.style.color = 'var(--blood-soft)';
+            });
+
+            // Enable wolf mode
+            document.body.classList.add('wolf-mode');
+
+            // Show secret section
+            setTimeout(() => {
+                secretWolf.classList.add('visible');
+                secretWolf.scrollIntoView({behavior: 'smooth', block: 'start'});
+            }, 600);
+
+            // Wolf eye cursor
+            document.addEventListener('mousemove', (e) => {
+                wolfEye.style.left = e.clientX + 'px';
+                wolfEye.style.top = e.clientY + 'px';
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>

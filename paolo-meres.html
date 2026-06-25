@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paolo Meres — Dossier #PM-1920 | L'Office</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+    --bg:#0a0908;
+    --bg-elevated:#110f0d;
+    --bg-card:#161412;
+    --panel:#1e1b18;
+    --panel-hover:#2a2622;
+    --gold:#b89b6a;
+    --gold-bright:#d4b896;
+    --gold-dim:#7a6540;
+    --gold-glow:rgba(184,155,106,0.15);
+    --blood:#6b2a2a;
+    --blood-soft:#8a3a3a;
+    --blood-glow:rgba(107,42,42,0.2);
+    --amber:#8a6a3a;
+    --amber-soft:#a08050;
+    --text:#e0d8cf;
+    --text-dim:#a09890;
+    --text-muted:#5a5248;
+    --text-faint:#3a3530;
+    --border-thin:rgba(184,155,106,0.08);
+    --border-hover:rgba(184,155,106,0.25);
+    --font-display:'Cinzel',serif;
+    --font-body:'Cormorant Garamond',serif;
+    --font-mono:'Space Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+::selection{background:var(--gold);color:var(--bg);}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+
+.film-grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+.nav-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,9,8,0.95);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border-thin);
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+}
+
+.nav-logo{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    color:var(--gold);
+    letter-spacing:4px;
+    font-weight:400;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.nav-logo::before{
+    content:'◈';
+    font-size:0.8rem;
+    opacity:0.6;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s;
+    position:relative;
+    padding:4px 0;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:width 0.3s;
+}
+
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+
+/* ─── HERO CHARACTER ─── */
+.char-hero{
+    min-height:70vh;
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+}
+
+.char-hero-bg{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, var(--bg) 0%, transparent 60%),
+                linear-gradient(135deg, rgba(138,106,58,0.08), transparent 50%);
+    z-index:1;
+}
+
+.char-hero img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:sepia(0.2) contrast(1.1) brightness(0.5);
+}
+
+.char-hero-content{
+    position:relative;
+    z-index:2;
+    padding:60px 40px;
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+}
+
+.char-hero .dossier-code{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:3px;
+    color:var(--blood-soft);
+    text-transform:uppercase;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.char-hero .dossier-code::before{
+    content:'';
+    width:20px;
+    height:1px;
+    background:var(--blood-soft);
+}
+
+.char-hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    color:var(--gold);
+    letter-spacing:8px;
+    text-transform:uppercase;
+    font-weight:400;
+    text-shadow:0 0 60px rgba(184,155,106,0.3);
+    margin-bottom:10px;
+}
+
+.char-hero .tagline{
+    font-family:var(--font-body);
+    font-size:1.3rem;
+    color:var(--text-dim);
+    font-style:italic;
+    margin-bottom:20px;
+}
+
+.char-hero .meta-row{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.char-hero .meta-item{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+}
+
+.char-hero .meta-item span{
+    color:var(--gold);
+}
+
+/* ─── CONTENT ─── */
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:60px 0;
+}
+
+.section{
+    margin-bottom:80px;
+}
+
+.section-title{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:0.85rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.section-title::before{
+    content:'';
+    width:30px;
+    height:1px;
+    background:var(--gold-dim);
+}
+
+.section p{
+    color:var(--text-dim);
+    font-size:1.05rem;
+    line-height:1.9;
+    margin-bottom:18px;
+    text-align:justify;
+}
+
+.section .highlight{
+    color:var(--gold-bright);
+    font-style:italic;
+}
+
+.section .quote{
+    border-left:2px solid var(--amber-soft);
+    padding-left:25px;
+    margin:30px 0;
+    font-style:italic;
+    color:var(--text);
+    font-size:1.1rem;
+}
+
+/* ─── STATS GRID ─── */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    margin:40px 0;
+}
+
+.stat-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:6px;
+    padding:25px 20px;
+    text-align:center;
+    transition:all 0.4s ease;
+}
+
+.stat-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+}
+
+.stat-card .stat-value{
+    font-family:var(--font-display);
+    font-size:1.5rem;
+    color:var(--gold);
+    margin-bottom:8px;
+}
+
+.stat-card .stat-label{
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+}
+
+/* ─── TRAITS ─── */
+.traits-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.trait-tag{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    padding:6px 14px;
+    border:1px solid var(--border-thin);
+    border-radius:3px;
+    background:var(--bg-card);
+    transition:all 0.3s;
+}
+
+.trait-tag:hover{
+    border-color:var(--amber-soft);
+    color:var(--amber-soft);
+}
+
+/* ─── RELATIONS ─── */
+.relations-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    margin-top:30px;
+}
+
+.relation-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:6px;
+    padding:25px;
+    transition:all 0.4s ease;
+    text-decoration:none;
+    display:block;
+}
+
+.relation-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+}
+
+.relation-card .rel-name{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:0.85rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.relation-card .rel-status{
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.relation-card .rel-desc{
+    color:var(--text-dim);
+    font-size:0.9rem;
+    line-height:1.7;
+}
+
+/* ─── NETWORK SECTION ─── */
+.network-section{
+    background:linear-gradient(135deg, rgba(138,106,58,0.05), transparent);
+    border:1px solid var(--amber-soft);
+    border-radius:8px;
+    padding:40px;
+    margin-top:60px;
+    position:relative;
+}
+
+.network-section::before{
+    content:'RÉSEAU DE CONNAISSANCES';
+    position:absolute;
+    top:-10px;
+    left:30px;
+    background:var(--bg);
+    padding:0 15px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:3px;
+    color:var(--amber-soft);
+}
+
+.network-section h3{
+    font-family:var(--font-display);
+    color:var(--amber-soft);
+    font-size:1rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.network-section p{
+    color:var(--text-dim);
+    font-size:1rem;
+    line-height:1.9;
+}
+
+/* ─── NAV FOOTER ─── */
+.nav-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:40px;
+    border-top:1px solid var(--border-thin);
+    margin-top:60px;
+}
+
+.nav-footer a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.nav-footer a:hover{color:var(--gold);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+    .stats-grid{grid-template-columns:repeat(2, 1fr);}
+    .relations-grid{grid-template-columns:1fr;}
+    .char-hero-content{padding:40px 20px;}
+    .nav-links{display:none;}
+}
+
+@media(max-width:600px){
+    .stats-grid{grid-template-columns:1fr;}
+    .char-hero h1{letter-spacing:4px;}
+}
+
+/* ─── REVEAL ─── */
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="film-grain"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav-bar">
+    <a href="index-monde.html" class="nav-logo">L'OFFICE</a>
+    <ul class="nav-links">
+        <li><a href="index-monde.html#prologue">Prologue</a></li>
+        <li><a href="index-monde.html#monde">Le Monde</a></li>
+        <li><a href="index-monde.html#office">L'Office</a></li>
+        <li><a href="index-monde.html#personnages">Personnages</a></li>
+        <li><a href="index-monde.html#chronologie">Chronologie</a></li>
+    </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="char-hero">
+    <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres">
+    <div class="char-hero-bg"></div>
+    <div class="char-hero-content">
+        <div class="dossier-code">Dossier #PM-1920 — Niveau d'accès : Confidentiel</div>
+        <h1>Paolo Meres</h1>
+        <div class="tagline">« Le Chaton — connaît déjà vos pièces »</div>
+        <div class="meta-row">
+            <div class="meta-item">Âge : <span>29 ans</span></div>
+            <div class="meta-item">Naissance : <span>1891</span></div>
+            <div class="meta-item">Rôle : <span>Consultant / Négociateur</span></div>
+            <div class="meta-item">Statut : <span>Actif — Sous surveillance</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="container">
+
+    <div class="section reveal">
+        <h2 class="section-title">Identité</h2>
+        <p>Paolo Meres est un consultant indépendant qui collabore avec l'Office depuis cinq ans. À <span class="highlight">29 ans</span>, il est l'un des négociateurs les plus habiles du milieu occulte européen. Son surnom — <em>« Le Chaton »</em> — est un jeu de mots cruel : derrière son sourire désarmant et ses manières affables se cache un prédateur qui connaît déjà toutes vos pièces avant que la partie ne commence.</p>
+        <p>Né à Naples dans une famille de commerçants, Paolo a grandi dans les ruelles étroites du quartier espagnol, où il a appris très tôt que l'information valait plus que l'or. À 16 ans, il travaillait déjà comme intermédiaire entre le monde visible et le monde caché — mettant en relation des chasseurs avec des employeurs, des entités avec des invocateurs, des secrets avec ceux qui pouvaient payer le prix.</p>
+        <p>Il a rejoint l'Office non pas comme agent, mais comme consultant — une distinction qu'il défend farouchement. Il n'obéit à personne. Il choisit ses missions. Et il facture cher.</p>
+    </div>
+
+    <div class="stats-grid reveal">
+        <div class="stat-card">
+            <div class="stat-value">29</div>
+            <div class="stat-label">Années</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">1891</div>
+            <div class="stat-label">Naissance</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">II</div>
+            <div class="stat-label">Niveau de menace</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Années de collaboration</div>
+        </div>
+    </div>
+
+    <div class="section reveal">
+        <h2 class="section-title">Apparence</h2>
+        <p>Paolo est un homme d'allure décontractée, presque nonchalante. Il mesure 1,78 mètre, avec une silhouette élancée et des épaules qui semblent toujours légèrement voûtées, comme s'il riait intérieurement d'une plaisanterie que personne d'autre ne comprend.</p>
+        <p>Ses cheveux bruns sont perpetuellement en bataille, ses lunettes rondes lui donnent un air d'intellectuel distrait, et son sourire — ce sourire — est son arme la plus dangereuse. Il déstabilise, désarme, et détruit avant que l'adversaire ne réalise ce qui lui arrive.</p>
+        <p>Il s'habille avec une élégance décontractée qui cache une attention méticuleuse aux détails. Chaque bouton, chaque pli, chaque accessoire est choisi pour envoyer un message. Le message est toujours le même : <em>« Je suis inoffensif. Faites confiance à mes intentions. »</em> C'est un mensonge magnifiquement exécuté.</p>
+    </div>
+
+    <div class="section reveal">
+        <h2 class="section-title">Personnalité</h2>
+        <p>Paolo est un manipulateur né, mais pas au sens péjoratif du terme. Il manipule parce qu'il comprend les gens mieux qu'ils ne se comprennent eux-mêmes. Il lit les micro-expressions, les silences, les hésitations. Il sait quand vous mentez avant que vous ne l'ayez décidé.</p>
+        <p>Derrière son masque de charmeur se cache une intelligence féroce et une mémoire photographique. Il n'oublie jamais un visage, jamais une conversation, jamais une dette. Ses archives mentales sont plus vastes que celles de l'Office.</p>
+        <p>Sa plus grande faiblesse est aussi sa plus grande force : il s'ennuie facilement. Il prend des risques inutiles juste pour sentir quelque chose. C'est ce qui le rend imprévisible. Et c'est ce qui le rend dangereux.</p>
+        <div class="quote">« Je ne trahis jamais. Je réorganise simplement les priorités. La différence est subtile, mais elle existe. »</div>
+    </div>
+
+    <div class="section reveal">
+        <h2 class="section-title">Capacités</h2>
+        <p>Paolo ne possède pas de capacités surnaturelles — du moins, pas à sa connaissance. Ce qui le rend redoutable, c'est son réseau. Il connaît tout le monde, et tout le monde lui doit quelque chose. Des vampires aristocrates aux démons mineurs, des politiciens corrompus aux agents doubles, son carnet d'adresses est un arsenal.</p>
+        <p>Il est également un maître en négociation, en psychologie, et en arts de la séduction. Il parle sept langues couramment, dont deux langues mortes utilisées dans les rituels d'invocation. Son expertise en contre-espionnage est sans égale dans l'Office.</p>
+        <div class="traits-list">
+            <span class="trait-tag">Négociation</span>
+            <span class="trait-tag">Réseau occulte</span>
+            <span class="trait-tag">Psychologie</span>
+            <span class="trait-tag">Contre-espionnage</span>
+            <span class="trait-tag">Sept langues</span>
+            <span class="trait-tag">Arts de la séduction</span>
+        </div>
+    </div>
+
+    <div class="section reveal">
+        <h2 class="section-title">Relations</h2>
+        <div class="relations-grid">
+            <a href="yoana-noxley.html" class="relation-card">
+                <div class="rel-name">Yoana Noxley</div>
+                <div class="rel-status">Directrice — Partenaire de jeu</div>
+                <div class="rel-desc">Paolo respecte Yoana comme l'unique adversaire digne de ce nom. Leur relation est un échiquier permanent où chaque mouvement est calculé, chaque sourire est une feinte.</div>
+            </a>
+            <a href="nora-dinkelmann.html" class="relation-card">
+                <div class="rel-name">Nora Dinkelmann</div>
+                <div class="rel-status">Agent terrain — Alchimie dangereuse</div>
+                <div class="rel-desc">Paolo est fasciné par Nora. Elle est le seule être qu'il ne parvient pas à lire complètement — et cela le rend à la fois frustré et obsédé.</div>
+            </a>
+            <a href="la-voyageuse.html" class="relation-card">
+                <div class="rel-name">La Voyageuse</div>
+                <div class="rel-status">Entité errante — Curiosité</div>
+                <div class="rel-desc">Paolo a croisé la route de la Voyageuse une fois, à Venise. Il n'a jamais parlé de cette rencontre. Mais il garde un objet qu'elle lui a donné, caché dans sa poche intérieure.</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="network-section reveal">
+        <h3>◈ Le Réseau Meres</h3>
+        <p>Le véritable pouvoir de Paolo ne réside pas dans ses capacités physiques ou surnaturelles, mais dans le réseau qu'il a tissé au fil des années. Des informateurs dans chaque grande ville d'Europe, des contacts chez les vampires de Prague, des alliés parmi les loups-garous des Carpates, des obligés chez les démons mineurs de Naples.</p>
+        <p>Il maintient ce réseau par un système complexe de faveurs et de dettes. Chaque information qu'il donne crée une dette. Chaque dette est soigneusement cataloguée dans sa mémoire. Et un jour, il encaissera.</p>
+        <p style="margin-top:15px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">Note de l'archiviste : Le réseau de M. Meres n'est pas officiellement reconnu par l'Office. Toute interaction est sous sa seule responsabilité. En cas de fuite d'information, l'Office niera toute connaissance.</p>
+    </div>
+
+</div>
+
+<!-- ═══ NAV FOOTER ═══ -->
+<div class="nav-footer">
+    <a href="yoana-noxley.html">◄ Yoana Noxley</a>
+    <a href="index-monde.html">◈ Retour aux Archives</a>
+    <a href="nora-dinkelmann.html">Nora Dinkelmann ►</a>
+</div>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, {threshold:0.1});
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
