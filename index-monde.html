@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Office | 1920 — Archives Classifiées</title>
+<!-- SECRET: Press Escape 3x to exit archives -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+    --bg:#0a0908;
+    --bg-elevated:#110f0d;
+    --bg-card:#161412;
+    --panel:#1e1b18;
+    --panel-hover:#2a2622;
+    --gold:#b89b6a;
+    --gold-bright:#d4b896;
+    --gold-dim:#7a6540;
+    --gold-glow:rgba(184,155,106,0.15);
+    --blood:#6b2a2a;
+    --blood-soft:#8a3a3a;
+    --blood-glow:rgba(107,42,42,0.2);
+    --ink:#2a2520;
+    --text:#e0d8cf;
+    --text-dim:#a09890;
+    --text-muted:#5a5248;
+    --text-faint:#3a3530;
+    --border-thin:rgba(184,155,106,0.08);
+    --border-hover:rgba(184,155,106,0.25);
+    --shadow:0 4px 30px rgba(0,0,0,0.6);
+    --shadow-gold:0 0 40px rgba(184,155,106,0.08);
+    --font-display:'Cinzel',serif;
+    --font-body:'Cormorant Garamond',serif;
+    --font-mono:'Space Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.7;
+    overflow-x:hidden;
+    cursor:default;
+}
+
+::selection{background:var(--gold);color:var(--bg);}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
+
+/* ─── FILM GRAIN OVERLAY ─── */
+.film-grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ─── TYPEWRITER CURSOR ─── */
+.typewriter-cursor{
+    display:inline-block;
+    width:2px;
+    height:1.1em;
+    background:var(--gold);
+    margin-left:2px;
+    animation:cursorBlink 1s step-end infinite;
+    vertical-align:text-bottom;
+}
+
+@keyframes cursorBlink{
+    0%,100%{opacity:1;}
+    50%{opacity:0;}
+}
+
+/* ─── ATTENTION METER ─── */
+.attention-bar{
+    position:fixed;
+    top:0;
+    left:0;
+    height:2px;
+    background:linear-gradient(90deg,var(--gold),var(--blood-soft));
+    z-index:10001;
+    width:0%;
+    transition:width 0.5s ease;
+}
+
+.attention-label{
+    position:fixed;
+    top:8px;
+    right:20px;
+    z-index:10001;
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:2px;
+    color:var(--gold-dim);
+    text-transform:uppercase;
+    opacity:0;
+    transition:opacity 0.5s ease;
+}
+
+.attention-label.visible{opacity:1;}
+
+/* ─── SECURITY BADGE ─── */
+.security-badge{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:1000;
+    background:rgba(10,9,8,0.9);
+    border:1px solid var(--border-thin);
+    border-radius:4px;
+    padding:8px 14px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:1px;
+    color:var(--text-muted);
+    backdrop-filter:blur(10px);
+}
+
+.security-badge .level{
+    color:var(--gold);
+    font-weight:700;
+}
+
+/* ─── HERO SECTION ─── */
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(180deg, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.6) 40%, rgba(10,9,8,0.95) 100%);
+    z-index:1;
+}
+
+.hero-fog{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(ellipse at 30% 70%, rgba(184,155,106,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(107,42,42,0.02) 0%, transparent 50%);
+    animation:fogDrift 20s ease-in-out infinite;
+    z-index:0;
+}
+
+@keyframes fogDrift{
+    0%,100%{transform:translateX(0) scale(1);}
+    50%{transform:translateX(-20px) scale(1.02);}
+}
+
+.hero-particles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+}
+
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:var(--gold);
+    border-radius:50%;
+    opacity:0;
+    animation:particleFloat 15s ease-in-out infinite;
+}
+
+@keyframes particleFloat{
+    0%{opacity:0;transform:translateY(100vh) scale(0);}
+    10%{opacity:0.3;}
+    90%{opacity:0.3;}
+    100%{opacity:0;transform:translateY(-10vh) scale(1);}
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:0 25px;
+    max-width:900px;
+}
+
+.hero .classified-stamp{
+    display:inline-block;
+    border:1px solid var(--blood-soft);
+    color:var(--blood-soft);
+    padding:4px 16px;
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:30px;
+    opacity:0;
+    animation:fadeUp 1s ease 0.2s forwards;
+    transform:rotate(-2deg);
+}
+
+.hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(2.5rem,7vw,5.5rem);
+    color:var(--gold);
+    letter-spacing:14px;
+    text-transform:uppercase;
+    font-weight:400;
+    text-shadow:0 0 80px rgba(184,155,106,0.2);
+    opacity:0;
+    animation:fadeUp 1.2s ease 0.5s forwards;
+}
+
+.hero .subtitle{
+    font-family:var(--font-display);
+    font-size:clamp(0.9rem,2vw,1.3rem);
+    color:var(--text-muted);
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-top:20px;
+    opacity:0;
+    animation:fadeUp 1.2s ease 0.8s forwards;
+}
+
+.hero .year-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    margin-top:25px;
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    color:var(--gold-dim);
+    letter-spacing:3px;
+    opacity:0;
+    animation:fadeUp 1.2s ease 1s forwards;
+}
+
+.hero .year-badge::before,
+.hero .year-badge::after{
+    content:'';
+    width:30px;
+    height:1px;
+    background:var(--gold-dim);
+    opacity:0.4;
+}
+
+.hero .prologue{
+    margin-top:40px;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+    opacity:0;
+    animation:fadeUp 1.5s ease 1.3s forwards;
+}
+
+.hero .prologue p{
+    font-family:var(--font-body);
+    font-size:clamp(0.95rem,1.5vw,1.15rem);
+    color:var(--text-dim);
+    line-height:2;
+    margin-bottom:1.2em;
+    font-weight:300;
+}
+
+.hero .prologue p:first-child::first-letter{
+    font-family:var(--font-display);
+    font-size:3.5rem;
+    float:left;
+    line-height:0.8;
+    margin-right:12px;
+    margin-top:8px;
+    color:var(--gold);
+}
+
+.hero .prologue .highlight{
+    color:var(--gold-bright);
+    font-style:italic;
+}
+
+.hero .prologue .attention-line{
+    color:var(--blood-soft);
+    font-weight:500;
+    letter-spacing:1px;
+}
+
+.hero-btn{
+    margin-top:45px;
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold-dim);
+    padding:14px 40px;
+    border-radius:0;
+    font-family:var(--font-display);
+    font-size:0.8rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all 0.5s ease;
+    opacity:0;
+    animation:fadeUp 1.2s ease 1.6s forwards;
+    position:relative;
+}
+
+.hero-btn::before{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:width 0.5s ease;
+}
+
+.hero-btn:hover{
+    color:var(--text);
+    border-color:var(--gold);
+    letter-spacing:6px;
+    box-shadow:0 0 30px var(--gold-glow);
+}
+
+.hero-btn:hover::before{width:100%;}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+/* ─── NAV ─── */
+.nav-bar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,9,8,0.95);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border-thin);
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+}
+
+.nav-logo{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    color:var(--gold);
+    letter-spacing:4px;
+    font-weight:400;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.nav-logo::before{
+    content:'◈';
+    font-size:0.8rem;
+    opacity:0.6;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s;
+    position:relative;
+    padding:4px 0;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    bottom:-4px;
+    left:0;
+    width:0;
+    height:1px;
+    background:var(--gold);
+    transition:width 0.3s;
+}
+
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--gold);}
+.nav-links a.active::after{width:100%;}
+
+/* ─── SECTIONS COMMON ─── */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title .section-number{
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:4px;
+    color:var(--gold-dim);
+    text-transform:uppercase;
+    margin-bottom:15px;
+    display:block;
+}
+
+.section-title h2{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:clamp(1.4rem,3vw,2rem);
+    font-weight:400;
+    letter-spacing:6px;
+    text-transform:uppercase;
+}
+
+.section-title .line{
+    width:60px;
+    height:1px;
+    background:var(--gold-dim);
+    margin:20px auto 0;
+    opacity:0.4;
+    position:relative;
+}
+
+.section-title .line::after{
+    content:'';
+    position:absolute;
+    left:50%;
+    top:-2px;
+    transform:translateX(-50%);
+    width:6px;
+    height:6px;
+    background:var(--gold-dim);
+    transform:translateX(-50%) rotate(45deg);
+}
+
+/* ─── PROLOGUE SECTION ─── */
+.prologue-section{
+    background:linear-gradient(180deg, var(--bg), var(--bg-elevated));
+    padding:100px 0;
+    position:relative;
+}
+
+.prologue-section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+.prologue-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+}
+
+.prologue-text{
+    position:relative;
+}
+
+.prologue-text .epigraph{
+    font-family:var(--font-body);
+    font-size:1.3rem;
+    font-style:italic;
+    color:var(--gold);
+    line-height:1.8;
+    margin-bottom:30px;
+    padding-left:20px;
+    border-left:2px solid var(--gold-dim);
+}
+
+.prologue-text p{
+    color:var(--text-dim);
+    margin-bottom:18px;
+    font-size:1.05rem;
+    text-align:justify;
+    line-height:1.9;
+}
+
+.prologue-text .highlight{
+    color:var(--gold-bright);
+    font-style:italic;
+}
+
+.prologue-text .attention-quote{
+    font-family:var(--font-display);
+    font-size:1.5rem;
+    color:var(--blood-soft);
+    text-align:center;
+    margin:40px 0;
+    letter-spacing:2px;
+    position:relative;
+    padding:20px;
+}
+
+.prologue-text .attention-quote::before,
+.prologue-text .attention-quote::after{
+    content:'"';
+    font-size:3rem;
+    position:absolute;
+    color:var(--blood-soft);
+    opacity:0.2;
+}
+
+.prologue-text .attention-quote::before{top:-10px;left:0;}
+.prologue-text .attention-quote::after{bottom:-20px;right:0;}
+
+.prologue-visual{
+    position:relative;
+    border:1px solid var(--border-thin);
+    border-radius:4px;
+    overflow:hidden;
+    aspect-ratio:3/4;
+}
+
+.prologue-visual img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:sepia(0.3) contrast(1.1) brightness(0.7);
+    transition:all 1s ease;
+}
+
+.prologue-visual:hover img{
+    filter:sepia(0.1) contrast(1.2) brightness(0.8);
+    transform:scale(1.03);
+}
+
+.prologue-visual::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(10,9,8,0.2), rgba(10,9,8,0.6));
+    pointer-events:none;
+}
+
+.prologue-visual .caption{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    z-index:2;
+    color:var(--text-muted);
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+/* ─── WORLD MAP SECTION ─── */
+.world-section{
+    background:var(--bg-elevated);
+    padding:100px 0;
+    position:relative;
+    overflow:hidden;
+}
+
+.world-section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+.map-container{
+    position:relative;
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    overflow:hidden;
+    background:var(--bg-card);
+}
+
+.map-container img{
+    width:100%;
+    display:block;
+    filter:sepia(0.2) contrast(0.95) brightness(0.8);
+}
+
+.map-overlay{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.map-region{
+    position:absolute;
+    padding:12px 18px;
+    background:rgba(10,9,8,0.85);
+    border:1px solid var(--border-thin);
+    border-radius:4px;
+    backdrop-filter:blur(10px);
+    max-width:220px;
+    transition:all 0.4s ease;
+    cursor:pointer;
+    pointer-events:auto;
+}
+
+.map-region:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-4px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+
+.map-region.north{top:15%;left:8%;}
+.map-region.south{bottom:20%;left:15%;}
+.map-region.west{top:25%;right:10%;}
+
+.map-region h4{
+    font-family:var(--font-display);
+    font-size:0.8rem;
+    color:var(--gold);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+
+.map-region p{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    line-height:1.6;
+}
+
+.map-region .region-tag{
+    display:inline-block;
+    margin-top:8px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    padding:2px 8px;
+    border:1px solid var(--border-thin);
+    border-radius:2px;
+}
+
+/* ─── OFFICE SECTION ─── */
+.office-section{
+    background:linear-gradient(180deg, var(--bg-elevated), var(--bg));
+    padding:100px 0;
+    position:relative;
+}
+
+.office-intro{
+    text-align:center;
+    max-width:750px;
+    margin:0 auto 70px;
+}
+
+.office-intro p{
+    color:var(--text-dim);
+    font-size:1.1rem;
+    line-height:1.9;
+}
+
+.office-pillars{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+    margin-bottom:60px;
+}
+
+.pillar-card{
+    background:var(--bg-card);
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    padding:45px 35px;
+    transition:all 0.5s ease;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+}
+
+.pillar-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity:0;
+    transition:opacity 0.4s;
+}
+
+.pillar-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-6px);
+    box-shadow:0 15px 50px rgba(0,0,0,0.5), var(--shadow-gold);
+}
+
+.pillar-card:hover::before{opacity:1;}
+
+.pillar-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 25px;
+    border:1px solid var(--border-thin);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
+    color:var(--gold-dim);
+    transition:all 0.4s ease;
+}
+
+.pillar-card:hover .pillar-icon{
+    border-color:var(--gold);
+    color:var(--gold);
+    box-shadow:0 0 20px var(--gold-glow);
+}
+
+.pillar-card h3{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:0.9rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+    font-weight:400;
+}
+
+.pillar-card p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.8;
+}
+
+.pillar-card .pillar-number{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    color:var(--text-faint);
+    letter-spacing:2px;
+}
+
+.office-cover{
+    position:relative;
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    overflow:hidden;
+    margin-top:50px;
+}
+
+.office-cover img{
+    width:100%;
+    display:block;
+    filter:sepia(0.3) brightness(0.6) contrast(1.1);
+    transition:all 0.8s ease;
+}
+
+.office-cover:hover img{
+    filter:sepia(0.1) brightness(0.7) contrast(1.2);
+    transform:scale(1.02);
+}
+
+.office-cover::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(10,9,8,0.8), transparent 60%);
+    pointer-events:none;
+}
+
+.office-cover .cover-text{
+    position:absolute;
+    bottom:30px;
+    left:30px;
+    z-index:2;
+    max-width:500px;
+}
+
+.office-cover .cover-text p{
+    color:var(--text-dim);
+    font-size:0.95rem;
+    line-height:1.8;
+    font-style:italic;
+}
+
+/* ─── CHARACTERS SECTION ─── */
+.char-section{
+    padding:100px 0;
+    position:relative;
+}
+
+.char-section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+.char-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+}
+
+.char-card{
+    position:relative;
+    border:1px solid var(--border-thin);
+    border-radius:8px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:all 0.6s ease;
+    aspect-ratio:3/4;
+    text-decoration:none;
+    display:block;
+    background:var(--bg-card);
+}
+
+.char-card:hover{
+    border-color:var(--border-hover);
+    transform:translateY(-8px);
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+
+.char-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:sepia(0.2) contrast(1.1) brightness(0.7);
+    transition:all 0.8s ease;
+}
+
+.char-card:hover img{
+    filter:sepia(0) contrast(1.15) brightness(0.8);
+    transform:scale(1.08);
+}
+
+.char-card .char-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.4) 50%, transparent 100%);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:30px;
+    transition:all 0.5s ease;
+}
+
+.char-card:hover .char-overlay{
+    background:linear-gradient(to top, rgba(10,9,8,0.98) 0%, rgba(10,9,8,0.6) 60%, transparent 100%);
+}
+
+.char-card .char-code{
+    position:absolute;
+    top:20px;
+    left:20px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--gold-dim);
+    text-transform:uppercase;
+    padding:4px 10px;
+    border:1px solid var(--border-thin);
+    border-radius:2px;
+    background:rgba(10,9,8,0.6);
+}
+
+.char-card .char-name{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:1.2rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-weight:400;
+    margin-bottom:8px;
+}
+
+.char-card .char-role{
+    font-family:var(--font-mono);
+    color:var(--text-muted);
+    font-size:0.7rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.char-card .char-secret{
+    color:var(--blood-soft);
+    font-size:0.8rem;
+    letter-spacing:1px;
+    margin-top:10px;
+    opacity:0;
+    transform:translateY(15px);
+    transition:all 0.5s ease 0.1s;
+    font-style:italic;
+    border-left:2px solid var(--blood-soft);
+    padding-left:12px;
+}
+
+.char-card:hover .char-secret{
+    opacity:0.8;
+    transform:translateY(0);
+}
+
+.char-card .char-age{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-family:var(--font-mono);
+    color:var(--text-muted);
+    font-size:0.65rem;
+    letter-spacing:2px;
+    border:1px solid var(--border-thin);
+    padding:4px 12px;
+    border-radius:2px;
+    background:rgba(10,9,8,0.6);
+}
+
+/* ─── TIMELINE SECTION ─── */
+.timeline-section{
+    background:var(--bg-elevated);
+    padding:100px 0;
+    position:relative;
+}
+
+.timeline-section::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--border-hover), transparent);
+}
+
+.timeline{
+    position:relative;
+    max-width:900px;
+    margin:0 auto;
+}
+
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(to bottom, transparent, var(--gold-dim), var(--blood-soft), transparent);
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    margin-bottom:60px;
+    position:relative;
+}
+
+.timeline-item:nth-child(even) .timeline-text{grid-column:2;text-align:left;}
+.timeline-item:nth-child(even) .timeline-year{grid-column:1;text-align:right;}
+
+.timeline-dot{
+    position:absolute;
+    left:50%;
+    top:8px;
+    width:10px;
+    height:10px;
+    background:var(--bg);
+    border:2px solid var(--gold-dim);
+    border-radius:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 15px var(--gold-glow);
+    transition:all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot{
+    border-color:var(--gold);
+    box-shadow:0 0 25px var(--gold-glow);
+}
+
+.timeline-year{
+    font-family:var(--font-display);
+    color:var(--gold);
+    font-size:1.3rem;
+    letter-spacing:4px;
+}
+
+.timeline-text h4{
+    font-family:var(--font-display);
+    color:var(--text);
+    font-size:1rem;
+    margin-bottom:10px;
+    font-weight:400;
+    letter-spacing:2px;
+}
+
+.timeline-text p{
+    color:var(--text-muted);
+    font-size:0.9rem;
+    line-height:1.8;
+}
+
+.timeline-text .event-tag{
+    display:inline-block;
+    margin-top:10px;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:2px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    padding:3px 10px;
+    border:1px solid var(--border-thin);
+    border-radius:2px;
+}
+
+/* ─── FOOTER ─── */
+footer{
+    text-align:center;
+    padding:80px 20px 50px;
+    border-top:1px solid var(--border-thin);
+    position:relative;
+}
+
+footer .seal{
+    width:70px;
+    height:70px;
+    border:1px solid var(--gold-dim);
+    border-radius:50%;
+    margin:0 auto 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-display);
+    font-size:1.4rem;
+    color:var(--gold-dim);
+    opacity:0.5;
+    position:relative;
+}
+
+footer .seal::before{
+    content:'';
+    position:absolute;
+    inset:8px;
+    border:1px solid var(--border-thin);
+    border-radius:50%;
+}
+
+footer p{
+    color:var(--text-muted);
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    margin-bottom:8px;
+}
+
+footer .warning{
+    margin-top:20px;
+    color:var(--blood-soft);
+    font-size:0.65rem;
+    letter-spacing:2px;
+    opacity:0.5;
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+    .prologue-grid{grid-template-columns:1fr;}
+    .prologue-visual{max-width:500px;margin:0 auto;}
+    .office-pillars{grid-template-columns:1fr;}
+    .char-grid{grid-template-columns:1fr;max-width:500px;margin:0 auto;}
+    .timeline::before{left:20px;}
+    .timeline-item{grid-template-columns:1fr;padding-left:50px;}
+    .timeline-item:nth-child(even) .timeline-text,
+    .timeline-item:nth-child(even) .timeline-year{grid-column:1;text-align:left;}
+    .timeline-dot{left:20px;}
+    .nav-links{display:none;}
+    .map-region{position:relative;top:auto;left:auto;right:auto;bottom:auto;margin:10px;}
+}
+
+@media(max-width:600px){
+    .container{padding:50px 0;}
+    .hero h1{letter-spacing:6px;}
+    .section-title h2{letter-spacing:3px;}
+}
+
+/* ─── SECRET UNLOCK ANIMATION ─── */
+@keyframes secretUnlock{
+    0%{filter:brightness(1);}
+    50%{filter:brightness(1.3) sepia(0.3);}
+    100%{filter:brightness(1);}
+}
+
+.secret-unlock{
+    animation:secretUnlock 0.6s ease;
+}
+
+/* ─── ATTENTION PULSE ─── */
+@keyframes attentionPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(184,155,106,0);}
+    50%{box-shadow:0 0 20px 5px rgba(184,155,106,0.1);}
+}
+
+.attention-pulse{
+    animation:attentionPulse 2s ease-in-out infinite;
+}
+</style>
+</head>
+<body>
+
+<div class="film-grain"></div>
+<div class="attention-bar" id="attentionBar"></div>
+<div class="attention-label" id="attentionLabel">Niveau d'attention : <span id="attentionValue">0%</span></div>
+
+<div class="security-badge">
+    SÉCURITÉ : <span class="level">RESTREINT</span> | ACCÈS : <span id="accessLevel">INVITÉ</span>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HERO — PROLOGUE INTERACTIF
+     ═══════════════════════════════════════ -->
+<section class="hero" id="accueil">
+    <div class="hero-fog"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-bg"></div>
+
+    <div class="hero-content">
+        <div class="classified-stamp">⚠ DOCUMENT CLASSIFIÉ</div>
+        <h1>L'Office</h1>
+        <div class="subtitle">Ce que l'on ne voit pas existe pourtant</div>
+        <div class="year-badge">1920 — Paris</div>
+
+        <div class="prologue" id="prologueText">
+            <p><span class="typewriter-text">Avez-vous déjà demandé qui écrit la première ligne qui rend une chose réelle ?</span><span class="typewriter-cursor"></span></p>
+            <p style="opacity:0;" class="prologue-line">Les histoires vous diront que les monstres naissent quand les dieux dorment ou quand les hommes péchèrent ; les érudits vous diront que les monstres sont un raccourci pour la contagion, la famine ou le temps qu'il fait ; les enfants vous diront que les monstres naissent de la forme de leurs ombres sur le mur.</p>
+            <p style="opacity:0;" class="prologue-line">Toutes ces réponses sont vraies en partie : et toutes manquent le fait plus ordinaire, plus terrible.</p>
+            <p style="opacity:0;" class="prologue-line attention-line">« Les monstres sont faits d'attention. »</p>
+            <p style="opacity:0;" class="prologue-line">Pas l'attention dramatique des projecteurs et des sanctuaires, mais la petite attention accumulée de communautés entières : les noms murmurés aux carrefours, la forme d'un avertissement gravée dans une poutre, le rituel qui ferme une porte et garde une seule peur privée du bon côté du registre.</p>
+            <p style="opacity:0;" class="prologue-line">Une légende commence au moment où un danger reçoit des contours que les gens peuvent cerner de leurs mains. <span class="highlight">Donnez un nom à la peur, et la peur devient une chose que l'on peut repousser... ou négocier avec.</span></p>
+        </div>
+
+        <button class="hero-btn" id="enterBtn" onclick="enterArchives()">
+            <span>◈</span> Accéder aux Archives
+        </button>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════ -->
+<nav class="nav-bar" id="mainNav">
+    <div class="nav-logo">L'OFFICE</div>
+    <ul class="nav-links">
+        <li><a href="#prologue" class="nav-link">Prologue</a></li>
+        <li><a href="#monde" class="nav-link">Le Monde</a></li>
+        <li><a href="#office" class="nav-link">L'Office</a></li>
+        <li><a href="#personnages" class="nav-link">Personnages</a></li>
+        <li><a href="#chronologie" class="nav-link">Chronologie</a></li>
+        <li><a href="origines.html" class="nav-link" style="color:var(--blood-soft);">Origines</a></li>
+    </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     PROLOGUE EXTENDED
+     ═══════════════════════════════════════ -->
+<section class="prologue-section" id="prologue">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">01 — Prologue</span>
+            <h2>La Mécanique de l'Attention</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="prologue-grid">
+            <div class="prologue-text reveal">
+                <div class="epigraph">« Donnez un nom à la peur, et la peur devient une chose que l'on peut repousser... ou négocier avec. »</div>
+
+                <p>À travers des régions qui ne se rencontrent jamais, les gens accomplissent le même travail silencieux de donner des contours à l'inconnu.</p>
+
+                <p>Dans le <span class="highlight">nord</span>, où les nuits prennent le son de l'os et où les toits respirent sous le poids de la neige, les choses sans nom prennent la qualité de l'absence : une faim qui a vidé une vieille famille, un lent silence qui répond à un bateau perdu. Ces histoires sont cartographiées en longues voyelles intemporelles ; elles sont patientes et froides.</p>
+
+                <p>Dans les <span class="highlight">places ensoleillées et les villes blanchies à la chaux</span>, où les gens se pressent et les voix ricochant, la même chose sans nom portera un visage de feu et d'accusation. Elle se rassemble dans la colère publique, dans la façon dont les machines broient les subsistances en une saison.</p>
+
+                <p>Dans les <span class="highlight">grandes villes noires de verre</span> de néon et d'air de métro, la même chose sans nom porte les données comme une peau : des motifs, des répétitions, un raccourci pour ce que les machines enregistrent et que les humains oublient.</p>
+
+                <div class="attention-quote">Ce ne sont pas des créatures séparées. Ce sont la même blessure vue de différents côtés d'une frontière.</div>
+
+                <p>Il y a des raisons pratiques à cela. Les humains sont des animaux en quête de motifs ; la charge cognitive est réelle et fatale. Si une communauté ne pouvait pas réduire la complexité de la perte en habitudes et en comptes, elle serait paralysée par la peur et s'effondrerait sous le poids de ne pas savoir quoi faire.</p>
+
+                <p>Mais la conservation a un prix. Quand une société transforme sa réponse en profession, elle crée des incitations : des carrières construites sur le maintien du récit cohérent, des archives qui privilégient la continuité plutôt que la contradiction.</p>
+
+                <p><span class="highlight">Le monstre devient non seulement un danger mais une description de poste.</span></p>
+            </div>
+
+            <div class="prologue-visual reveal reveal-delay-1">
+                <img src="hero-paris.png" alt="Paris 1920">
+                <span class="caption">Paris, 3h du matin — Archive visuelle #001</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     LE MONDE — CARTE INTERACTIVE
+     ═══════════════════════════════════════ -->
+<section class="world-section" id="monde">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">02 — Géographie</span>
+            <h2>Le Monde</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="map-container reveal">
+            <img src="map-europe.png" alt="Carte de l'Europe 1920">
+
+            <div class="map-overlay">
+                <div class="map-region north reveal reveal-delay-1">
+                    <h4>◆ Le Nord</h4>
+                    <p>Nuits qui prennent le son de l'os. Toits qui respirent sous le poids de la neige. Les légendes sont patientes et froides.</p>
+                    <span class="region-tag">Munich • Copenhague • Oslo</span>
+                </div>
+
+                <div class="map-region south reveal reveal-delay-2">
+                    <h4>◆ Le Sud</h4>
+                    <p>Visages de feu et d'accusation. La colère publique, les machines qui dévorent les subsistances. Les rituels sont bruyants.</p>
+                    <span class="region-tag">Naples • Séville • Athènes</span>
+                </div>
+
+                <div class="map-region west reveal reveal-delay-3">
+                    <h4>◆ L'Ouest</h4>
+                    <p>Données comme peau. Syntaxe d'anomalies. Le monstre est un problème avec paramètres, traité par des blouses blanches.</p>
+                    <span class="region-tag">Paris • Londres • Berlin</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:40px;text-align:center;" class="reveal">
+            <p style="color:var(--text-muted);font-size:0.9rem;max-width:700px;margin:0 auto;line-height:1.8;">
+                <em>« Les titres, les prières funéraires, les ordonnances municipales... chaque lieu parle dans son propre registre et apprend ainsi à appeler la même souffrance par des noms différents. Le langage ne fait pas que décrire ; il prescrit. »</em>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     L'OFFICE — ORGANISATION
+     ═══════════════════════════════════════ -->
+<section class="office-section" id="office">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">03 — Organisation</span>
+            <h2>L'Office</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="office-intro reveal">
+            <p>
+                <strong style="color:var(--gold);">L'Office pour la Gestion, le Confinement et l'Élimination des Entités Surnaturelles</strong>
+                — ou simplement <em>« L'Office »</em> — est une société secrète fondée au XIVe siècle,
+                après la Peste Noire que certains savants de l'époque savaient être d'origine
+                autrement plus sinistre que naturelle.
+            </p>
+        </div>
+
+        <div class="office-pillars">
+            <div class="pillar-card reveal reveal-delay-1">
+                <span class="pillar-number">PILIER I</span>
+                <div class="pillar-icon">⚔</div>
+                <h3>Guerre</h3>
+                <p>Les agents de l'Office traquent et éliminent les entités hostiles. Vampires en délire, loups-garous enragés, démons invoqués par imprudence — chaque menace est cataloguée, évaluée, et si nécessaire, détruite.</p>
+            </div>
+
+            <div class="pillar-card reveal reveal-delay-2">
+                <span class="pillar-number">PILIER II</span>
+                <div class="pillar-icon">◉</div>
+                <h3>Confinement</h3>
+                <p>Toutes les entités ne peuvent pas être tuées. Certaines sont trop anciennes, trop puissantes, ou trop… intéressantes. L'Office maintient des sites de confinement secrets à travers l'Europe.</p>
+            </div>
+
+            <div class="pillar-card reveal reveal-delay-3">
+                <span class="pillar-number">PILIER III</span>
+                <div class="pillar-icon">▤</div>
+                <h3>Archives</h3>
+                <p>Chaque entité, chaque incident, chaque agent est minutieusement documenté. Les archives contiennent des siècles de connaissances interdites, protégées par des sceaux que seuls les initiés peuvent briser.</p>
+            </div>
+        </div>
+
+        <div class="office-cover reveal">
+            <img src="office-interior.png" alt="Siège de l'Office">
+            <div class="cover-text">
+                <p>« Au grand jour, l'Office se présente comme une entreprise de consultation ésotérique — des charlatans pour les riches, des marabouts pour les superstitieux. Personne ne soupçonne la vérité. <em>Et c'est ainsi que ça doit rester.</em> »</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PERSONNAGES
+     ═══════════════════════════════════════ -->
+<section class="char-section" id="personnages">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">04 — Personnel</span>
+            <h2>Les Agents</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="char-grid">
+            <a href="yoana-noxley.html" class="char-card reveal reveal-delay-1">
+                <img src="pfp-yoana.jpg" alt="Yoana Noxley">
+                <div class="char-overlay">
+                    <div class="char-code">DOSSIER #YN-1920</div>
+                    <div class="char-age">24 ans</div>
+                    <div class="char-name">Yoana Noxley</div>
+                    <div class="char-role">Directrice de l'Office</div>
+                    <div class="char-secret">The Black Raven — celle qui voit tout</div>
+                </div>
+            </a>
+
+            <a href="nora-dinkelmann.html" class="char-card reveal reveal-delay-2">
+                <img src="PFP Nora.png" alt="Nora Dinkelmann">
+                <div class="char-overlay">
+                    <div class="char-code">DOSSIER #ND-1920</div>
+                    <div class="char-age">27 ans</div>
+                    <div class="char-name">Nora Dinkelmann</div>
+                    <div class="char-role">Agent terrain — Munich</div>
+                    <div class="char-secret">La Louve de Munich — ne pardonne jamais</div>
+                </div>
+            </a>
+
+            <a href="paolo-meres.html" class="char-card reveal reveal-delay-3">
+                <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres">
+                <div class="char-overlay">
+                    <div class="char-code">DOSSIER #PM-1920</div>
+                    <div class="char-age">29 ans</div>
+                    <div class="char-name">Paolo Meres</div>
+                    <div class="char-role">Consultant / Négociateur</div>
+                    <div class="char-secret">Le Chaton — connaît déjà vos pièces</div>
+                </div>
+            </a>
+        </div>
+
+        <div style="margin-top:50px;text-align:center;" class="reveal">
+            <a href="la-voyageuse.html" style="display:inline-block;color:var(--text-muted);text-decoration:none;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;padding:12px 30px;border:1px dashed var(--border-thin);border-radius:4px;transition:all 0.4s;" onmouseover="this.style.borderColor='var(--gold-dim)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--border-thin)';this.style.color='var(--text-muted)';">
+                ◊ ACCÉDER AU DOSSIER ERRANT : LA VOYAGEUSE
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHRONOLOGIE
+     ═══════════════════════════════════════ -->
+<section class="timeline-section" id="chronologie">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">05 — Historique</span>
+            <h2>Chronologie</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1348</div>
+                <div class="timeline-text">
+                    <h4>La Fondation</h4>
+                    <p>Après la Peste Noire, un consortium d'alchimistes, de moines et de nobles créent l'Office pour contenir les entités responsables de la catastrophe.</p>
+                    <span class="event-tag">Événement déclencheur</span>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1589</div>
+                <div class="timeline-text">
+                    <h4>Le Grand Sceau</h4>
+                    <p>Les archives sont scellées. L'Office devient une société secrète, opérant sous couverture de guildes marchandes et de confréries religieuses.</p>
+                    <span class="event-tag">Restructuration</span>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1789</div>
+                <div class="timeline-text">
+                    <h4>La Révolution</h4>
+                    <p>Le chaos révolutionnaire libère plusieurs entités confinées. L'Office subit ses plus lourdes pertes. Les archives de Paris brûlent partiellement.</p>
+                    <span class="event-tag">Catastrophe</span>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1914 — 1918</div>
+                <div class="timeline-text">
+                    <h4>La Grande Guerre</h4>
+                    <p>Les tranchées réveillent des choses endormies depuis des siècles. L'Office déploie des agents sur tous les fronts, combattant deux guerres à la fois.</p>
+                    <span class="event-tag">Conflit majeur</span>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">1920</div>
+                <div class="timeline-text">
+                    <h4>Aujourd'hui</h4>
+                    <p>Yoana Noxley, 24 ans, prend la direction de l'Office. Sous sa férule, l'organisation s'adapte au monde moderne — tout en restant dans l'ombre où elle a toujours opéré.</p>
+                    <span class="event-tag">Présent</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════ -->
+<div id="secretExit" style="position:fixed;bottom:0;left:0;width:100%;height:3px;z-index:9999;cursor:default;opacity:0;" title=""></div>
+<footer>
+    <div class="seal">◈</div>
+    <p>L'Office pour la Gestion, le Confinement et l'Élimination</p>
+    <p>des Entités Surnaturelles</p>
+    <p class="warning">Document classifié — Divulgation interdite sous peine de représailles</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// SYSTÈME D'ATTENTION
+// ═══════════════════════════════════════
+let attentionLevel = 0;
+let maxAttention = 100;
+let scrollThreshold = 0;
+const attentionBar = document.getElementById('attentionBar');
+const attentionLabel = document.getElementById('attentionLabel');
+const attentionValue = document.getElementById('attentionValue');
+const accessLevel = document.getElementById('accessLevel');
+
+function updateAttention(amount){
+    attentionLevel = Math.min(attentionLevel + amount, maxAttention);
+    attentionBar.style.width = attentionLevel + '%';
+    attentionValue.textContent = Math.floor(attentionLevel) + '%';
+
+    if(attentionLevel > 0 && !attentionLabel.classList.contains('visible')){
+        attentionLabel.classList.add('visible');
+    }
+
+    // Mettre à jour le niveau d'accès
+    if(attentionLevel > 80){
+        accessLevel.textContent = 'ADMINISTRATEUR';
+        accessLevel.style.color = '#b89b6a';
+    } else if(attentionLevel > 50){
+        accessLevel.textContent = 'AGENT';
+        accessLevel.style.color = '#8a7350';
+    } else if(attentionLevel > 20){
+        accessLevel.textContent = 'INITIÉ';
+        accessLevel.style.color = '#5a5248';
+    }
+}
+
+// ═══════════════════════════════════════
+// PARTICULES HERO
+// ═══════════════════════════════════════
+const particlesContainer = document.getElementById('heroParticles');
+for(let i = 0; i < 30; i++){
+    const p = document.createElement('span');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (10 + Math.random() * 20) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.3;
+    particlesContainer.appendChild(p);
+}
+
+// ═══════════════════════════════════════
+// TYPEWRITER EFFECT
+// ═══════════════════════════════════════
+const typewriterText = document.querySelector('.typewriter-text');
+const text = typewriterText.textContent;
+typewriterText.textContent = '';
+let charIndex = 0;
+
+function typeWriter(){
+    if(charIndex < text.length){
+        typewriterText.textContent += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 50);
+    } else {
+        // Démarrer le défilement des lignes suivantes
+        setTimeout(revealPrologueLines, 800);
+    }
+}
+
+function revealPrologueLines(){
+    const lines = document.querySelectorAll('.prologue-line');
+    lines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.transition = 'opacity 1.5s ease';
+            line.style.opacity = '1';
+            updateAttention(5);
+        }, index * 1200);
+    });
+}
+
+// Démarrer le typewriter après un délai
+setTimeout(typeWriter, 1500);
+
+// ═══════════════════════════════════════
+// ENTRÉE DANS LES ARCHIVES
+// ═══════════════════════════════════════
+function enterArchives(){
+    updateAttention(10);
+    document.getElementById('prologue').scrollIntoView({behavior: 'smooth'});
+
+    // Effet de transition
+    document.body.style.transition = 'filter 0.5s ease';
+    document.body.style.filter = 'brightness(1.2)';
+    setTimeout(() => {
+        document.body.style.filter = 'brightness(1)';
+    }, 500);
+}
+
+// ═══════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            updateAttention(3);
+        }
+    });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ═══════════════════════════════════════
+// NAV HIGHLIGHT
+// ═══════════════════════════════════════
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if(scrollY >= sectionTop - 300){
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === '#' + current){
+            link.classList.add('active');
+        }
+    });
+
+    // Augmenter l'attention au scroll
+    const scrollPercent = (scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    if(scrollPercent > scrollThreshold + 10){
+        updateAttention(2);
+        scrollThreshold = scrollPercent;
+    }
+});
+
+// ═══════════════════════════════════════
+// INTERACTION CARTE
+// ═══════════════════════════════════════
+document.querySelectorAll('.map-region').forEach(region => {
+    region.addEventListener('mouseenter', () => {
+        updateAttention(5);
+    });
+});
+
+// ═══════════════════════════════════════
+// INTERACTION PERSONNAGES
+// ═══════════════════════════════════════
+document.querySelectorAll('.char-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        updateAttention(8);
+    });
+});
+
+// ═══════════════════════════════════════
+// INTERACTION TIMELINE
+// ═══════════════════════════════════════
+document.querySelectorAll('.timeline-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        updateAttention(4);
+    });
+});
+
+// ═══════════════════════════════════════
+// EFFET PARALLAX HERO
+// ═══════════════════════════════════════
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if(hero && scrolled < window.innerHeight){
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+});
+
+// ═══════════════════════════════════════
+// CURSEUR PERSONNALISÉ (optionnel)
+// ═══════════════════════════════════════
+document.addEventListener('mousemove', (e) => {
+    // Créer une traînée subtile
+    if(Math.random() > 0.9){
+        const trail = document.createElement('div');
+        trail.style.position = 'fixed';
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+        trail.style.width = '3px';
+        trail.style.height = '3px';
+        trail.style.background = 'rgba(184,155,106,0.3)';
+        trail.style.borderRadius = '50%';
+        trail.style.pointerEvents = 'none';
+        trail.style.zIndex = '9998';
+        trail.style.transition = 'opacity 1s ease';
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+            trail.style.opacity = '0';
+        }, 10);
+        setTimeout(() => {
+            trail.remove();
+        }, 1000);
+    }
+});
+</script>
+
+<script>
+// Secret exit: triple-click bottom strip or triple-Escape to return to leurre
+let escCount = 0;
+let escTimer = null;
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+        escCount++;
+        if(!escTimer){
+            escTimer = setTimeout(() => { escCount = 0; escTimer = null; }, 800);
+        }
+        if(escCount >= 3){
+            clearTimeout(escTimer);
+            escCount = 0; escTimer = null;
+            window.location.href = 'index.html';
+        }
+    }
+});
+const exitTrigger = document.getElementById('secretExit');
+let exitClicks = 0;
+let exitTimer = null;
+if(exitTrigger){
+    exitTrigger.addEventListener('click', () => {
+        exitClicks++;
+        if(!exitTimer){
+            exitTimer = setTimeout(() => { exitClicks = 0; exitTimer = null; }, 600);
+        }
+        if(exitClicks >= 3){
+            clearTimeout(exitTimer);
+            exitClicks = 0; exitTimer = null;
+            window.location.href = 'index.html';
+        }
+    });
+}
+</script>
+</body>
+</html>
