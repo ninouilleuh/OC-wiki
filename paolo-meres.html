@@ -3,605 +3,685 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paolo Meres — Dossier #PM-1920 | L'Office</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap');
-
-:root{
-    --bg:#0a0908;
-    --bg-elevated:#110f0d;
-    --bg-card:#161412;
-    --panel:#1e1b18;
-    --panel-hover:#2a2622;
-    --gold:#b89b6a;
-    --gold-bright:#d4b896;
-    --gold-dim:#7a6540;
-    --gold-glow:rgba(184,155,106,0.15);
-    --blood:#6b2a2a;
-    --blood-soft:#8a3a3a;
-    --blood-glow:rgba(107,42,42,0.2);
-    --amber:#8a6a3a;
-    --amber-soft:#a08050;
-    --text:#e0d8cf;
-    --text-dim:#a09890;
-    --text-muted:#5a5248;
-    --text-faint:#3a3530;
-    --border-thin:rgba(184,155,106,0.08);
-    --border-hover:rgba(184,155,106,0.25);
-    --font-display:'Cinzel',serif;
-    --font-body:'Cormorant Garamond',serif;
-    --font-mono:'Space Mono',monospace;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    line-height:1.7;
-    overflow-x:hidden;
-}
-
-::selection{background:var(--gold);color:var(--bg);}
-
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
-
-.film-grain{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:9999;
-    opacity:0.035;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
-
-/* ─── NAV ─── */
-.nav-bar{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(10,9,8,0.95);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border-thin);
-    padding:0 40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:60px;
-}
-
-.nav-logo{
-    font-family:var(--font-display);
-    font-size:1.1rem;
-    color:var(--gold);
-    letter-spacing:4px;
-    font-weight:400;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-}
-
-.nav-logo::before{
-    content:'◈';
-    font-size:0.8rem;
-    opacity:0.6;
-}
-
-.nav-links{
-    display:flex;
-    gap:35px;
-    list-style:none;
-}
-
-.nav-links a{
-    color:var(--text-muted);
-    text-decoration:none;
-    font-family:var(--font-mono);
-    font-size:0.7rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    transition:all 0.3s;
-    position:relative;
-    padding:4px 0;
-}
-
-.nav-links a::after{
-    content:'';
-    position:absolute;
-    bottom:-4px;
-    left:0;
-    width:0;
-    height:1px;
-    background:var(--gold);
-    transition:width 0.3s;
-}
-
-.nav-links a:hover{color:var(--gold);}
-.nav-links a:hover::after{width:100%;}
-
-/* ─── HERO CHARACTER ─── */
-.char-hero{
-    min-height:70vh;
-    position:relative;
-    display:flex;
-    align-items:flex-end;
-    overflow:hidden;
-}
-
-.char-hero-bg{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to top, var(--bg) 0%, transparent 60%),
-                linear-gradient(135deg, rgba(138,106,58,0.08), transparent 50%);
-    z-index:1;
-}
-
-.char-hero img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:sepia(0.2) contrast(1.1) brightness(0.5);
-}
-
-.char-hero-content{
-    position:relative;
-    z-index:2;
-    padding:60px 40px;
-    max-width:1200px;
-    margin:0 auto;
-    width:100%;
-}
-
-.char-hero .dossier-code{
-    font-family:var(--font-mono);
-    font-size:0.65rem;
-    letter-spacing:3px;
-    color:var(--blood-soft);
-    text-transform:uppercase;
-    margin-bottom:15px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.char-hero .dossier-code::before{
-    content:'';
-    width:20px;
-    height:1px;
-    background:var(--blood-soft);
-}
-
-.char-hero h1{
-    font-family:var(--font-display);
-    font-size:clamp(2.5rem,6vw,4.5rem);
-    color:var(--gold);
-    letter-spacing:8px;
-    text-transform:uppercase;
-    font-weight:400;
-    text-shadow:0 0 60px rgba(184,155,106,0.3);
-    margin-bottom:10px;
-}
-
-.char-hero .tagline{
-    font-family:var(--font-body);
-    font-size:1.3rem;
-    color:var(--text-dim);
-    font-style:italic;
-    margin-bottom:20px;
-}
-
-.char-hero .meta-row{
-    display:flex;
-    gap:30px;
-    flex-wrap:wrap;
-}
-
-.char-hero .meta-item{
-    font-family:var(--font-mono);
-    font-size:0.7rem;
-    letter-spacing:2px;
-    color:var(--text-muted);
-    text-transform:uppercase;
-}
-
-.char-hero .meta-item span{
-    color:var(--gold);
-}
-
-/* ─── CONTENT ─── */
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:0 auto;
-    padding:60px 0;
-}
-
-.section{
-    margin-bottom:80px;
-}
-
-.section-title{
-    font-family:var(--font-display);
-    color:var(--gold);
-    font-size:0.85rem;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    margin-bottom:25px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.section-title::before{
-    content:'';
-    width:30px;
-    height:1px;
-    background:var(--gold-dim);
-}
-
-.section p{
-    color:var(--text-dim);
-    font-size:1.05rem;
-    line-height:1.9;
-    margin-bottom:18px;
-    text-align:justify;
-}
-
-.section .highlight{
-    color:var(--gold-bright);
-    font-style:italic;
-}
-
-.section .quote{
-    border-left:2px solid var(--amber-soft);
-    padding-left:25px;
-    margin:30px 0;
-    font-style:italic;
-    color:var(--text);
-    font-size:1.1rem;
-}
-
-/* ─── STATS GRID ─── */
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:20px;
-    margin:40px 0;
-}
-
-.stat-card{
-    background:var(--bg-card);
-    border:1px solid var(--border-thin);
-    border-radius:6px;
-    padding:25px 20px;
-    text-align:center;
-    transition:all 0.4s ease;
-}
-
-.stat-card:hover{
-    border-color:var(--border-hover);
-    transform:translateY(-4px);
-}
-
-.stat-card .stat-value{
-    font-family:var(--font-display);
-    font-size:1.5rem;
-    color:var(--gold);
-    margin-bottom:8px;
-}
-
-.stat-card .stat-label{
-    font-family:var(--font-mono);
-    font-size:0.6rem;
-    letter-spacing:2px;
-    color:var(--text-muted);
-    text-transform:uppercase;
-}
-
-/* ─── TRAITS ─── */
-.traits-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:20px;
-}
-
-.trait-tag{
-    font-family:var(--font-mono);
-    font-size:0.65rem;
-    letter-spacing:2px;
-    color:var(--text-muted);
-    text-transform:uppercase;
-    padding:6px 14px;
-    border:1px solid var(--border-thin);
-    border-radius:3px;
-    background:var(--bg-card);
-    transition:all 0.3s;
-}
-
-.trait-tag:hover{
-    border-color:var(--amber-soft);
-    color:var(--amber-soft);
-}
-
-/* ─── RELATIONS ─── */
-.relations-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:20px;
-    margin-top:30px;
-}
-
-.relation-card{
-    background:var(--bg-card);
-    border:1px solid var(--border-thin);
-    border-radius:6px;
-    padding:25px;
-    transition:all 0.4s ease;
-    text-decoration:none;
-    display:block;
-}
-
-.relation-card:hover{
-    border-color:var(--border-hover);
-    transform:translateY(-4px);
-}
-
-.relation-card .rel-name{
-    font-family:var(--font-display);
-    color:var(--gold);
-    font-size:0.85rem;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:8px;
-}
-
-.relation-card .rel-status{
-    font-family:var(--font-mono);
-    font-size:0.6rem;
-    letter-spacing:2px;
-    color:var(--text-muted);
-    text-transform:uppercase;
-    margin-bottom:12px;
-}
-
-.relation-card .rel-desc{
-    color:var(--text-dim);
-    font-size:0.9rem;
-    line-height:1.7;
-}
-
-/* ─── NETWORK SECTION ─── */
-.network-section{
-    background:linear-gradient(135deg, rgba(138,106,58,0.05), transparent);
-    border:1px solid var(--amber-soft);
-    border-radius:8px;
-    padding:40px;
-    margin-top:60px;
-    position:relative;
-}
-
-.network-section::before{
-    content:'RÉSEAU DE CONNAISSANCES';
-    position:absolute;
-    top:-10px;
-    left:30px;
-    background:var(--bg);
-    padding:0 15px;
-    font-family:var(--font-mono);
-    font-size:0.6rem;
-    letter-spacing:3px;
-    color:var(--amber-soft);
-}
-
-.network-section h3{
-    font-family:var(--font-display);
-    color:var(--amber-soft);
-    font-size:1rem;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    margin-bottom:20px;
-}
-
-.network-section p{
-    color:var(--text-dim);
-    font-size:1rem;
-    line-height:1.9;
-}
-
-/* ─── NAV FOOTER ─── */
-.nav-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:40px;
-    border-top:1px solid var(--border-thin);
-    margin-top:60px;
-}
-
-.nav-footer a{
-    color:var(--text-muted);
-    text-decoration:none;
-    font-family:var(--font-mono);
-    font-size:0.7rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    transition:all 0.3s;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.nav-footer a:hover{color:var(--gold);}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-    .stats-grid{grid-template-columns:repeat(2, 1fr);}
-    .relations-grid{grid-template-columns:1fr;}
-    .char-hero-content{padding:40px 20px;}
-    .nav-links{display:none;}
-}
-
-@media(max-width:600px){
-    .stats-grid{grid-template-columns:1fr;}
-    .char-hero h1{letter-spacing:4px;}
-}
-
-/* ─── REVEAL ─── */
-.reveal{
-    opacity:0;
-    transform:translateY(30px);
-    transition:all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal.visible{
-    opacity:1;
-    transform:translateY(0);
-}
-</style>
+<meta name="description" content="Bureau d'archives confidentiel — Dossier Paolo Meres. Document classifié.">
+<meta name="theme-color" content="#0c0a08">
+<title>Bureau d'Archives — Dossier PM-1920 | L'Office</title>
+<link rel="stylesheet" href="desk-v2-styles.css">
 </head>
 <body>
 
-<div class="film-grain"></div>
-
-<!-- ═══ NAV ═══ -->
-<nav class="nav-bar">
-    <a href="index.html" class="nav-logo">L'OFFICE</a>
-    <ul class="nav-links">
-        <li><a href="index.html#prologue">Prologue</a></li>
-        <li><a href="index.html#monde">Le Monde</a></li>
-        <li><a href="index.html#office">L'Office</a></li>
-        <li><a href="index.html#personnages">Personnages</a></li>
-        <li><a href="index.html#chronologie">Chronologie</a></li>
-    </ul>
-</nav>
-
-<!-- ═══ HERO ═══ -->
-<section class="char-hero">
-    <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres">
-    <div class="char-hero-bg"></div>
-    <div class="char-hero-content">
-        <div class="dossier-code">Dossier #PM-1920 — Niveau d'accès : Confidentiel</div>
-        <h1>Paolo Meres</h1>
-        <div class="tagline">« Le Chaton — connaît déjà vos pièces »</div>
-        <div class="meta-row">
-            <div class="meta-item">Âge : <span>29 ans</span></div>
-            <div class="meta-item">Naissance : <span>1891</span></div>
-            <div class="meta-item">Rôle : <span>Consultant / Négociateur</span></div>
-            <div class="meta-item">Statut : <span>Actif — Sous surveillance</span></div>
+<!-- UI Overlay -->
+<div class="ui-overlay">
+    <div class="ui-top">
+        <div>
+            <div class="ui-title">◈ Bureau d'Archives</div>
+            <div class="ui-subtitle">Dossier PM-1920 — Paolo Meres</div>
+        </div>
+        <div class="ui-hint">
+            <span>🖱 Glissez pour explorer</span>
+            <span>👆 Cliquez pour examiner</span>
+            <span>✉ Ouvrez les enveloppes</span>
+            <span>⌨ Échap pour fermer</span>
         </div>
     </div>
-</section>
+    <div class="ui-bottom">
+        <div class="ui-seal">◈</div>
+        <div class="ui-warning">Document classifié — Niveau Confidentiel</div>
+    </div>
+</div>
 
-<!-- ═══ CONTENT ═══ -->
-<div class="container">
+<!-- Scanlines overlay -->
+<div class="scanlines" id="scanlines"></div>
 
-    <div class="section reveal">
-        <h2 class="section-title">Identité</h2>
-        <p>Paolo Meres est un consultant indépendant qui collabore avec l'Office depuis cinq ans. À <span class="highlight">29 ans</span>, il est l'un des négociateurs les plus habiles du milieu occulte européen. Son surnom — <em>« Le Chaton »</em> — est un jeu de mots cruel : derrière son sourire désarmant et ses manières affables se cache un prédateur qui connaît déjà toutes vos pièces avant que la partie ne commence.</p>
-        <p>Né à Naples dans une famille de commerçants, Paolo a grandi dans les ruelles étroites du quartier espagnol, où il a appris très tôt que l'information valait plus que l'or. À 16 ans, il travaillait déjà comme intermédiaire entre le monde visible et le monde caché — mettant en relation des chasseurs avec des employeurs, des entités avec des invocateurs, des secrets avec ceux qui pouvaient payer le prix.</p>
-        <p>Il a rejoint l'Office non pas comme agent, mais comme consultant — une distinction qu'il défend farouchement. Il n'obéit à personne. Il choisit ses missions. Et il facture cher.</p>
+<!-- Desk Surface -->
+<div class="desk-container" id="desk">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CENTRAL DOCUMENTS (visible immediately) -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <!-- CONTRAT — CENTER STAGE -->
+    <div class="doc-item" id="doc-contrat">
+        <div class="doc-preview">
+            <div class="seal">◈</div>
+            <div class="doc-title">Contrat de Consultation</div>
+            <div class="doc-sub">CT-PM-1920-07 — 15 Juillet 1920</div>
+            <div class="doc-stamp">RESTREINT</div>
+        </div>
+        <div class="doc-full">
+            <div class="full-header">
+                <div class="full-seal">◈</div>
+                <div class="full-title">Contrat de Consultation</div>
+                <div class="full-sub">Entre L'Office pour la Gestion, le Confinement et l'Élimination des Entités Surnaturelles et Paolo Meres</div>
+                <div class="full-meta">
+                    <div>Réf : <span>CT-PM-1920-07</span></div>
+                    <div>Date : <span>15 Juillet 1920</span></div>
+                    <div>Classif : <span>RESTREINT</span></div>
+                </div>
+            </div>
+            <div class="full-section">
+                <h3>Préambule</h3>
+                <p>Le présent contrat est établi entre <span class="highlight">L'Office pour la Gestion, le Confinement et l'Élimination des Entités Surnaturelles</span> (ci-après dénommée « L'Office »), représentée par sa Directrice, Yoana Noxley, et <span class="highlight">Paolo Meres</span> (ci-après dénommé « Le Consultant »), agissant en qualité d'intermédiaire indépendant et de négociateur professionnel.</p>
+                <p>Le Consultant est engagé pour fournir des services de consultation, de négociation et d'intermédiation dans des affaires relevant de la compétence de L'Office, conformément aux termes et conditions ci-après énoncés.</p>
+            </div>
+            <div class="full-section">
+                <h3>Article I — Termes de Service</h3>
+                <ul>
+                    <li><strong>Indépendance du Consultant.</strong> Le Consultant agit en tant qu'entité indépendante et non en tant qu'agent, employé ou représentant officiel de L'Office.</li>
+                    <li><strong>Confidentialité Absolue.</strong> Toute information obtenue dans le cadre des missions est strictement confidentielle.</li>
+                    <li><strong>Clause de Non-Concurrence.</strong> Le Consultant s'engage à ne pas fournir de services similaires à des organisations concurrentes pendant <span class="redacted">[DONNÉES SUPPRIMÉES]</span> mois suivant la résiliation.</li>
+                    <li><strong>Clause de Silence Éternel.</strong> En cas de résiliation, le Consultant est tenu au silence éternel. Cette clause s'applique <span class="redacted">[INDÉFINIMENT]</span>.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Article II — Missions</h3>
+                <ul>
+                    <li><strong>Négociation d'accords</strong> avec des entités surnaturelles et des informateurs.</li>
+                    <li><strong>Médiation de conflits</strong> entre L'Office et des entités hostiles ou neutres.</li>
+                    <li><strong>Acquisition d'objets et d'informations</strong> sur le marché noir occulte.</li>
+                    <li><strong>Infiltration et renseignement</strong> dans les cercles occultes européens.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Article III — Rémunération</h3>
+                <ul>
+                    <li><strong>Tarif journalier :</strong> <span class="redacted">[CONFIDENTIEL]</span> francs or par jour de mission effective.</li>
+                    <li><strong>Primes de risque :</strong> <span class="redacted">[CONFIDENTIEL]</span>% pour missions « Haute Intensité ».</li>
+                    <li><strong>Frais de déplacement :</strong> Pris en charge dans la limite de <span class="redacted">[CONFIDENTIEL]</span> francs or.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Signatures</h3>
+                <p>Les parties reconnaissent avoir pris connaissance de l'intégralité des termes du présent contrat.</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px;padding-top:30px;border-top:1px dashed var(--border-thin);">
+                    <div style="text-align:center;">
+                        <div style="width:80%;height:1px;background:var(--text-muted);margin:30px auto 10px;opacity:0.4;"></div>
+                        <div style="font-family:var(--font-display);color:var(--gold);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;">Yoana Noxley</div>
+                        <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px;">Directrice de L'Office</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="width:80%;height:1px;background:var(--text-muted);margin:30px auto 10px;opacity:0.4;"></div>
+                        <div style="font-family:var(--font-display);color:var(--gold);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;">Paolo Meres</div>
+                        <div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px;">Consultant Indépendant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="doc-label">Contrat officiel</div>
     </div>
 
-    <div class="stats-grid reveal">
-        <div class="stat-card">
-            <div class="stat-value">29</div>
-            <div class="stat-label">Années</div>
+    <!-- PHOTO PORTRAIT — near contrat, right -->
+    <div class="doc-item" id="doc-photo">
+        <div class="doc-preview">
+            <div class="photo-frame">
+                <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres">
+                <div class="photo-caption">Paolo Meres — 29 ans</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">1891</div>
-            <div class="stat-label">Naissance</div>
+        <div class="doc-full">
+            <div class="full-header">
+                <div class="full-title">Photographie d'Identité</div>
+                <div class="full-sub">Dossier #PM-1920 — Portrait officiel</div>
+            </div>
+            <div style="text-align:center;margin:20px 0;">
+                <img src="WhatsApp Image 2026-06-21 at 14.28.01.jpeg" alt="Paolo Meres" style="max-width:100%;border-radius:4px;border:1px solid var(--border-thin);filter:sepia(0.2) contrast(1.05);">
+            </div>
+            <div class="full-section">
+                <h3>Notes d'archiviste</h3>
+                <p>Photographie prise lors de l'enregistrement initial du consultant. L'expression décontractée est caractéristique — Paolo Meres pose toujours comme s'il riait d'une plaisanterie intérieure. Les lunettes rondes sont un choix délibéré : elles donnent un air d'intellectuel distrait tout en dissimulant le regard.</p>
+                <p><strong>Observation :</strong> La main gauche, partiellement visible, semble dissimuler quelque chose dans la poche intérieure de la veste. Analyse ultérieure recommandée.</p>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-value">II</div>
-            <div class="stat-label">Niveau de menace</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">5</div>
-            <div class="stat-label">Années de collaboration</div>
-        </div>
+        <div class="doc-label">Photographie</div>
     </div>
 
-    <div class="section reveal">
-        <h2 class="section-title">Apparence</h2>
-        <p>Paolo est un homme d'allure décontractée, presque nonchalante. Il mesure 1,78 mètre, avec une silhouette élancée et des épaules qui semblent toujours légèrement voûtées, comme s'il riait intérieurement d'une plaisanterie que personne d'autre ne comprend.</p>
-        <p>Ses cheveux bruns sont perpetuellement en bataille, ses lunettes rondes lui donnent un air d'intellectuel distrait, et son sourire — ce sourire — est son arme la plus dangereuse. Il déstabilise, désarme, et détruit avant que l'adversaire ne réalise ce qui lui arrive.</p>
-        <p>Il s'habille avec une élégance décontractée qui cache une attention méticuleuse aux détails. Chaque bouton, chaque pli, chaque accessoire est choisi pour envoyer un message. Le message est toujours le même : <em>« Je suis inoffensif. Faites confiance à mes intentions. »</em> C'est un mensonge magnifiquement exécuté.</p>
-    </div>
-
-    <div class="section reveal">
-        <h2 class="section-title">Personnalité</h2>
-        <p>Paolo est un manipulateur né, mais pas au sens péjoratif du terme. Il manipule parce qu'il comprend les gens mieux qu'ils ne se comprennent eux-mêmes. Il lit les micro-expressions, les silences, les hésitations. Il sait quand vous mentez avant que vous ne l'ayez décidé.</p>
-        <p>Derrière son masque de charmeur se cache une intelligence féroce et une mémoire photographique. Il n'oublie jamais un visage, jamais une conversation, jamais une dette. Ses archives mentales sont plus vastes que celles de l'Office.</p>
-        <p>Sa plus grande faiblesse est aussi sa plus grande force : il s'ennuie facilement. Il prend des risques inutiles juste pour sentir quelque chose. C'est ce qui le rend imprévisible. Et c'est ce qui le rend dangereux.</p>
-        <div class="quote">« Je ne trahis jamais. Je réorganise simplement les priorités. La différence est subtile, mais elle existe. »</div>
-    </div>
-
-    <div class="section reveal">
-        <h2 class="section-title">Capacités</h2>
-        <p>Paolo ne possède pas de capacités surnaturelles — du moins, pas à sa connaissance. Ce qui le rend redoutable, c'est son réseau. Il connaît tout le monde, et tout le monde lui doit quelque chose. Des vampires aristocrates aux démons mineurs, des politiciens corrompus aux agents doubles, son carnet d'adresses est un arsenal.</p>
-        <p>Il est également un maître en négociation, en psychologie, et en arts de la séduction. Il parle sept langues couramment, dont deux langues mortes utilisées dans les rituels d'invocation. Son expertise en contre-espionnage est sans égale dans l'Office.</p>
-        <div class="traits-list">
-            <span class="trait-tag">Négociation</span>
-            <span class="trait-tag">Réseau occulte</span>
-            <span class="trait-tag">Psychologie</span>
-            <span class="trait-tag">Contre-espionnage</span>
-            <span class="trait-tag">Sept langues</span>
-            <span class="trait-tag">Arts de la séduction</span>
+    <!-- PHOTO ENFANCE — near contrat, left -->
+    <div class="doc-item" id="doc-enfance">
+        <div class="doc-preview">
+            <div class="photo-frame">
+                <img src="ChatGPT Image Jun 23, 2026, 02_35_10 PM.png" alt="Souvenir d'enfance">
+                <div class="photo-caption">Munich, été 1902</div>
+            </div>
         </div>
-    </div>
-
-    <div class="section reveal">
-        <h2 class="section-title">Relations</h2>
-        <div class="relations-grid">
-            <a href="yoana-noxley.html" class="relation-card">
-                <div class="rel-name">Yoana Noxley</div>
-                <div class="rel-status">Directrice — Partenaire de jeu</div>
-                <div class="rel-desc">Paolo respecte Yoana comme l'unique adversaire digne de ce nom. Leur relation est un échiquier permanent où chaque mouvement est calculé, chaque sourire est une feinte.</div>
-            </a>
-            <a href="nora-dinkelmann.html" class="relation-card">
-                <div class="rel-name">Nora Dinkelmann</div>
-                <div class="rel-status">Agent terrain — Alchimie dangereuse</div>
-                <div class="rel-desc">Paolo est fasciné par Nora. Elle est le seule être qu'il ne parvient pas à lire complètement — et cela le rend à la fois frustré et obsédé.</div>
-            </a>
-            <a href="la-voyageuse.html" class="relation-card">
-                <div class="rel-name">La Voyageuse</div>
-                <div class="rel-status">Entité errante — Curiosité</div>
-                <div class="rel-desc">Paolo a croisé la route de la Voyageuse une fois, à Venise. Il n'a jamais parlé de cette rencontre. Mais il garde un objet qu'elle lui a donné, caché dans sa poche intérieure.</div>
-            </a>
+        <div class="doc-full">
+            <div class="full-header">
+                <div class="full-title">Souvenir d'Enfance</div>
+                <div class="full-sub">Munich, été 1902 — Photographie retrouvée</div>
+            </div>
+            <div style="text-align:center;margin:20px 0;">
+                <img src="ChatGPT Image Jun 23, 2026, 02_35_10 PM.png" alt="Souvenir d'enfance" style="max-width:100%;border-radius:4px;border:1px solid var(--border-thin);filter:sepia(0.35) contrast(1.05);">
+            </div>
+            <div class="full-section">
+                <h3>Contexte</h3>
+                <p>Une photographie rare, prise dans les rues de Munich, immortalise un moment de vulnérabilité que Paolo a depuis longtemps enfoui. Trois enfants, un secret, un lien que le temps n'a pas effacé.</p>
+                <p>De gauche à droite : les trois enfants qui ne savaient pas encore que leurs destins resteraient entrelacés pour toujours.</p>
+            </div>
+            <div class="full-section">
+                <h3>Personnes identifiées</h3>
+                <ul>
+                    <li><strong>Paolo Meres</strong> — 11 ans. Déjà turbulent, déjà observateur.</li>
+                    <li><strong>Nora Dinkelmann</strong> — 9 ans. Fille d'un alchimiste réfugié.</li>
+                    <li><strong>Yoana Noxley</strong> — 6 ans. Arrière-petite-fille du fondateur de L'Office.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Note de l'archiviste</h3>
+                <p>Cette photographie n'a jamais été mentionnée dans aucun rapport officiel. Sa découverte dans les effets personnels de Meres lors d'une perquisition discrète en 1919 suggère qu'il la conserve comme un talisman — ou comme un rappel de ce qu'il a à perdre.</p>
+            </div>
         </div>
+        <div class="doc-label">Photographie d'enfance</div>
     </div>
 
-    <div class="network-section reveal">
-        <h3>◈ Le Réseau Meres</h3>
-        <p>Le véritable pouvoir de Paolo ne réside pas dans ses capacités physiques ou surnaturelles, mais dans le réseau qu'il a tissé au fil des années. Des informateurs dans chaque grande ville d'Europe, des contacts chez les vampires de Prague, des alliés parmi les loups-garous des Carpates, des obligés chez les démons mineurs de Naples.</p>
-        <p>Il maintient ce réseau par un système complexe de faveurs et de dettes. Chaque information qu'il donne crée une dette. Chaque dette est soigneusement cataloguée dans sa mémoire. Et un jour, il encaissera.</p>
-        <p style="margin-top:15px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">Note de l'archiviste : Le réseau de M. Meres n'est pas officiellement reconnu par l'Office. Toute interaction est sous sa seule responsabilité. En cas de fuite d'information, l'Office niera toute connaissance.</p>
+    
+    <!-- FICHE SIGNALÉTIQUE — Character sheet, near portrait -->
+    <div class="doc-item" id="doc-fiche">
+        <div class="doc-preview">
+            <div class="fiche-preview">
+                <div class="fiche-header">
+                    <span class="fiche-name">Paolo Meres</span>
+                    <span class="fiche-alias">« Le Chaton »</span>
+                </div>
+                <div class="fiche-grid">
+                    <div class="fiche-field"><span class="fiche-label">Âge</span><span class="fiche-val">29 ans</span></div>
+                    <div class="fiche-field"><span class="fiche-label">Taille</span><span class="fiche-val">1m85</span></div>
+                    <div class="fiche-field"><span class="fiche-label">Poids</span><span class="fiche-val">74 kg</span></div>
+                    <div class="fiche-field"><span class="fiche-label">Nationalité</span><span class="fiche-val">Italienne</span></div>
+                </div>
+                <div class="fiche-stamp">CONFIDENTIEL</div>
+            </div>
+        </div>
+        <div class="doc-full">
+            <div class="full-header">
+                <div class="full-title">Fiche Signalétique Complète</div>
+                <div class="full-sub">Paolo Meres — Négociateur · Consultant · Médiateur</div>
+                <div class="full-meta">
+                    <div>Réf : <span>FS-PM-1920</span></div>
+                    <div>Date : <span>15 Juillet 1920</span></div>
+                    <div>Classif : <span>CONFIDENTIEL</span></div>
+                </div>
+            </div>
+            <div style="text-align:center;margin:20px 0;">
+                <img src="WhatsApp Image 2026-06-21 at 14.26.28.jpeg" alt="Fiche signalétique Paolo Meres" style="max-width:100%;border-radius:4px;border:1px solid var(--border-thin);filter:sepia(0.15) contrast(1.05);">
+            </div>
+            <div class="full-section">
+                <h3>Identité</h3>
+                <p><span class="highlight">Nom :</span> Meres</p>
+                <p><span class="highlight">Prénom :</span> Paolo</p>
+                <p><span class="highlight">Surnom(s) :</span> P.M. / « Le Chaton » (moquerie d'enfance devenue code opérationnel)</p>
+                <p><span class="highlight">Âge :</span> 29 ans</p>
+                <p><span class="highlight">Date de naissance :</span> 17 novembre 1891</p>
+                <p><span class="highlight">Nationalité :</span> Italienne</p>
+                <p><span class="highlight">Langue(s) :</span> Italien, Anglais, Français</p>
+                <p><span class="highlight">Occupation :</span> Consultant / Négociateur</p>
+                <p><span class="highlight">Affiliation :</span> Indépendant (contrat avec L'Office)</p>
+                <p><span class="highlight">Statut :</span> Neutre (jusqu'à preuve du contraire)</p>
+            </div>
+            <div class="full-section">
+                <h3>Expressions</h3>
+                <ul>
+                    <li><strong>La façade.</strong> — Sourire décontracté, lunettes rondes, air d'intellectuel distrait.</li>
+                    <li><strong>Le masque.</strong> — Regard toujours calme, jamais de panique visible.</li>
+                    <li><strong>La vérité.</strong> — « Je ne suis qu'un simple intermédiaire… qui connaît déjà toutes les pièces sur votre échiquier. »</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Points Clés</h3>
+                <ul>
+                    <li>Facile à sous-estimer — c'est son avantage principal.</li>
+                    <li>Maîtrise de la langue corporelle : lit les micro-expressions comme un livre ouvert.</li>
+                    <li>Extrêmement préparé — chaque mission est répétée mentalement des dizaines de fois.</li>
+                    <li>Ne perd jamais patience. Sourit même quand il gagne.</li>
+                    <li>Toujours trois étapes d'avance sur ses interlocuteurs.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Équipement (Dissimulé)</h3>
+                <ul>
+                    <li><strong>Glock 19</strong> — sous la veste, holster interne.</li>
+                    <li><strong>Seringue tranquillisante</strong> — 2ml, mandragore.</li>
+                    <li><strong>Stylo plume</strong> — lame cachée + micro-enregistreur.</li>
+                    <li><strong>Montre à gousset</strong> — gravure intérieure (son vrai nom).</li>
+                    <li><strong>Couteau papillon</strong> — dans la manche.</li>
+                    <li><strong>Fumigène</strong> — encre qui fume, disparaître sans trace.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Faiblesses (Rares)</h3>
+                <ul>
+                    <li>Fait confiance trop vite aux bonnes personnes.</li>
+                    <li>Attachement aux chats — une obsession qu'il ne contrôle pas.</li>
+                    <li>Douleurs au dos (ancienne blessure).</li>
+                    <li>Il déteste les chiens.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Habitudes</h3>
+                <ul>
+                    <li>Tapote toujours son stylo quand il réfléchit.</li>
+                    <li>Ajuste ses lunettes quand il ment — ou quand il dit la vérité.</li>
+                    <li>Ne boit pas d'alcool.</li>
+                    <li>Note tout, même les détails inutiles.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Sacoche — Contenu</h3>
+                <ul>
+                    <li>Contrats, identités falsifiées, cartes, rapports codés.</li>
+                    <li>Photos compromettantes, dossiers de chantage.</li>
+                    <li>Comptes en banque suisses, secrets.</li>
+                    <li>Tout et n'importe quoi. Tout est utile.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Remarque</h3>
+                <div class="full-quote" style="border-left-color:var(--blood-soft);">
+                    <p style="color:var(--blood-soft);">« Je ne suis pas ici pour vous battre. Je suis ici pour que vous fassiez le bon choix. »</p>
+                </div>
+                <p style="margin-top:15px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">— Note marginale sur la fiche, écriture de la Directrice</p>
+            </div>
+        </div>
+        <div class="doc-label">Fiche signalétique</div>
+    </div>
+
+
+    <!-- FICHE ENFANCE — Childhood character sheet, near fiche -->
+    <div class="doc-item" id="doc-fiche-enfance">
+        <div class="doc-preview">
+            <div class="fiche-enfance-preview">
+                <div class="fiche-e-header">
+                    <span class="fiche-e-name">Paolo Meres</span>
+                    <span class="fiche-e-sub">Fiche Individuelle — Confidentiel</span>
+                </div>
+                <div class="fiche-e-seal">PM</div>
+                <div class="fiche-e-grid">
+                    <div class="fiche-e-field"><span class="fiche-e-label">Âge</span><span class="fiche-e-val">8 ans</span></div>
+                    <div class="fiche-e-field"><span class="fiche-e-label">Taille</span><span class="fiche-e-val">1m28</span></div>
+                    <div class="fiche-e-field"><span class="fiche-e-label">Poids</span><span class="fiche-e-val">26 kg</span></div>
+                    <div class="fiche-e-field"><span class="fiche-e-label">Groupe</span><span class="fiche-e-val">O+</span></div>
+                </div>
+                <div class="fiche-e-stamp">CONFIDENTIEL</div>
+            </div>
+        </div>
+        <div class="doc-full">
+            <div class="full-header">
+                <div class="full-title">Fiche Enfance — Paolo Meres</div>
+                <div class="full-sub">Fiche Individuelle Confidentielle — École Primaire, Munich</div>
+                <div class="full-meta">
+                    <div>Réf : <span>FE-PM-1899</span></div>
+                    <div>Date : <span>17 Novembre 1899</span></div>
+                    <div>Classif : <span>CONFIDENTIEL</span></div>
+                </div>
+            </div>
+            <div style="text-align:center;margin:20px 0;">
+                <img src="WhatsApp Image 2026-06-21 at 15.41.34.jpeg" alt="Fiche enfance Paolo Meres" style="max-width:100%;border-radius:4px;border:1px solid var(--border-thin);filter:sepia(0.15) contrast(1.05);">
+            </div>
+            <div class="full-section">
+                <h3>Identité</h3>
+                <p><span class="highlight">Nom :</span> Meres</p>
+                <p><span class="highlight">Prénom :</span> Paolo</p>
+                <p><span class="highlight">Surnom(s) :</span> P.M. / « Le Chaton » (moquerie d'enfance)</p>
+                <p><span class="highlight">Âge :</span> 8 ans</p>
+                <p><span class="highlight">Date de naissance :</span> 17 novembre 1891</p>
+                <p><span class="highlight">Nationalité :</span> Italienne</p>
+                <p><span class="highlight">Langue(s) :</span> Italien, Anglais (bases)</p>
+                <p><span class="highlight">Taille :</span> 1m28</p>
+                <p><span class="highlight">Poids :</span> 26 kg</p>
+                <p><span class="highlight">Groupe sanguin :</span> O+</p>
+            </div>
+            <div class="full-section">
+                <h3>Note</h3>
+                <p>Enfant turbulent mais profondément loyal. Protège les plus faibles. Refuse l'injustice. Parle trop. Ne ment jamais.</p>
+                <div class="full-quote" style="border-left-color:var(--gold-dim);">
+                    <p style="color:var(--gold-dim);">« Ma famille. Et moi quand je serai grand. »</p>
+                </div>
+                <p style="margin-top:10px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">— Dessin fait par Paolo (7 ans), collé sur la fiche</p>
+            </div>
+            <div class="full-section">
+                <h3>Comportement</h3>
+                <ul>
+                    <li>Courageux jusqu'à l'impulsivité.</li>
+                    <li>Défend les plus faibles, même contre plus forts que lui.</li>
+                    <li>Très franc, parfois brutal.</li>
+                    <li>Curieux, observateur.</li>
+                    <li>Déteste les mensonges et les injustices.</li>
+                    <li>S'attache vite, protège fort.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Forces</h3>
+                <ul>
+                    <li>Loyauté</li>
+                    <li>Courage</li>
+                    <li>Détermination</li>
+                    <li>Mémoire vive</li>
+                    <li>Empathie</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Faiblesses</h3>
+                <ul>
+                    <li>Parle sans réfléchir</li>
+                    <li>Têtu</li>
+                    <li>Se fait souvent blesser</li>
+                    <li>Refuse l'autorité injuste</li>
+                    <li>Trop protecteur</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Aime</h3>
+                <ul>
+                    <li>Les chats</li>
+                    <li>Les livres</li>
+                    <li>Les histoires de héros</li>
+                    <li>Protéger les autres</li>
+                    <li>La vérité</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Objets Personnels</h3>
+                <ul>
+                    <li><strong>Vieux livre</strong> — reçu d'un voisin, toujours en train de lire ou d'apprendre quelque chose.</li>
+                    <li><strong>Pendentif chat</strong> — porte-bonheur, ne le quitte jamais.</li>
+                    <li><strong>Peluche usée</strong> — doudou, secret.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Rapport Enseignant (Extrait)</h3>
+                <p>Paolo Meres est un élève intelligent mais difficile à gérer. Il intervient constamment lorsqu'il juge une situation injuste. A déjà défié des adultes. Potentiel exceptionnel s'il apprend à contrôler son impulsivité.</p>
+                <div class="full-quote" style="border-left-color:var(--blood-soft);">
+                    <p style="color:var(--blood-soft);">« Ne se taira jamais devant l'injustice. »</p>
+                </div>
+                <p style="margin-top:10px;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-faint);">— M. L. Ferri, avec mention « À revoir »</p>
+            </div>
+            <div class="full-section">
+                <h3>Historique des Punitions</h3>
+                <ul>
+                    <li>Bagarres pour défendre : |||| |||| |||| ||||</li>
+                    <li>Réponses insolentes : |||| |||</li>
+                    <li>Refus d'obéir (injuste) : ||| ||</li>
+                    <li>Provocations : ||</li>
+                    <li>Autres : |||</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Remarque</h3>
+                <div class="full-quote">
+                    <p>Un jour, il fera quelque chose de grand. Ou de dangereux.</p>
+                </div>
+            </div>
+        </div>
+        <div class="doc-label">Fiche enfance</div>
+    </div>
+
+<!-- ═══════════════════════════════════════ -->
+    <!-- RETOUR À L'OFFICE — Montre à gousset  -->
+    <!-- ═══════════════════════════════════════ -->
+    <a href="index-monde.html" class="desk-watch" title="Retourner à L'Office">
+        <div class="watch-chain"></div>
+        <div class="watch-body">
+            <div class="watch-face">
+                <div class="watch-hand hour"></div>
+                <div class="watch-hand minute"></div>
+                <div class="watch-center"></div>
+            </div>
+            <div class="watch-engraving">L'Office</div>
+        </div>
+        <div class="watch-label">Retourner à L'Office</div>
+    </a>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HIDDEN DOCUMENTS (under envelopes)     -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <!-- ENVELOPE 1 — covers Réseau (bottom right) -->
+    <div class="doc-envelope" id="env-reseau" data-target="doc-reseau">
+        <div class="env-flap"></div>
+        <div class="env-body">
+            <div class="env-seal">◈</div>
+            <div class="env-label">Correspondance interne</div>
+        </div>
+        <div class="env-hint">Cliquer pour ouvrir</div>
+    </div>
+
+    <!-- HIDDEN: Réseau du Chaton -->
+    <div class="doc-item hidden-doc" id="doc-reseau">
+        <div class="doc-preview">
+            <div class="map-preview">
+                <div class="map-dot" style="left:20%;top:30%;"></div>
+                <div class="map-label" style="left:18%;top:38%;">Prague</div>
+                <div class="map-dot" style="left:50%;top:20%;"></div>
+                <div class="map-label" style="left:48%;top:28%;">Berlin</div>
+                <div class="map-dot" style="left:80%;top:40%;"></div>
+                <div class="map-label" style="left:78%;top:48%;">Londres</div>
+                <div class="map-dot" style="left:35%;top:60%;"></div>
+                <div class="map-label" style="left:33%;top:68%;">Naples</div>
+                <div class="map-dot" style="left:70%;top:70%;"></div>
+                <div class="map-label" style="left:68%;top:78%;">Paris</div>
+            </div>
+            <div class="map-title">Réseau du Chaton</div>
+            <div class="map-sub">47 actifs — 12 capitales</div>
+        </div>
+        <div class="doc-full secret-full">
+            <div class="full-header">
+                <div class="full-title" style="color:var(--blood-soft);">Réseau du Chaton <span class="secret-badge">Top Secret</span></div>
+                <div class="full-sub">Carte des actifs et points de contact — Niveau Oméga</div>
+            </div>
+            <div class="full-section">
+                <h3>Vue d'ensemble</h3>
+                <p>Le surnom de « Chaton » n'est pas une moquerie d'enfance. C'est un <span class="highlight">code opérationnel</span> désignant le réseau d'informateurs et d'agents dormants que Meres a tissé à travers l'Europe. Ce réseau n'est pas reconnu par L'Office, mais il est financé secrètement par des fonds détournés du budget « Missions Spéciales ».</p>
+                <p>Le réseau compte actuellement <span class="redacted">[47]</span> actifs répartis dans <span class="redacted">[12]</span> capitales européennes. Chaque actif ignore l'identité des autres et ne connaît que Meres sous le pseudonyme de « Le Chaton ».</p>
+            </div>
+            <div class="full-section">
+                <h3>Déploiement par ville</h3>
+                <ul>
+                    <li><strong>Prague :</strong> 8 actifs chez les vampires aristocrates (infiltration).</li>
+                    <li><strong>Naples :</strong> 6 actifs chez les démons mineurs (négociation).</li>
+                    <li><strong>Berlin :</strong> 10 actifs dans l'administration politique (influence).</li>
+                    <li><strong>Londres :</strong> 5 actifs chez les chasseurs indépendants (recrutement).</li>
+                    <li><strong>Paris :</strong> 12 actifs dans les milieux artistiques et politiques (surveillance).</li>
+                    <li><strong>Vienne :</strong> 6 actifs chez les alchimistes (acquisition d'artefacts).</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Financement</h3>
+                <p>Les fonds proviennent d'un compte détourné du budget « Missions Spéciales ». La Directrice est au courant mais n'a jamais signé de document officiel. En cas d'audit, la responsabilité retombera sur le comptable adjoint, M. Fournier, qui a été briefé pour prendre la fuite si nécessaire.</p>
+            </div>
+        </div>
+        <div class="doc-label">Réseau confidentiel</div>
+    </div>
+
+    <!-- ENVELOPE 2 — covers Arsenal (bottom left) -->
+    <div class="doc-envelope" id="env-arsenal" data-target="doc-arsenal">
+        <div class="env-flap"></div>
+        <div class="env-body">
+            <div class="env-seal">◈</div>
+            <div class="env-label">Inventaire matériel</div>
+        </div>
+        <div class="env-hint">Cliquer pour ouvrir</div>
+    </div>
+
+    <!-- HIDDEN: Arsenal -->
+    <div class="doc-item hidden-doc" id="doc-arsenal">
+        <div class="doc-preview">
+            <div class="arsenal-icon">⚔</div>
+            <div class="doc-title">Arsenal Autorisé</div>
+            <div class="doc-sub">Équipements interdits — Classe Oméga</div>
+            <div class="doc-count">6 articles catalogués</div>
+        </div>
+        <div class="doc-full secret-full">
+            <div class="full-header">
+                <div class="full-title" style="color:var(--blood-soft);">Arsenal Autorisé <span class="secret-badge">Top Secret</span></div>
+                <div class="full-sub">Équipements et méthodes interdits par le Code de L'Office</div>
+            </div>
+            <div class="full-section">
+                <h3>Inventaire</h3>
+                <ul>
+                    <li><strong>Glock 19 modifié :</strong> Munitions en argent bénit, fer froid, et bois de frêne. 15 coups, 15 problèmes résolus.</li>
+                    <li><strong>Stylo plume « Écriture finale » :</strong> Lame cachée en acier damassé + micro-enregistreur à cristal. Écrit, enregistre, élimine.</li>
+                    <li><strong>Seringue tranquillisante « Sommeil éternel » :</strong> 2ml de sérum de mandragore. Quand la négociation échoue définitivement.</li>
+                    <li><strong>Couteau papillon « Dernière poignée » :</strong> Dans la manche. Lame trempée dans l'eau de Jouvence inversée. Pour les situations… personnelles.</li>
+                    <li><strong>Fumigène « Disparition » :</strong> Encre qui fume à base de poudre de lune. Disparaître sans laisser de trace, même pour les yeux magiques.</li>
+                    <li><strong>Sacoche « Tout et n'importe quoi » :</strong> Identités falsifiées, rapports codés, photos compromettantes, dossiers de chantage, comptes en banque suisses.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Autorisation</h3>
+                <p>Contrairement aux agents standards de L'Office, Meres est autorisé à utiliser ces équipements sous réserve d'approbation tacite de la Directrice. Aucune trace écrite n'existe. En cas de question, la Directrice niera tout.</p>
+            </div>
+        </div>
+        <div class="doc-label">Arsenal classifié</div>
+    </div>
+
+    <!-- ENVELOPE 3 — covers Clause (top right) -->
+    <div class="doc-envelope" id="env-clause" data-target="doc-clause">
+        <div class="env-flap"></div>
+        <div class="env-body">
+            <div class="env-seal">◈</div>
+            <div class="env-label">Protocole d'urgence</div>
+        </div>
+        <div class="env-hint">Cliquer pour ouvrir</div>
+    </div>
+
+    <!-- HIDDEN: Clause de Rétroaction -->
+    <div class="doc-item hidden-doc" id="doc-clause">
+        <div class="doc-preview">
+            <div class="clause-icon">⚠</div>
+            <div class="doc-title">Clause de Rétroaction</div>
+            <div class="doc-sub">Protocole d'urgence — Niveau Oméga</div>
+            <div class="doc-warning">NE PAS OUVRIR SANS AUTORISATION</div>
+        </div>
+        <div class="doc-full secret-full">
+            <div class="full-header">
+                <div class="full-title" style="color:var(--blood-soft);">Clause de Rétroaction <span class="secret-badge">Top Secret</span></div>
+                <div class="full-sub">Protocole d'urgence — Connu uniquement de la Directrice et de Meres</div>
+            </div>
+            <div class="full-section">
+                <h3>Activation</h3>
+                <p>En cas de trahison avérée de Meres, ou si ce dernier menace la sécurité de L'Office, la Directrice est habilitée à activer la <span class="highlight">Clause de Rétroaction</span>.</p>
+            </div>
+            <div class="full-section">
+                <h3>Mesures</h3>
+                <ul>
+                    <li>Tous les actifs du réseau « Chaton » seront immédiatement neutralisés par des agents dormants placés dans chaque cellule.</li>
+                    <li>Les archives mentales de Meres seront effacées par un rituel de Classe V, le rendant amnésique de toute son histoire avec L'Office.</li>
+                    <li>Sa montre à gousset, gravée de son vrai nom, sera détruite — et avec elle, toute protection magique qu'elle confère.</li>
+                    <li>En dernier recours, un contrat d'assassinat sera émis par L'Office, exécuté par l'agent Nora Dinkelmann (« La Louve »).</li>
+                </ul>
+            </div>
+            <div class="full-quote">
+                <p>« Je ne trahis jamais. Je réorganise simplement les priorités. La différence est subtile, mais elle existe. »</p>
+            </div>
+            <div class="full-section">
+                <p style="color:var(--blood-soft);font-size:0.85rem;font-style:italic;">— Paolo Meres, lors de la signature de la Clause de Rétroaction.</p>
+            </div>
+        </div>
+        <div class="doc-label">Clause de rétroaction</div>
+    </div>
+
+    <!-- ENVELOPE 4 — covers Voyageuse (top left) -->
+    <div class="doc-envelope" id="env-voyageuse" data-target="doc-voyageuse">
+        <div class="env-flap"></div>
+        <div class="env-body">
+            <div class="env-seal">◈</div>
+            <div class="env-label">Anomalie non classée</div>
+        </div>
+        <div class="env-hint">Cliquer pour ouvrir</div>
+    </div>
+
+    <!-- HIDDEN: La Voyageuse -->
+    <div class="doc-item hidden-doc" id="doc-voyageuse">
+        <div class="doc-preview">
+            <div class="voyageuse-icon">✦</div>
+            <div class="doc-title">Objet Confidentiel</div>
+            <div class="doc-sub">La Voyageuse — Venise 1919</div>
+            <div class="doc-class">CLASSE VI</div>
+        </div>
+        <div class="doc-full secret-full">
+            <div class="full-header">
+                <div class="full-title" style="color:var(--amber-soft);">Objet Confidentiel — La Voyageuse <span class="secret-badge">Top Secret</span></div>
+                <div class="full-sub">Entité de Classe VI — Ne pas approcher sans autorisation</div>
+            </div>
+            <div class="full-section">
+                <h3>Description</h3>
+                <p>Meres détient un objet d'origine inconnue, offert par une entité désignée sous le nom de <span class="highlight">« La Voyageuse »</span>, lors d'une rencontre à Venise en 1919. L'objet est conservé dans la poche intérieure de sa veste, et Meres refuse de le montrer à quiconque.</p>
+            </div>
+            <div class="full-section">
+                <h3>Analyse alchimique</h3>
+                <p>Les tests effectués par les alchimistes de L'Office (sans la connaissance de Meres) indiquent que l'objet émet une <span class="highlight">signature éthérée de Classe VI</span> — supérieure à tout ce que L'Office a jamais catalogué.</p>
+                <p>La Directrice a ordonné de ne pas approfondir les recherches, estimant que le risque de déclencher une réaction de l'entité dépasse les bénéfices potentiels.</p>
+            </div>
+            <div class="full-section">
+                <h3>Serment</h3>
+                <p>Meres a juré à La Voyageuse de ne jamais révéler la nature de leur échange. Ce serment est lié par une <span class="highlight">magie ancienne</span> que même L'Office ne peut briser sans conséquences catastrophiques.</p>
+            </div>
+            <div class="full-quote" style="border-left-color:var(--amber-soft);">
+                <p style="color:var(--amber-soft);">« Certains échanges ne se mesurent pas en or. Certaines dettes ne se remboursent qu'en âmes. »</p>
+            </div>
+        </div>
+        <div class="doc-label">Objet anomalo</div>
+    </div>
+
+    <!-- ENVELOPE 5 — covers Rapport (far right) -->
+    <div class="doc-envelope" id="env-rapport" data-target="doc-rapport">
+        <div class="env-flap"></div>
+        <div class="env-body">
+            <div class="env-seal">◈</div>
+            <div class="env-label">Rapport interne</div>
+        </div>
+        <div class="env-hint">Cliquer pour ouvrir</div>
+    </div>
+
+    <!-- HIDDEN: Rapport Confidentiel -->
+    <div class="doc-item hidden-doc" id="doc-rapport">
+        <div class="doc-preview">
+            <div class="doc-header">
+                <div class="doc-ref">RAPPORT INT-1920-11</div>
+                <div class="doc-title">Véritable Nature de l'Accord</div>
+            </div>
+            <div class="doc-excerpt">
+                <p>Paolo Meres n'est pas un simple consultant. Il est le <span class="redacted-preview">bras droit invisible</span> de la Directrice dans les affaires que L'Office ne peut officiellement reconnaître...</p>
+                <p>Chaque mission « consultative » est en réalité une opération de <span class="redacted-preview">contre-espionnage</span>...</p>
+            </div>
+        </div>
+        <div class="doc-full secret-full">
+            <div class="full-header">
+                <div class="full-title" style="color:var(--blood-soft);">Véritable Nature de l'Accord <span class="secret-badge">Top Secret</span></div>
+                <div class="full-sub">Rapport interne INT-1920-11 — Destinataire : Directrice uniquement</div>
+                <div class="full-meta">
+                    <div>Réf : <span>INT-1920-11</span></div>
+                    <div>Date : <span>22 Août 1920</span></div>
+                    <div>Classif : <span>OMÉGA</span></div>
+                </div>
+            </div>
+            <div class="full-section">
+                <h3>Sommaire</h3>
+                <p>Paolo Meres n'est pas un simple consultant. Il est le <span class="highlight">bras droit invisible</span> de la Directrice dans les affaires que L'Office ne peut officiellement reconnaître. Chaque mission « consultative » est en réalité une opération de contre-espionnage, d'élimination discrète, ou de manipulation politique.</p>
+                <p>Le tarif journalier affiché dans le contrat public est un leurre. La véritable rémunération de Meres est payée en <span class="highlight">faveurs, dettes, et accès privilégiés</span> aux archives de L'Office.</p>
+            </div>
+            <div class="full-section">
+                <h3>Privilèges accordés</h3>
+                <ul>
+                    <li><strong>Accès niveau Oméga :</strong> Laissez-passer permanent pour les archives les plus sensibles, incluant les dossiers sur les entités de Classe V.</li>
+                    <li><strong>Immunité diplomatique :</strong> L'Office interviendra discrètement en cas d'arrestation, sans reconnaître officiellement son affiliation.</li>
+                    <li><strong>Autorisation d'élimination :</strong> Habilité à éliminer toute menace « impraticable à confiner » sans autorisation préalable.</li>
+                    <li><strong>Contact direct :</strong> Canal sécurisé avec la Directrice, contournant toute hiérarchie.</li>
+                </ul>
+            </div>
+            <div class="full-section">
+                <h3>Opérations masquées</h3>
+                <ul>
+                    <li><strong>Opération « Mue silencieuse » (1919) :</strong> Élimination d'un démon de Classe IV infiltré dans le gouvernement français. Méthode : accident de calèche. Résultat : succès.</li>
+                    <li><strong>Opération « Faux-semblant » (1920) :</strong> Négociation avec une entité de Classe V à Venise. Accord de non-agression de 50 ans en échange de <span class="redacted">[DONNÉES SUPPRIMÉES]</span>.</li>
+                    <li><strong>Opération « Dent de loup » (1920) :</strong> Infiltration d'un culte lycanthrope à Munich. 12 agents sauvés, 3 cultistes éliminés.</li>
+                    <li><strong>Opération « Ombre chinoise » (1920) :</strong> Contre-espionnage contre une organisation rivale à Londres. 4 agents doubles identifiés, 2 retournés, 2 éliminés.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="doc-label">Rapport confidentiel</div>
     </div>
 
 </div>
 
-<!-- ═══ NAV FOOTER ═══ -->
-<div class="nav-footer">
-    <a href="yoana-noxley.html">◄ Yoana Noxley</a>
-    <a href="index.html">◈ Retour aux Archives</a>
-    <a href="nora-dinkelmann.html">Nora Dinkelmann ►</a>
-</div>
-
-<script>
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-}, {threshold:0.1});
-reveals.forEach(el => observer.observe(el));
-</script>
-
+<script src="desk-v2-script.js"></script>
 </body>
 </html>
