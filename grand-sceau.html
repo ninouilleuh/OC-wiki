@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Office | 07 — Le Grand Sceau — Archives Niveau IV</title>
+<base target="_blank">
+<link rel="stylesheet" href="css/style-origine.css">
+</head>
+<body>
+
+<!-- ═══ SECURITY CLEARANCE POPUP ═══ -->
+<div class="security-popup" id="securityPopup">
+    <div class="security-popup-backdrop"></div>
+    <div class="security-popup-panel">
+        <div class="security-popup-seal">◈</div>
+        <div class="security-popup-title">VERIFICATION D'IDENTITE</div>
+        <div class="security-popup-subtitle">ARCHIVES NIVEAU IV — ACCES RESTREINT</div>
+        <div class="security-popup-divider"></div>
+        <div class="security-popup-body">
+            <p>Ce document est classifie <strong>NIVEAU IV</strong> par l'Office pour la Gestion, le Confinement et l'Elimination des Entites Surnaturelles.</p>
+            <p>Toute consultation entraine un enregistrement automatique de votre empreinte numerique, adresse IP et geolocalisation approximative dans les registres de securite de l'O.F.F.I.C.E.</p>
+            <p class="security-popup-warning">Divulgation interdite sous peine de poursuites judiciaires et de mesures disciplinaires conformement au Protocole Omega-7.</p>
+            <p style="margin-top:12px;font-size:0.8rem;color:var(--blood-soft);"><strong>Alerte speciale :</strong> Ce document necessite l'ouverture partielle du Sceau. Procedure referencee en Annexe III.</p>
+        </div>
+        <div class="security-popup-actions">
+            <button class="security-popup-btn security-popup-deny" id="popupDeny">REFUSER L'ACCES</button>
+            <button class="security-popup-btn security-popup-accept" id="popupAccept">CONFIRMER L'IDENTITE ET ACCEDER</button>
+        </div>
+        <div class="security-popup-tracking">
+            <span class="tracking-dot"></span>
+            Session en cours de tracage — ID temporaire : <span id="trackingId">---</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ WATERMARK KONAMI ═══ -->
+<div class="watermark" id="konamiWatermark">DECLASSIFIE</div>
+
+<!-- ═══ OVERLAY & FX ═══ -->
+<div class="page-load-overlay" id="pageLoadOverlay">
+    <div class="load-seal">◈</div>
+</div>
+<div class="film-grain"></div>
+<div class="vignette"></div>
+<div class="scanline" id="scanline"></div>
+<div class="attention-bar" id="attentionBar"></div>
+<div class="attention-label" id="attentionLabel">Niveau d'attention : <span id="attentionValue">0%</span></div>
+
+<div class="security-badge">
+    SECURITE : <span class="level">NIVEAU IV</span> | ACCES : <span id="accessLevel">ARCHIVISTE</span>
+</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav-bar" id="mainNav">
+    <a href="index-monde.html" class="nav-logo">◈ L'OFFICE</a>
+    <ul class="nav-links">
+        <li><a href="#chapitre1" class="nav-link">I. Dissémination</a></li>
+        <li><a href="#chapitre2" class="nav-link">II. Guerres de Religion</a></li>
+        <li><a href="#chapitre3" class="nav-link">III. Saint-Cloud</a></li>
+        <li><a href="#chapitre4" class="nav-link">IV. Le Sceau</a></li>
+        <li><a href="#chapitre5" class="nav-link">V. Les Guildes</a></li>
+    </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="accueil">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+        <div class="classified-stamp">⚠ CLASSIFICATION : NIVEAU IV — SCELLEMENT PARTIEL</div>
+        <div class="doc-number">DOCUMENT 07 — LE GRAND SCEAU | L'OFFICE SOUS LES PIERRES</div>
+        <h1>Le Grand Sceau</h1>
+        <div class="subtitle">L'O.F.F.I.C.E. sous les pierres — 1349-1589</div>
+        <div class="divider-line"></div>
+        <div class="archivist-note">
+            <p>Compile par Hubert Maret, Archiviste Principal, Paris, 1897.</p>
+            <p>Sources : Registres des Six Corps de Marchands de Paris (Archives nationales, serie F/12) · Actes notariaux de Lyon et d'Avignon (1589-1600)</p>
+            <p>Mémoires de Simon Goulart (edition 1589) · Registres du Chatelet de Paris (1585-1590) · Chroniques de Brantome</p>
+            <p>Correspondance partielle de l'Archivum Romanum Societatis Iesu (Rome) · Dix-sept documents internes de l'O.F.F.I.C.E. recupérés entre 1590 et 1889</p>
+            <p class="warning">Note particuliere : trois documents internes ont necessite l'ouverture partielle du Sceau pour authentification. Le Sceau a ete referme le 14 novembre 1897 a 23h41.</p>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <span></span>
+        <p>Defiler</p>
+    </div>
+</section>
+
+<!-- ═══ CHAPITRE I ═══ -->
+<section class="chapter" id="chapitre1">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">Chapitre I</span>
+            <h2>Ce que fit l'Office dans les deux siecles qui separent les catastrophes</h2>
+            <div class="line"></div>
+            <p style="color:var(--gold-dim);font-family:var(--font-mono);font-size:0.7rem;letter-spacing:3px;margin-top:15px;">1349 — 1562</p>
+        </div>
+        <div class="body-text reveal">
+            <p class="drop-cap" data-note="Les six survivants ne constituaient pas une organisation mais un reseau d'obligations mutuelles. H.M.">Il serait commode de raconter les deux siecles qui separent la <a href="origines.html#chapitre5" class="wiki-link" target="_self">Nuit des Sept</a> de la crise de 1589 comme une periode de croissance reguliere. Ce n'est pas ce qui se passa.</p>
+            <p data-note="Le terme 'se dissemine' est le seul qui corresponde a la structure reelle de l'organisation dans cette periode. H.M.">L'O.F.F.I.C.E., dans les annees qui suivirent sa refondation, ne se reconstruisit pas a proprement parler. Il se <span class="highlight glow-hover">dissemina</span>.</p>
+            <p data-note="Le septieme survivant, Alain de Montfort, ne fut jamais retrouve. Son nom fut raye des registres a l'unanimite. H.M.">Six survivants — le septieme, <span class="konami-hidden">Alain de Montfort</span>, n'ayant jamais ete retrouve, son nom raye des registres a l'unanimite — ne constituaient pas une organisation. Ils constituaient un reseau d'obligations mutuelles et de memoire partagee. Ils se formerent les uns les autres avec la mefiance de gens qui venaient de perdre soixante-dix camarades en dix-huit mois. Ils recruterent lentement, et avec une prudence qui touchait a la paranoia.</p>
+            <p data-note="L'agent 'R.' est identifie par sa seule initiale dans tous les registres de la periode. H.M.">Ils n'eurent pas de siege fixe avant 1401, quand un agent lyonnais designe dans les registres par la seule initiale <span class="highlight glow-hover">« R. »</span> acquit sous fausse identite une cave dans le quartier de la Loge des Changes, a Lyon — la meme ville, la meme profession de couverture mercantile, qui jouerait un role central en 1589.</p>
+        </div>
+        <div class="img-frame reveal" data-note="La cave de la Loge des Changes fut localisee en 1889. Elle avait ete transformee en entrepot commercial au XVIIIe siecle. H.M.">
+            <img src="images/cave-lyon-1401.jpg" alt="Premier siege fixe de l'O.F.F.I.C.E., Lyon 1401">
+            <span class="caption">Cave de la Loge des Changes, Lyon — Premier siege fixe de l'O.F.F.I.C.E., circa 1401</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Ce modele cellulaire est atteste par quatorze documents internes de la periode 1400-1550. H.M.">Le modele des deux siecles suivants fut moins celui d'une institution que celui d'une serie de <span class="highlight glow-hover">cellules autonomes</span> partageant des protocoles communs, des archives partielles, et une regle fondatrice dont la plupart des membres ne connaissaient que les quatre premiers articles. Ce qui les maintenait ensemble n'etait pas une hierarchie. C'etait la memoire commune d'un echec.</p>
+            <p data-note="Cette regle de comptabilite des echecs est citee explicitement dans un memoire interne de 1487. H.M.">Les registres de la periode 1360-1500 — ceux qui ont survecu — documentent quarante-deux interventions reussies, neuf interventions partielles, et dix-sept cas ou l'agent arriva apres que la chose eut deja fait ce qu'elle etait venue faire. Ce bilan est presente sans commentaire. C'est peut-etre la seule regle de la Nuit des Sept qu'ils appliquerent sans exception : <span class="highlight glow-hover">compter les echecs avec la meme meticulosite que les succès.</span></p>
+            <p data-note="La Reforme protestante de 1517 compliqua durablement les liens avec l'Eglise. H.M.">Ils recruterent parmi les medecins, les apothicaires, les notaires, les cartographes. Rarement parmi le clerge — la Reforme protestante, a partir de 1517, compliquerait durablement les liens avec l'Eglise comme institution. Plus volontiers parmi les marchands itinerants, qui avaient des raisons legitimes de traverser les frontieres, de connaitre plusieurs langues, de maintenir des correspondances regulieres avec des inconnus dans des villes lointaines. <span class="attention">C'est cette derniere population qui, quand le monde se fractura selon des lignes religieuses, sauverait l'organisation.</span></p>
+        </div>
+    </div>
+</section>
+
+<div class="chapter-divider"><span>◈ ◈ ◈</span></div>
+
+<!-- ═══ CHAPITRE II ═══ -->
+<section class="chapter" id="chapitre2">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">Chapitre II</span>
+            <h2>Les Guerres de Religion — l'Europe comme terrain favorable</h2>
+            <div class="line"></div>
+            <p style="color:var(--gold-dim);font-family:var(--font-mono);font-size:0.7rem;letter-spacing:3px;margin-top:15px;">1562 — 1588</p>
+        </div>
+        <div class="body-text reveal">
+            <p class="drop-cap" data-note="Le massacre de Vassy (1er mars 1562) marqua le debut des Guerres de Religion. H.M.">La France entra en guerre civile le <a href="https://fr.wikipedia.org/wiki/Massacre_de_Vassy" class="wiki-link" target="_blank">1er mars 1562</a>, quand des soldats aux ordres de Francois de Guise massacrerent une congregation protestante en priere a Vassy, en Champagne. Ce fut le premier des huit conflits que les historiens regroupent sous le nom de Guerres de Religion. La paix finale — l'Edit de Nantes — ne serait signee qu'en 1598. Entre ces deux dates, trente-six ans de violences intermittentes restructurerent la carte confessionnelle de l'Europe occidentale et creerent, pour les entites cataloguees par l'O.F.F.I.C.E., les conditions d'une proliferation sans precedent depuis la Peste Noire.</p>
+            <p data-note="Cette correlation est documentee dans quatorze registres internes de la periode 1562-1590. H.M.">Ce n'est pas une metaphore. C'est une observation documentee dans les registres internes de la periode : <span class="highlight glow-hover">les entites que l'Ordo nommait autrefois revenants de violence collective, affames de frontiere, choses sans territoire, se multiplient en proportion directe de l'intensite et de la duree de la souffrance.</span> La mort ordinaire genere peu. La mort qui brise le langage et renverse les rituels — la mort qui laisse les survivants incapables de nommer ce qu'ils ont vu — genere davantage.</p>
+            <p class="attention" data-note="Cette phrase est une citation d'un rapport interne de 1574, auteur anonyme. H.M.">Les guerres de religion produisirent ce type de mort en quantites industrielles.</p>
+        </div>
+        <div class="archive-box reveal reveal-delay-1">
+            <div class="archive-header">
+                <span>Rapport d'evaluation, section Ile-de-France, 28 aout 1572</span>
+                <span class="source-tag">Document interne O.E./IDF/1572/08</span>
+            </div>
+            <div class="archive-content">
+                <p style="font-style:italic;color:var(--gold);margin-bottom:22px;letter-spacing:0.5px;">Cinq jours apres le massacre de la Saint-Barthelemy.</p>
+                <p><strong>Denombrement preliminaire :</strong> au moins dix-sept entites actives identifiees dans l'enceinte de Paris entre le 23 et le 28 aout. Trois correspondent a des typologies connues et pourraient etre contenus selon les protocoles standards si nous disposions des ressources necessaires. Les quatorze restantes ne correspondent a aucune entree de registre existant.</p>
+                <p><strong>Estimation de la duree d'activite :</strong> inconnue. En 1348, ce type de proliferation avait dure dix-huit mois avant stabilisation naturelle — mais nous n'avions pas de donnees comparatives. Nous en avons maintenant. <span class="highlight">La comparaison n'est pas rassurante.</span></p>
+                <p class="attention">Personnel disponible a Paris : deux agents. Un blesse. L'autre ici.</p>
+                <p class="attention">Je ne sais pas quoi faire avec dix-sept.</p>
+            </div>
+            <div class="archive-footer">
+                Note en marge, d'une autre main : Aucune instruction envoyee. Les voies de communication entre Paris et Lyon etaient coupees du 23 au 31 aout. — H.M., 1891
+            </div>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Les estimations du nombre de victimes varient entre cinq mille et trente mille morts. H.M.">Le <a href="https://fr.wikipedia.org/wiki/Massacre_de_la_Saint-Barth%C3%A9l%C3%A9my" class="wiki-link" target="_blank">massacre de la Saint-Barthelemy</a> — entre cinq mille et trente mille morts selon les estimations — survint dans la nuit du 23 au 24 aout 1572, quatre jours apres le mariage cense sceller une reconciliation entre catholiques et protestants. Les chefs huguenots etaient a Paris pour les festivites. Ce n'etait pas un accident.</p>
+            <p data-note="L'agente n'est jamais nommee dans les registres. Son rapport fut conserve integral, sans expurgation. H.M.">L'O.F.F.I.C.E. compta ses morts : trois agents tues dans les premieres heures, confondus avec les huguenots ou simplement pris dans la violence. Une quatrieme agente — dont le nom n'est jamais enregistre, presente a Paris sous couverture de marchande de soie — survécut en se convertissant publiquement le 24 aout au matin, en larmes, dans une eglise du Marais. Elle nota dans son rapport, redige trois semaines plus tard depuis Lyon : <span class="quote-inline">Je ne sais pas si ce que j'ai fait constitue une apostasie ou une survie. Je ne suis pas sure que la distinction soit aussi nette que nos regles fondatrices le supposent.</span> Elle continua a travailler pour l'O.F.F.I.C.E. pendant dix-huit ans. Son rapport ne fut pas expurge.</p>
+        </div>
+        <div class="img-frame reveal" data-note="Le massacre de la Saint-Barthelemy, 23-24 aout 1572. Estimation des victimes : entre 5000 et 30000 morts. H.M.">
+            <img src="images/saint-barthelemy-1572.jpg" alt="Massacre de la Saint-Barthelemy, Paris 1572">
+            <span class="caption">La Saint-Barthelemy, nuit du 23 au 24 aout 1572 — Paris</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="La Ligue catholique fut restructuree en 1576 sous l'impulsion d'Henri de Guise. H.M.">Ce qui rendit les annees 1580 specifiquement intenables n'etait pas la violence en elle-meme — l'O.F.F.I.C.E. avait appris a naviguer la violence. C'etait la <span class="highlight glow-hover">systematisation des reseaux de surveillance.</span></p>
+            <p data-note="Philippe II d'Espagne financa la Ligue a hauteur de 50000 ecus par an a partir de 1585. H.M.">La <a href="https://fr.wikipedia.org/wiki/Ligue_catholique_(France)" class="wiki-link" target="_blank">Ligue catholique</a>, restructuree en 1576 sous l'impulsion d'Henri de Guise, etait devenue en une decennie une organisation aussi tentaculaire que l'Ordo l'avait jamais ete — avec cette difference qu'elle disposait du soutien financier de Philippe II d'Espagne et de l'appui d'une partie du clerge francais. Elle avait ses propres reseaux d'information, ses propres agents dans les guildes et les confreries, ses propres methodes pour identifier les individus dont l'allegeance confessionnelle n'etait pas clairement etablie.</p>
+            <p class="attention" data-note="Cette identite structurelle entre l'O.F.F.I.C.E. et les cibles de la Ligue est le fondement de la crise de 1589. H.M.">L'O.F.F.I.C.E. travaillait precisement parmi ces individus. L'O.F.F.I.C.E. etait ces individus.</p>
+            <p data-note="Les barricades de la Journee des Barricades furent erigées le 12 mai 1588. Henri III quitta Paris par les jardins du Louvre et n'y retourna jamais. H.M.">Le <a href="https://fr.wikipedia.org/wiki/Journ%C3%A9e_des_Barricades" class="wiki-link" target="_blank">12 mai 1588</a>, le peuple de Paris — encadre par la Ligue — eleva des barricades dans les rues de la capitale. Henri III choisit de fuir plutot que d'affronter la foule. Il quitterait Paris par les jardins du Louvre, a pied, et n'y retournerait jamais. La capitale passa de facto sous le controle du Conseil des Seize — la faction ultra-catholique representant les seize quartiers de Paris. Ils fouillaient les maisons des marchands suspects, controlaient les correspondances aux portes de la ville, interrogeaient les domestiques.</p>
+            <p data-note="Les trois arrestations eurent lieu entre le 8 et le 18 janvier 1589. H.M.">En janvier 1589, trois agents en activite a Paris furent arretes a dix jours d'intervalle par le Conseil des Seize. Ils furent accuses de correspondre avec des protestants. Deux des accusations etaient fausses. La troisieme etait vraie — l'agent concerne avait un contact huguenot necessaire pour une intervention dans le Faubourg Saint-Antoine. <span class="highlight glow-hover">L'entite qu'il cherchait a contenir ne demandait pas l'allegeance confessionnelle de ses victimes.</span></p>
+        </div>
+        <div class="archive-box reveal reveal-delay-1">
+            <div class="archive-header">
+                <span>Lettre chiffree, Paris a Lyon, 22 janvier 1589</span>
+                <span class="source-tag">Dechiffree par H. Maret, 1892</span>
+            </div>
+            <div class="archive-content">
+                <p style="font-style:italic;color:var(--gold);margin-bottom:18px;letter-spacing:0.5px;">Cle de chiffrement : Registre des Codes, volume III.</p>
+                <p>Trois des notres sont sous les verrous du Chatelet. Je ne sais pas ce qu'ils ont dit ou n'ont pas dit.</p>
+                <p>J'opere depuis dix ans ici sous couverture de commis chez un epicier de la rue Saint-Denis. Mon patron est un homme bien, il ne sait rien. Mais son frere siege au Conseil des Seize. Je ne peux plus utiliser cette adresse pour les correspondances.</p>
+                <p>Autre chose, que je hesite a formuler : les entites proliferées depuis la Saint-Barthelemy ne se comportent pas toutes selon les modeles connus. Certaines se deplacent. Pas de facon aleatoire. <span class="highlight">Elles suivent — je le dis avec toutes les reserves d'usage — les reseaux de la Ligue.</span> Non pas comme agents. Comme beneficiaires.</p>
+                <p>Je voulais documenter cela correctement. Pour documenter correctement, il faudrait rester a Paris. Pour rester a Paris, il me faudrait une couverture que je n'ai plus.</p>
+            </div>
+            <div class="archive-footer">
+                Lettre interceptee — Archive de l'O.F.F.I.C.E., niveau IV
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="chapter-divider"><span>◈ ◈ ◈</span></div>
+
+<!-- ═══ CHAPITRE III ═══ -->
+<section class="chapter" id="chapitre3">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">Chapitre III</span>
+            <h2>Saint-Cloud, 1er Aout 1589</h2>
+            <div class="line"></div>
+        </div>
+        <div class="body-text reveal">
+            <p class="drop-cap" data-note="L'alliance fut conclue le 30 avril 1589 au chateau de Plessis-lez-Tours. Henri III fut excommunie par le pape Sixte V le 5 septembre 1585, alliance anticipee. H.M."><a href="https://fr.wikipedia.org/wiki/Henri_III_(roi_de_France)" class="wiki-link" target="_blank">Henri III</a> s'etait allie, le 30 avril 1589, avec son beau-frere et cousin huguenot Henri de Navarre — l'heritier legitime depuis la mort sans descendance de Francois d'Anjou en 1584. Cette alliance, inacceptable pour la Ligue et pour Rome, avait valu a Henri III d'etre excommunie par le pape Sixte V. L'ete 1589, il assiegeait sa propre capitale depuis le camp royal etabli a Saint-Cloud.</p>
+            <p data-note="Jacques Clement (1567-1589), frere dominicain, originaire de Serbonnes en Bourgogne. H.M.">Le 31 juillet, un frere dominicain du nom de <a href="https://fr.wikipedia.org/wiki/Jacques_Cl%C3%A9ment" class="wiki-link" target="_blank">Jacques Clement</a> quitta Paris pour rejoindre ce camp. Il avait vingt-deux ans, etait natif d'un village de Bourgogne nomme Serbonnes, et portait sur lui une lettre qu'il pretendait tenir du premier president du Parlement, Achille de Harlay — reste dans Paris et favorable au roi. Arrete a l'entree du camp, tenu sous surveillance pendant la nuit, il fut trouve endormi, son Breviaire ouvert a l'endroit du meurtre d'Holopherne par Judith. La Guesle, procureur general, jugea cela suffisamment pieux et le fit introduire dans la chambre du roi.</p>
+            <p data-note="Henri III mourut le lendemain, 2 aout 1589, apres avoir designe Henri de Navarre comme successeur. H.M.">Henri III recut Jacques Clement alors qu'il se tenait sur sa chaise percee. Tandis que le roi lisait la lettre, Clement sortit un couteau de sa manche et le lui porta au bas-ventre. Le roi s'exclama : <span class="quote-inline">« Ah, mon Dieu ! »</span>, puis arracha le couteau et frappa son assaillant au visage. Les gardes accoururent au bruit, transpercerent le moine de leurs epees et le jeterent par la fenetre. Henri III mourut le lendemain, 2 aout 1589, apres avoir designe Henri de Navarre comme son successeur.</p>
+        </div>
+        <div class="img-frame reveal" data-note="Assassinat d'Henri III par Jacques Clement, 1er aout 1589, camp de Saint-Cloud. H.M.">
+            <img src="images/saint-cloud-1589.jpg" alt="Assassinat d'Henri III, Saint-Cloud, 1er aout 1589">
+            <span class="caption">Assassinat d'Henri III par Jacques Clement, camp de Saint-Cloud, 1er aout 1589</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Thomas Guilhem : apothicaire, installe a Versailles depuis six ans. Son rapport est le seul document contemporain a decrire la presence. H.M.">Un agent de l'O.F.F.I.C.E. etait present a Saint-Cloud ce matin-la pour des raisons sans rapport avec l'assassinat. Il s'appelait <span class="highlight glow-hover">Thomas Guilhem</span>. Apothicaire, installe a Versailles depuis six ans sous ce metier de couverture. Il avait ete convoque au camp pour examiner un soldat atteint d'une fievre que les medecins militaires ne reconnaissaient pas. Son rapport du soir du 1er aout est le seul document contemporain a mentionner ce qu'il vit apres que les gardes eurent defenestre le corps de Clement.</p>
+        </div>
+        <div class="archive-box reveal reveal-delay-1">
+            <div class="archive-header">
+                <span>Rapport de Thomas Guilhem, agent O.F.F.I.C.E. section Ile-de-France, 1er aout 1589</span>
+                <span class="source-tag">Document interne O.E./IDF/1589/08/01</span>
+            </div>
+            <div class="archive-content">
+                <p>J'etais dans la cour quand les gardes ont crie. Je me suis approche. Le moine etait deja par terre. Le Roi etait encore debout, soutenu par deux officiers.</p>
+                <p><span class="highlight">Ce que j'ai vu ensuite :</span> il y avait quelque chose dans la chambre. Non pas un homme. Une presence — une densite d'attention orientee, dans le sens professionnel du terme. Je ne l'ai perçue que depuis le couloir, a travers la porte ouverte. Elle n'avait pas de forme propre. Elle en empruntait une, temporairement, comme si elle utilisait le contour de quelque chose d'autre pour etre lisible. <span class="highlight">La forme qu'elle empruntait etait celle d'un homme en robe de religieux.</span></p>
+                <p>Elle n'a pas bouge quand les gardes sont entres dans la chambre. Aucun des gardes ne l'a perçue.</p>
+                <p>Elle a attendu que le Roi soit emmene. Puis elle n'etait plus la.</p>
+                <p>Je note sans pouvoir conclure. La presence de Saint-Cloud ne correspond a aucune entree de nos registres courants. Elle ne correspond pas non plus a la <a href="origines.html#chapitre3" class="wiki-link" target="_self">presence de Messine</a>, decrite par Frere Amadeus en 1347 — mais la ressemblance fonctionnelle est suffisante pour etre consignee. <span class="attention">Quelque chose regarde les catastrophes. Quelque chose compte les morts au moment ou ils le deviennent.</span></p>
+                <p style="color:var(--gold-dim);font-style:italic;margin-top:18px;">Je serai a Lyon dans cinq jours.</p>
+            </div>
+            <div class="archive-footer">
+                Original en francais — Archives internes, niveau IV
+            </div>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Thomas Guilhem arriva a Lyon en trois jours au lieu de cinq. Il avait marche les nuits. H.M.">Thomas Guilhem arriva a Lyon non pas en cinq jours mais en trois. Il avait marche les nuits.</p>
+            <p data-note="Le cadavre de Jacques Clement fut soumis au supplice de l'ecartelement, reserve aux regicides, puis brule. H.M.">A Paris, le cadavre de Jacques Clement fut soumis au supplice de l'ecartelement, reserve aux regicides, puis brule, ses cendres jetees dans la Seine — <span class="quote-inline">a ce qu'il n'en soit a l'advenir aucune memoire</span>, selon la formule officielle. Dans les rues de la capitale controlees par la Ligue, on celebrat un martyr.</p>
+            <p data-note="La reunion de Lyon n'est documentee dans aucun registre interne — deliberement. H.M.">La reunion qui suivit l'arrivee de Guilhem a Lyon n'est documentee dans aucun registre interne — deliberement. Ce que nous savons de ses conclusions, nous le savons par deduction, par les effets plutot que par les causes.</p>
+        </div>
+    </div>
+</section>
+
+<div class="chapter-divider"><span>◈ ◈ ◈</span></div>
+
+<!-- ═══ CHAPITRE IV ═══ -->
+<section class="chapter" id="chapitre4">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">Chapitre IV</span>
+            <h2>Le Grand Sceau — Septembre 1589</h2>
+            <div class="line"></div>
+        </div>
+        <div class="body-text reveal">
+            <p class="drop-cap" data-note="Le Sceau avait ete fabrique dans la nuit du 21 au 22 decembre 1349 par un orfevre dont le nom fut le seul de la Nuit des Sept a etre consigne — puis soigneusement efface. H.M.">L'O.F.F.I.C.E. possedait depuis la Nuit des Sept un outil que les registres internes nomment simplement <span class="highlight glow-hover">le Sceau</span> — un disque de bronze portant la seule marque qui eut jamais identifie l'organisation dans ses documents confidentiels : un cercle ouvert d'un cote, que les agents appelaient <span class="highlight glow-hover">la porte</span>. Il avait ete fabrique dans la nuit du 21 au 22 decembre 1349 par un orfevre dont le nom fut le seul de la Nuit des Sept a etre consigne — puis soigneusement efface.</p>
+            <p data-note="L'Annexe I de l'Acte de Refondation definit le scellement comme 'mise en sommeil', pas destruction. H.M.">Le Sceau avait deux fonctions. Il authentifiait les documents internes, au meme titre que le Grand Sceau de France authentifiait les actes royaux. Et selon l'Annexe I de l'<a href="origines.html#chapitre5" class="wiki-link" target="_self">Acte de Refondation</a>, il pouvait <span class="highlight glow-hover">sceller les archives</span> : les fermer, les rendre inaccessibles a quiconque ne possedait pas les codes d'ouverture, qui n'existaient que dans la memoire des Archivistes designes.</p>
+            <p class="attention" data-note="Cette definition precise est au coeur du Protocole du Grand Sceau. H.M.">Ce n'etait pas une destruction. C'etait une mise en sommeil.</p>
+            <p data-note="Cette circonstance unique n'avait jamais ete invoquee avant septembre 1589. H.M.">L'Annexe I ne definissait qu'une seule circonstance justifiant ce scellement : <span class="highlight glow-hover">quand la survie des archives constitue un danger plus grand que leur inaccessibilite temporaire.</span></p>
+        </div>
+        <div class="img-frame reveal" data-note="Le Sceau de bronze — disque portant le cercle ouvert, 'la porte'. Photographie d'archive, 1897. H.M.">
+            <img src="images/le-grand-sceau.jpg" alt="Le Sceau de bronze de l'O.F.F.I.C.E.">
+            <span class="caption">Le Sceau de bronze — 'La Porte' — Photographie d'archive, 1897</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Le sceau d'Henri III fut officiellement fracasse le 2 aout 1589, jour de sa mort. H.M.">Il existait un parallele que personne ne formula a voix haute mais que chacun dans cette reunion avait en tête : a Paris, le <a href="https://fr.wikipedia.org/wiki/Grand_Sceau_de_France" class="wiki-link" target="_blank">Grand Sceau de France</a> venait d'etre brise. Par tradition, le sceau de chaque regne etait detruit a la mort du roi, pour qu'aucun acte frauduleux ne put etre authentifie en son nom apres sa mort. Le 2 aout 1589, le sceau d'Henri III avait ete officiellement fracasse. L'ere qu'il representait n'existait plus.</p>
+            <p data-note="Thomas Guilhem formula la question. Le vote fut unanime. H.M.">La question posee a Lyon fut simple, et Thomas Guilhem la formula le premier : <span class="quote-inline">si nos archives etaient saisies — par la Ligue, par le Conseil des Seize, par les agents du Pape, par n'importe qui —, que saurait l'adversaire ?</span></p>
+            <p data-note="Cette enumeration est une reconstitution fondee sur les documents ulterieurs. H.M.">Il saurait les noms de tous les agents actifs depuis 1349. Il saurait les emplacements de toutes les entites confinees a travers l'Europe. Il saurait les protocoles d'intervention — et donc, par inversion, les protocoles de liberation deliberée. Il saurait que la presence de Messine et la presence de Saint-Cloud etaient peut-etre de la meme nature, et que <span class="attention">quelque chose observait les catastrophes europeennes depuis au moins deux cent cinquante ans sans jamais etre nomme.</span></p>
+            <p class="attention" data-note="Citation reconstituee des comptes rendus posterieurs. H.M."><span class="quote-inline">Voila, dit Guilhem, ce que nous ne pouvons pas laisser saisir.</span></p>
+            <p data-note="Le vote fut unanime. Aucun nom ne fut consigne. H.M.">Le vote fut unanime.</p>
+        </div>
+        <div class="act-box reveal reveal-delay-1">
+            <div class="act-title">Protocole du Grand Sceau</div>
+            <div class="act-subtitle">EXECUTE LE 14 SEPTEMBRE 1589, LYON — SEUL DOCUMENT INTERNE NON SCELLE DE CETTE PERIODE</div>
+            <div class="act-content">
+                <p>En application de l'Annexe I de l'Acte de Refondation du 21 decembre 1349, le Conseil des presents a decide a l'unanimite le scellement provisoire des Archives centrales de l'O.F.F.I.C.E.</p>
+                <span class="article">Archives scellees :</span>
+                <p>Registres de l'Ordo (volumes I-IX) · Registres de l'O.F.F.I.C.E. (volumes I-VI) · Catalogues d'entites (cinquante-trois volumes) · Protocoles d'intervention (quatorze volumes) · Correspondances internes.</p>
+                <span class="article">Conditions du scellement :</span>
+                <p>Les codes d'ouverture seront detenus par trois Archivistes designes, dans trois villes separees. Aucun des trois ne saura qui sont les deux autres. La reconstitution du code complet necessitera leur reunion physique.</p>
+                <p>Les archives physiques seront divisees en trois portions et transportees dans trois sites distincts, non consignes par ecrit.</p>
+                <p>L'O.F.F.I.C.E. continuera a operer. Ses agents continueront a documenter. Mais les nouvelles archives seront locales, minimales, et detruites des qu'elles risquent d'etre compromises — jusqu'a ce que les conditions permettant la reouverture du Sceau soient reunies.</p>
+                <p><em>Ces conditions ne peuvent pas etre definies a l'avance. Elles seront reconnues quand elles se presenteront.</em></p>
+                <div class="act-signature">
+                    Signe : les presents.<br>
+                    Noms non consignes.
+                </div>
+                <div class="act-margin">
+                    Le Grand Sceau de France vient d'etre brise. Le notre se ferme. Ce n'est pas la meme chose.
+                    <span class="margin-note">— En bas de page, d'une ecriture que H. Maret n'a pas pu attribuer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="chapter-divider"><span>◈ ◈ ◈</span></div>
+
+<!-- ═══ CHAPITRE V ═══ -->
+<section class="chapter" id="chapitre5">
+    <div class="container">
+        <div class="section-title reveal">
+            <span class="section-number">Chapitre V</span>
+            <h2>Ce que l'Office devint — Les Guildes et les Confreries</h2>
+            <div class="line"></div>
+        </div>
+        <div class="body-text reveal">
+            <p class="drop-cap" data-note="La restructuration prit des semaines, pas des mois, car l'infrastructure existait deja. H.M.">La restructuration ne prit pas des mois. Elle prit des semaines, parce que l'infrastructure existait deja.</p>
+            <p data-note="Ce modele de couverture par les guildes etait deja en place depuis 1401. Le Sceau ne fit que l'officialiser. H.M.">Les agents de l'O.F.F.I.C.E. avaient, depuis deux siecles, recrute preferentiellement parmi les marchands. Ces marchands appartenaient a des guildes. Ces guildes avaient des correspondants dans chaque ville, des regles internes inaccessibles aux non-membres, des reunions regulieres que personne n'attendait qu'elles fussent publiques, et des raisons legitimes de faire circuler de l'argent, des lettres et des hommes sans que quiconque y trouvat a redire.</p>
+            <p data-note="Les Six Corps de Marchands : Drapiers, Epiciers, Merciers, Fourreurs, Bonnetiers, Orfevres. H.M.">Paris etait organisee autour des <span class="highlight glow-hover">Six Corps de Marchands</span> — les six grandes corporations autorisees a commercer en gros dans la capitale : les Drapiers, les Epiciers, les Merciers, les Fourreurs, les Bonnetiers et les Orfevres. Chaque corps de metier etait double par une ou plusieurs confreries assurant les oeuvres charitables et pieuses, notamment les hospices pour les compagnons malades et l'assistance aux mourants.</p>
+        </div>
+        <div class="img-frame reveal" data-note="Les Six Corps de Marchands de Paris dans leur hall de guilde, fin du XVIe siecle. H.M.">
+            <img src="images/guildes-merciers.jpg" alt="Les Six Corps de Marchands de Paris, fin XVIe siecle">
+            <span class="caption">Les Six Corps de Marchands de Paris — Hall de guilde, fin du XVIe siecle</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Les Merciers constituaient le corps le plus nombreux, avec des statuts datant de 1407. Leur reseau couvrait Lyon, Bordeaux, Anvers, Geneve. H.M.">Parmi les Six Corps, les <span class="highlight glow-hover">Merciers</span> occupaient une position particuliere. Les Merciers — negociants en soieries, etoffes, dentelles, toiles et marchandises diverses — constituaient le corps le plus nombreux, avec des statuts datant de 1407. Ils ne produisaient rien et ne transformaient rien : ils vendaient et transportaient tout. Six branches de specialite avaient ete constituees par lettres patentes d'Henri II en 1558. Leur reseau couvrait Lyon, Bordeaux, Anvers, Geneve — exactement les villes ou l'O.F.F.I.C.E. avait ses cellules les plus actives.</p>
+            <p data-note="La rue des Ecrivains est l'actuelle rue des Grands-Augustins, VIe arrondissement. H.M.">Il y avait un autre detail que personne ne nota par ecrit mais que les agents de la reunion de Lyon connaissaient tous : les Bonnetiers avaient leur bureau <span class="highlight glow-hover">rue des Ecrivains</span> — la meme rue ou, deux cent quarante ans plus tot, six survivants s'etaient reunis dans une cave pour reecrire leurs regles fondatrices.</p>
+        </div>
+        <div class="archive-box reveal reveal-delay-1">
+            <div class="archive-header">
+                <span>Registre d'admission, Corporation des Merciers de Paris, 1591</span>
+                <span class="source-tag">Archives nationales, serie F/12</span>
+            </div>
+            <div class="archive-content">
+                <p><strong>Admission de Henri Soulier</strong>, trente-deux ans declares, natif de Clermont-Ferrand, domicilie rue des Lombards depuis deux ans. Caution fournie par Jacques Moreau, maitre mercier, rue Saint-Denis.</p>
+                <p>Specialites : toile, soieries legeres, correspondance commerciale en francais et latin. Voyages declares : Lyon, Bordeaux, Geneve, Anvers.</p>
+                <p><span style="color:var(--gold-dim);font-style:italic;">Note de l'examinateur :</span> candidat serieux. Latin excellent, hors norme pour un marchand. Connait ses routes. Admis.</p>
+                <div class="secret-margin"><strong>Note marginale de H. Maret, 1891</strong>Henri Soulier = probablement Thomas Guilhem, identite changee. Verifier contre registre interne IV/C.</div>
+            </div>
+            <div class="archive-footer">
+                Consulte par H. Maret, 1891 — Archives nationales, serie F/12
+            </div>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Les confreries de penitents offraient une couverture parfaite grace a l'anonymat de leurs robes a capuche. H.M.">Les confreries fournirent l'autre couverture — et celle-la etait, a certains egards, la plus parfaite.</p>
+            <p data-note="L'anonymat des penitents etait une regle de l'ordre, justifiee theologiquement par l'humilite chretienne. H.M.">La France de 1589 etait couverte de confreries de penitents : associations laiques vouees a la priere collective, aux processions, et a l'assistance aux condamnes a mort et aux malades. Leurs membres portaient, lors des processions et des interventions nocturnes, des robes longues a capuche dissimulant entierement le visage. L'anonymat etait une regle de l'ordre, justifiee theologiquement par l'humilite chretienne. On ne savait pas qui se trouvait sous la robe. On ne demandait pas.</p>
+            <p data-note="Cette observation est la cle de la restructuration de 1589-1590. H.M.">Voila le detail que les agents de l'O.F.F.I.C.E. noterent immediatement : les confreries de penitents avaient pour mission officielle de se rendre dans les maisons des malades et des mourants. <span class="attention">Toutes les maisons. Meme celles ou la maladie avait pris des formes que personne ne voulait regarder de trop pres.</span></p>
+        </div>
+        <div class="img-frame reveal" data-note="Procession des Penitents de Sainte-Marthe, Lyon, circa 1590. H.M.">
+            <img src="images/penitents-sainte-marthe.jpg" alt="Procession des Penitents de Sainte-Marthe, Lyon, circa 1590">
+            <span class="caption">Procession des Penitents de Sainte-Marthe, Lyon, circa 1590</span>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="La Confrerie des Penitents de Sainte-Marthe fut fondee a Lyon en 1590, a Paris en 1592. H.M.">Une nouvelle confrerie — les <span class="highlight glow-hover">Penitents de Sainte-Marthe</span>, patronne des hotesses et des servantes, choisie deliberement pour son caractere peu remarquable — fut fondee a Lyon en 1590, a Paris en 1592, a Bordeaux, Rouen et Toulouse dans les annees qui suivirent. Ses statuts etaient en tous points conformes aux confreries de l'epoque. Sauf l'article sept.</p>
+        </div>
+        <div class="archive-box reveal reveal-delay-1">
+            <div class="archive-header">
+                <span>Statuts de la Confrerie des Penitents de Sainte-Marthe, Lyon, 1590</span>
+                <span class="source-tag">Archives diocesaines de Lyon</span>
+            </div>
+            <div class="archive-content">
+                <p style="font-style:italic;color:var(--gold);margin-bottom:18px;letter-spacing:0.5px;">Article VII</p>
+                <p>Les freres et soeurs de la Confrerie s'engagent a repondre a tout appel provenant d'une maison ou la maladie a pris des formes que le medecin ordinaire ne reconnait pas. Ils s'engagent a se rendre sur les lieux, a evaluer la nature de la maladie selon <span class="highlight">les protocoles enseignes lors de l'initiation</span>, et a intervenir par les moyens appropries a cette nature.</p>
+                <p>L'intervention est gratuite pour les familles sans ressources. Pour les familles avec ressources, une contribution aux frais de la Confrerie est attendue mais non exigee.</p>
+                <p>Les freres et soeurs portent leur robe lors des interventions nocturnes, conformement aux regles de l'ordre.</p>
+                <div class="secret-margin"><strong>Note de H. Maret, 1893</strong>"Les protocoles enseignes lors de l'initiation" — c'est la terminologie interne de l'O.F.F.I.C.E. "Les formes que le medecin ordinaire ne reconnait pas" — c'est la definition de travail d'une manifestation d'entite depuis 1349. L'article sept est la regle fondatrice reecrite en latin devot. La couverture est parfaite. Elle l'est trop pour etre accidentelle.</div>
+            </div>
+            <div class="archive-footer">
+                Copie conservee aux archives diocesaines de Lyon — Consulte par H. Maret, 1893
+            </div>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Cette transformation est le resultat direct de la fermeture du Sceau. H.M.">L'O.F.F.I.C.E. sous les guildes et les confreries etait une organisation differente. Pas plus faible. Differente.</p>
+            <p data-note="Chaque cellule pouvait operer sans contact avec les autres pendant des mois. H.M.">Il avait perdu la centralisation. Il avait gagne la profondeur. Chaque cellule etait autonome, capable d'operer sans contact avec les autres pendant des mois. Les agents se reconnaissaient a des signes que les historiens qui les avaient etudies par inadvertance avaient pris pour des pratiques commerciales ou devotionnelles ordinaires : une facon precise de plier une lettre de credit, une formule dans les correspondances marchandes — <span class="quote-inline">concernant les marchandises qui ne circulent pas en plein jour</span> — , la position d'une bougie lors des processions des Penitents.</p>
+            <p data-note="Ce compromis entre securite et efficacite structura l'O.F.F.I.C.E. jusqu'a la Revolution. H.M.">Ce qui se perdit dans cette restructuration, c'est la capacite a coordonner les grandes interventions. Les operations necessitant plusieurs cellules simultanees devenaient lentes, approximatives, dependantes de coincidences geographiques. Ce qui se gagna, c'est quelque chose que l'Ordo n'avait jamais eu et que la Nuit des Sept n'avait pas cherche a construire : <span class="highlight glow-hover">la capacite a survivre a la destruction de n'importe laquelle de ses parties.</span></p>
+        </div>
+        <div class="act-box reveal reveal-delay-1">
+            <div class="act-title">L'Equilibre Nouveau</div>
+            <div class="act-subtitle">L'O.F.F.I.C.E. 1590-1789 — STRUCTURE CELLULAIRE</div>
+            <div class="act-content">
+                <span class="article">Ce qui fut perdu :</span>
+                <p>La centralisation · La coordination des grandes interventions · L'acces aux archives historiques · La capacite a mobiliser plusieurs cellules simultanement</p>
+                <span class="article">Ce qui fut gagne :</span>
+                <p>L'autonomie cellulaire · L'infiltration des reseaux marchands · La couverture religieuse par les confreries · La capacite a survivre a la destruction de toute partie du reseau · L'impossibilite pour un adversaire de saisir l'ensemble</p>
+                <span class="article">Ce qui demeura inchange :</span>
+                <p>La regle des quatre premiers articles · Le Sceau · La dette</p>
+            </div>
+        </div>
+        <div class="body-text reveal">
+            <p data-note="Les archives rouvrirent progressivement, decennie par decennie, a mesure que le monde se stabilisait. H.M.">Le Grand Sceau ne fut jamais officiellement leve. Les archives rouvrirent progressivement, decennie par decennie, a mesure que le monde se stabilisait — l'Edit de Nantes en 1598, la paix relative sous Henri IV, la lente reconstruction d'un reseau central qui n'aurait plus jamais tout a fait la meme forme qu'avant 1589.</p>
+            <p data-note="Ce reflexe cellulaire se transmit de generation en generation d'agents. H.M.">Mais les confreries de Sainte-Marthe continuerent a tenir leurs registres. Les merciers continuerent a noter leurs routes avec une precision legerement superieure aux besoins commerciaux. Et les agents formes dans ce systeme garderent, longtemps apres que le danger immediat fut passe, le reflexe de la cellule autonome — de l'operation menee sans demander d'autorisation a une hierarchie qui pourrait ne plus exister.</p>
+            <p class="attention" data-note="La Revolution de 1789 dissout les guildes par decret et dissout les confreries au nom de la Nation. H.M."><span class="highlight glow-hover">Ce reflexe les sauverait deux cents ans plus tard.</span></p>
+            <p data-note="Cette phrase est le dernier paragraphe du Document 07 tel que compile par H. Maret. H.M.">Ce que la Revolution de 1789 trouverait, quand elle demantelerait les guildes par decret et dissoudrait les confreries au nom de la Nation, c'est une organisation qui avait appris a exister sans aucune de ses structures apparentes.</p>
+            <p class="attention" data-note="Ce cliffhanger est deliberé. H. Maret laisse le Document 08 a un successeur. H.M.">Ce qu'elle libererait en les demantelant est une autre histoire.</p>
+        </div>
+    </div>
+</section>
+
+<section class="debt-section">
+    <div class="reveal">
+        <div class="debt-text">Le Sceau se ferme.</div>
+        <div class="debt-sub">Le Grand Sceau de France vient d'etre brise. Le notre se ferme.<br>Ce n'est pas la meme chose.</div>
+    </div>
+    <div style="margin-top:40px;" class="reveal reveal-delay-1">
+        <a href="origines.html" class="back-link">
+            ◈ DOCUMENT PRECEDENT — 06 : ORIGINES
+        </a>
+    </div>
+    <div style="margin-top:20px;" class="reveal reveal-delay-2">
+        <a href="index-monde.html" class="back-link">
+            ◈ RETOURNER AUX ARCHIVES — 1920
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="seal">◈</div>
+    <p>L'Office pour la Gestion, le Confinement et l'Elimination</p>
+    <p>des Entites Surnaturelles</p>
+    <p class="warning">Document classifie niveau IV — Sceau referme le 14 novembre 1897 a 23h41</p>
+    <p style="margin-top:10px;font-size:0.7rem;color:var(--text-faint);">Divulgation interdite sous peine de représailles</p>
+</footer>
+
+<script src="js/main-origine.js"></script>
+</body>
+</html>
